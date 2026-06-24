@@ -3308,6 +3308,7 @@ html {
 
 body {
   overflow-x: hidden;
+  overflow-y: auto !important;  /* SCROLL VERTICAL LIVRE */
   width: 100%;
   max-width: 100vw;
   position: relative;
@@ -3365,5 +3366,53 @@ textarea {
 }
 
 table {
+  max-width: 100%;
+}
+
+
+/* =====================================================
+   SCROLL MOBILE - Vertical livre, horizontal bloqueado
+   ===================================================== */
+html {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  height: auto !important;
+  position: relative !important;
+  -webkit-overflow-scrolling: touch;  /* iOS scroll suave */
+}
+
+/* Main content scrollável */
+.main-content {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  max-height: 100vh;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Quando menu aberto, parar scroll do body mas permitir do conteúdo */
+body.menu-open {
+  overflow-y: hidden !important;
+}
+
+body.menu-open .main-content {
+  overflow-y: auto !important;
+}
+
+/* Sidebar sempre scrollável se conteúdo for grande */
+.sidebar {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevenir scroll horizontal em tudo */
+* {
   max-width: 100%;
 }
