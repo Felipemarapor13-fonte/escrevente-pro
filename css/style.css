@@ -9,6 +9,101 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
+/* =====================================================
+   CRÍTICO: MOBILE SEM ZOOM - viewport fix
+   ===================================================== */
+@-ms-viewport {
+  width: device-width;
+}
+
+@viewport {
+  width: device-width;
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  box-sizing: border-box;
+}
+
+/* Garantir que NADA estoure a tela */
+* {
+  box-sizing: inherit;
+}
+
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* Elementos de mídia responsivos */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+/* Evitar zoom em inputs no iOS */
+input, button, textarea, select {
+  font-size: 16px;
+}
+
+/* Container principal */
+.main-content {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Sidebar nunca estoura */
+.sidebar {
+  width: 300px;
+  max-width: 85vw;
+}
+
+/* Stats em grid responsivo */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 0.75rem;
+  width: 100%;
+}
+
+/* Cards responsivos */
+.stat-card, .card, .module-card, .tool-card {
+  width: 100%;
+  min-width: 0;
+}
+
+/* Tabelas com scroll horizontal */
+table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevenir que pre tags estourem */
+pre, code {
+  max-width: 100%;
+  overflow-x: auto;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+
   /* Backgrounds */
   --bg-0: #0a0a0f;
   --bg-1: #12121a;
@@ -3199,4 +3294,76 @@ body.menu-open .sidebar {
     opacity: 1 !important;
     pointer-events: auto !important;
   }
+}
+
+
+/* =====================================================
+   ANTI-ZOOM E ANTI-OVERFLOW - MOBILE
+   ===================================================== */
+html {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100vw;
+  position: relative;
+}
+
+/* Nenhum elemento pode estourar a tela */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* Imagens e mídia responsivas */
+img, video, canvas, svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Prevenir zoom em inputs no iOS */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+textarea {
+  font-size: 16px !important;
+}
+
+/* Sidebar nunca estoura */
+.sidebar {
+  max-width: 300px;
+}
+
+/* Main content se ajusta */
+.main-content {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* Stats row responsiva */
+.stats-row {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Cards responsivos */
+.card, .stat-card, .module-card {
+  width: 100%;
+  max-width: 100%;
+}
+
+/* Tabelas com scroll */
+.table-responsive {
+  overflow-x: auto;
+  max-width: 100%;
+}
+
+table {
+  max-width: 100%;
 }

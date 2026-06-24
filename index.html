@@ -13,6 +13,36 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <link rel="stylesheet" href="css/style.css">
   <title>Aprova SP | Guia do Escrevente TJ-SP</title>
+
+  <style>
+  /* CRÍTICO: Prevenir zoom e overflow no mobile */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+    max-width: 100vw !important;
+    position: relative !important;
+  }
+  
+  * {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  
+  /* Prevenir zoom em inputs */
+  input, textarea, select {
+    font-size: 16px !important;  /* IoT 16px previne zoom no iOS */
+  }
+  
+  /* Meta viewport reforçada via CSS */
+  @supports (-webkit-touch-callout: none) {
+    /* iOS Safari */
+    body {
+      position: fixed !important;
+      width: 100% !important;
+    }
+  }
+  </style>
+
 </head>
 <body>
 
