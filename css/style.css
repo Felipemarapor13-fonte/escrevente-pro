@@ -2883,8 +2883,9 @@ body.menu-open .menu-overlay {
 }
 
 /* MenuToggle - escondido por padrão em desktop */
+/* MenuToggle - controlado por media queries */
 .menu-toggle {
-  display: none;
+  display: none; /* Desktop */
 }
 
 /* Animação de entrada do menu */
@@ -2920,5 +2921,72 @@ body.menu-open .sidebar {
   .card:hover,
   .stat-card:hover {
     transform: none;
+  }
+}
+
+
+/* =====================================================
+   CORREÇÃO MENU MOBILE - Regras finais
+   ===================================================== */
+
+/* Garantir que menu-toggle aparece só em mobile */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  /* Sidebar fechada por padrão */
+  .sidebar {
+    width: 0 !important;
+    overflow: hidden;
+  }
+  
+  /* Sidebar aberta */
+  body.menu-open .sidebar {
+    width: 280px !important;
+    overflow-x: hidden;
+  }
+  
+  /* Overlay */
+  .menu-overlay {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  body.menu-open .menu-overlay {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  /* Ícone do menu */
+  .menu-toggle i {
+    font-size: 1.25rem;
+  }
+  
+  /* Ícone X quando aberto */
+  body.menu-open .menu-toggle i::before {
+    content: '\f00d'; /* X do FontAwesome */
+  }
+}
+
+/* Desktop - menu sempre visível */
+@media (min-width: 769px) {
+  .menu-toggle {
+    display: none !important;
+  }
+  
+  .menu-overlay {
+    display: none !important;
+  }
+  
+  .sidebar {
+    width: 300px !important;
+  }
+  
+  body.menu-open .sidebar {
+    width: 300px !important;
   }
 }

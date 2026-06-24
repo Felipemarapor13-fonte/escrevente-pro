@@ -1692,23 +1692,55 @@
 <script src="js/app.js" defer></script>
 <script>
 
-// Menu Toggle para Mobile
+// Menu Toggle para Mobile - VERSÃO CORRIGIDA
 function toggleMenu() {
   const body = document.body;
   body.classList.toggle('menu-open');
+  
+  const isOpen = body.classList.contains('menu-open');
+  console.log('Menu:', isOpen ? 'ABERTO' : 'FECHADO');
 }
 
 document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const menuOverlay = document.getElementById('menuOverlay');
+  const sidebar = document.querySelector('.sidebar');
+  
+  console.log('Menu Toggle:', menuToggle ? 'ENCONTRADO' : 'NÃO ENCONTRADO');
+  console.log('Menu Overlay:', menuOverlay ? 'ENCONTRADO' : 'NÃO ENCONTRADO');
+  console.log('Sidebar:', sidebar ? 'ENCONTRADA' : 'NÃO ENCONTRADA');
   
   if(menuToggle) {
-    menuToggle.addEventListener('click', toggleMenu);
+    menuToggle.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      toggleMenu();
+    });
+    console.log('✓ Event listener adicionado ao menuToggle');
   }
   
   if(menuOverlay) {
-    menuOverlay.addEventListener('click', toggleMenu);
+    menuOverlay.addEventListener('click', (e) => {
+      e.preventDefault();
+      toggleMenu();
+    });
+    console.log('✓ Event listener adicionado ao menuOverlay');
   }
+  
+  // Fechar menu ao clicar em um link
+  const navLinks = document.querySelectorAll('.sidebar nav a');
+  navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      document.body.classList.remove('menu-open');
+    });
+  });
+  
+  // Fechar com ESC
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+      toggleMenu();
+    }
+  });
 });
 
 </script>
