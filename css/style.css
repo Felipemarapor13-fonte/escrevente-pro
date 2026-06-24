@@ -3062,10 +3062,51 @@ body.menu-open .sidebar {
   body.menu-open .menu-overlay {
     display: block !important;
     opacity: 1 !important;
+    pointer-events: auto !important;
   }
   
   /* Main content quando menu aberto */
   body.menu-open .main-content {
     pointer-events: none !important;
+  }
+}
+
+
+/* =====================================================
+   MENU MOBILE - REGRA FINAL SEM BORRÃO
+   ===================================================== */
+@media (max-width: 768px) {
+  /* Overlay some COMPLETAMENTE quando fechado */
+  .menu-overlay {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    display: block !important;  /* Sempre existe no DOM */
+  }
+  
+  /* Overlay aparece quando aberto */
+  body.menu-open .menu-overlay {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+  
+  /* Sidebar some completamente quando fechada */
+  .sidebar {
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+  
+  /* Sidebar aparece quando aberta */
+  body.menu-open .sidebar {
+    visibility: visible !important;
+    opacity: 1 !important;
+  }
+  
+  /* Botão do menu: SEMPRE visível, NUNCA some */
+  .menu-toggle {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
   }
 }

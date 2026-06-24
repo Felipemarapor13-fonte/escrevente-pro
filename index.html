@@ -1692,113 +1692,62 @@
 <script src="js/app.js" defer></script>
 <script>
 
-// Menu Toggle para Mobile - VERSÃO FINAL CORREGIDA
-let menuIsOpen = false;
 
-function toggleMenu() {
-  const body = document.body;
-  menuIsOpen = !menuIsOpen;
-  
-  if (menuIsOpen) {
-    body.classList.add('menu-open');
-    console.log('✅ Menu ABERTO');
-  } else {
-    body.classList.remove('menu-open');
-    console.log('❌ Menu FECHADO');
-  }
-  
-  // Prevenir scroll do body quando menu aberto
-  if (menuIsOpen) {
-    document.body.style.overflow = 'hidden';
-  } else {
-    document.body.style.overflow = '';
-  }
-}
-
-function closeMenu() {
-  if (menuIsOpen) {
-    menuIsOpen = false;
-    document.body.classList.remove('menu-open');
-    document.body.style.overflow = '';
-    console.log('❌ Menu FECHADO (closeMenu)');
-  }
-}
-
+// Menu Mobile - VERSÃO SIMPLES E FUNCIONAL
 document.addEventListener('DOMContentLoaded', () => {
   const menuToggle = document.getElementById('menuToggle');
   const menuOverlay = document.getElementById('menuOverlay');
   const sidebar = document.querySelector('.sidebar');
+  const body = document.body;
   
-  console.log('=== MENU MOBILE DEBUG ===');
-  console.log('menuToggle:', menuToggle ? 'ENCONTRADO' : 'NÃO ENCONTRADO');
-  console.log('menuOverlay:', menuOverlay ? 'ENCONTRADO' : 'NÃO ENCONTRADO');
-  console.log('sidebar:', sidebar ? 'ENCONTRADA' : 'NÃO ENCONTRADA');
+  if (!menuToggle || !menuOverlay || !sidebar) {
+    console.error('Elementos do menu não encontrados!');
+    return;
+  }
   
-  // Menu toggle button
-  if (menuToggle) {
-    menuToggle.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();  // IMPEDIR BORRULHAMENTO
-      console.log('🔘 Clique no menuToggle');
-      toggleMenu();
-      return false;
-    });
-    
-    // Prevenir clique duplo
-    menuToggle.addEventListener('touchstart', (e) => {
+  // FUNÇÃO: Abrir menu
+  function openMenu(e) {
+    if (e) {
       e.preventDefault();
       e.stopPropagation();
-      toggleMenu();
-    }, { passive: false });
-    
-    console.log('✓ menuToggle configurado');
+    }
+    body.classList.add('menu-open');
+    document.body.style.overflow = 'hidden';
+    console.log('✅ Menu ABERTO');
   }
   
-  // Overlay - fecha ao clicar fora
-  if (menuOverlay) {
-    menuOverlay.addEventListener('click', (e) => {
+  // FUNÇÃO: Fechar menu
+  function closeMenu(e) {
+    if (e) {
       e.preventDefault();
       e.stopPropagation();
-      console.log('🖱️ Clique no overlay - fechando menu');
-      closeMenu();
-    });
-    console.log('✓ menuOverlay configurado');
+    }
+    body.classList.remove('menu-open');
+    document.body.style.overflow = '';
+    console.log('❌ Menu FECHADO');
   }
   
-  // Sidebar - impedir que clique nela feche o menu
-  if (sidebar) {
-    sidebar.addEventListener('click', (e) => {
-      e.stopPropagation();  // NÃO fechar ao clicar na sidebar
-      console.log('📌 Clique na sidebar (não fecha)');
-    });
-    
-    // Fechar ao clicar em link de navegação
-    const navLinks = sidebar.querySelectorAll('nav a');
-    navLinks.forEach((link, index) => {
-      link.addEventListener('click', () => {
-        console.log(`🔗 Link ${index + 1} clicado - fechando menu`);
-        closeMenu();
-      });
-    });
-  }
+  // BOTÃO: abre o menu
+  menuToggle.addEventListener('click', openMenu);
+  menuToggle.addEventListener('touchstart', openMenu, { passive: false });
   
-  // Fechar com ESC
+  // OVERLAY: fecha o menu (clicar fora)
+  menuOverlay.addEventListener('click', closeMenu);
+  menuOverlay.addEventListener('touchstart', closeMenu, { passive: false });
+  
+  // LINKS: fechar ao navegar
+  sidebar.querySelectorAll('nav a').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
+  
+  // TECLADO: ESC fecha
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && menuIsOpen) {
-      console.log('⌨️ ESC pressed - fechando menu');
+    if (e.key === 'Escape' && body.classList.contains('menu-open')) {
       closeMenu();
     }
   });
   
-  // Prevenir clique acidental fora do menu
-  document.addEventListener('click', (e) => {
-    if (menuIsOpen && !sidebar.contains(e.target) && !menuToggle.contains(e.target)) {
-      console.log('🖱️ Clique fora detectado - fechando menu');
-      closeMenu();
-    }
-  });
-  
-  console.log('=== MENU MOBILE PRONTO ===');
+  console.log('✓ Menu mobile inicializado');
 });
 
 </script>
