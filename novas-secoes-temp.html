@@ -1,0 +1,187 @@
+<!-- ─── BANCO DE QUESTÕES ──────────────────────────── -->
+    <div id="banco-questoes" class="view-section">
+      <div class="section-header">
+        <h1 class="section-title"><i class="fa-solid fa-layer-group"></i> Banco de Questões</h1>
+        <p class="section-subtitle">Cadastre, organize e revise questões personalizadas</p>
+      </div>
+
+      <!-- Formulário de Cadastro -->
+      <div class="card mb-3">
+        <h3 class="card-title"><i class="fa-solid fa-plus-circle"></i> Nova Questão</h3>
+        <div class="form-row mt-2">
+          <div class="form-group">
+            <label>Matéria</label>
+            <select id="qMateria">
+              <option value="port">Português</option>
+              <option value="penal">Direito Penal</option>
+              <option value="proc">Processo Penal & Civil</option>
+              <option value="const">Constitucional & Administrativo</option>
+              <option value="mat">Matemática/RLM/Informática</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Origem (opcional)</label>
+            <input type="text" id="qOrigem" placeholder="Ex: Vunesp 2023 - TJ-SP">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Enunciado da Questão</label>
+          <textarea id="qEnunciado" placeholder="Digite o enunciado completo..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Alternativas</label>
+          <div class="form-row">
+            <div><input type="text" id="qAltA" placeholder="Alternativa A"></div>
+            <div><input type="text" id="qAltB" placeholder="Alternativa B"></div>
+            <div><input type="text" id="qAltC" placeholder="Alternativa C"></div>
+            <div><input type="text" id="qAltD" placeholder="Alternativa D"></div>
+            <div><input type="text" id="qAltE" placeholder="Alternativa E (opcional)"></div>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Alternativa Correta</label>
+            <select id="qCorreta">
+              <option value="a">A</option>
+              <option value="b">B</option>
+              <option value="c">C</option>
+              <option value="d">D</option>
+              <option value="e">E</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Comentário/Justificativa (opcional)</label>
+            <textarea id="qComentario" placeholder="Explique por que esta é a correta..."></textarea>
+          </div>
+        </div>
+        <button class="btn btn-primary" onclick="salvarQuestao()"><i class="fa-solid fa-save"></i> Salvar Questão</button>
+      </div>
+
+      <!-- Modo de Revisão -->
+      <div class="card mb-3">
+        <div class="card-header">
+          <h3 class="card-title"><i class="fa-solid fa-brain"></i> Modo de Revisão</h3>
+          <select id="revisaoFiltro" style="width: auto;">
+            <option value="todas">Todas as Matérias</option>
+            <option value="port">Português</option>
+            <option value="penal">Direito Penal</option>
+            <option value="proc">Processo</option>
+            <option value="const">Constitucional</option>
+            <option value="mat">Matemática</option>
+          </select>
+        </div>
+        <div class="text-center">
+          <button class="btn btn-success" onclick="iniciarRevisao()"><i class="fa-solid fa-play"></i> Iniciar Revisão</button>
+          <p class="text-muted mt-2" id="revisaoStatus">Selecione um filtro e clique em Iniciar</p>
+        </div>
+      </div>
+
+      <!-- Tela de Revisão Ativa -->
+      <div id="revisaoAtiva" class="hidden">
+        <div class="card" style="background: var(--accent-dim); border-color: var(--accent);">
+          <div class="questao-enunciado" id="revisaoEnunciado"></div>
+          <div class="questao-alternativas" id="revisaoAlternativas"></div>
+          <div id="revisaoFeedback" class="hidden mt-3"></div>
+          <div class="mt-3" style="display: flex; gap: 1rem; justify-content: center;">
+            <button class="btn btn-secondary" onclick="proximaQuestao()"><i class="fa-solid fa-arrow-right"></i> Próxima</button>
+            <button class="btn btn-secondary" onclick="encerrarRevisao()"><i class="fa-solid fa-stop"></i> Encerrar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lista de Questões -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><i class="fa-solid fa-list"></i> Questões Cadastradas</h3>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <select id="listaFiltro" onchange="renderBancoQuestoes()" style="width: auto;">
+              <option value="todas">Todas</option>
+              <option value="port">Português</option>
+              <option value="penal">Penal</option>
+              <option value="proc">Processo</option>
+              <option value="const">Constitucional</option>
+              <option value="mat">Matemática</option>
+            </select>
+            <span class="badge badge-port" id="questoesTotal">0 questões</span>
+          </div>
+        </div>
+        <div id="listaQuestoes"></div>
+      </div>
+    </div>
+
+    <!-- ─── CADERNO DE ERROS ──────────────────────────── -->
+    <div id="caderno-erros" class="view-section">
+      <div class="section-header">
+        <h1 class="section-title"><i class="fa-solid fa-bug"></i> Caderno de Erros</h1>
+        <p class="section-subtitle">Registre e aprenda com seus erros</p>
+      </div>
+
+      <div class="dicas-hero" style="background: linear-gradient(135deg, var(--danger-dim), var(--warning-dim)); border-color: var(--danger);">
+        <div class="dicas-hero-icon">📊</div>
+        <div>
+          <h2>Aprenda com Seus Erros</h2>
+          <p>Cada erro é uma oportunidade de aprendizado. Registre aqui os conceitos que você mais erra e revise periodicamente.</p>
+        </div>
+      </div>
+
+      <!-- Formulário -->
+      <div class="card mb-3">
+        <h3 class="card-title"><i class="fa-solid fa-plus"></i> Novo Registro</h3>
+        <div class="form-row mt-2">
+          <div class="form-group">
+            <label>Matéria</label>
+            <select id="eMateria">
+              <option value="port">Português</option>
+              <option value="penal">Direito Penal</option>
+              <option value="proc">Processo Penal & Civil</option>
+              <option value="const">Constitucional & Administrativo</option>
+              <option value="mat">Matemática/RLM/Informática</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tema/Assunto</label>
+            <input type="text" id="eTema" placeholder="Ex: Crase, Homicídio, Competência...">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Contexto do Erro (o que a questão pedia?)</label>
+          <textarea id="eContexto" placeholder="Descreva o contexto da questão..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Por que Errei?</label>
+          <textarea id="eMotivo" placeholder="Falta de conhecimento? Interpretação? Cuidado?..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>Resposta/Fundamento Correto</label>
+          <textarea id="eResposta" placeholder="Qual é o correto? Fundamente..."></textarea>
+        </div>
+        <button class="btn btn-primary" onclick="salvarErro()"><i class="fa-solid fa-save"></i> Salvar Erro</button>
+      </div>
+
+      <!-- Lista de Erros -->
+      <div class="card">
+        <div class="card-header">
+          <h3 class="card-title"><i class="fa-solid fa-clipboard-list"></i> Meus Erros Registrados</h3>
+          <div style="display: flex; gap: 0.5rem; align-items: center;">
+            <select id="errosFiltro" onchange="renderErros()" style="width: auto;">
+              <option value="todas">Todos</option>
+              <option value="port">Português</option>
+              <option value="penal">Penal</option>
+              <option value="proc">Processo</option>
+              <option value="const">Constitucional</option>
+              <option value="mat">Matemática</option>
+            </select>
+            <span class="badge badge-penal" id="errosTotal">0 erros</span>
+          </div>
+        </div>
+        <div id="listaErros"></div>
+      </div>
+
+      <!-- Medalha -->
+      <div class="medals-row mt-3">
+        <div class="medal locked" id="medalErros10">
+          <span class="medal-icon">🏆</span>
+          <span>Analista de Erros (10 registros)</span>
+        </div>
+      </div>
+    </div>

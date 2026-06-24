@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" fill="#0c0c0f" rx="64"/>
+  <circle cx="256" cy="180" r="80" fill="#c9a84c"/>
+  <path d="M256 300c-70 0-120 40-120 95h240c0-55-50-95-120-95z" fill="#c9a84c"/>
+  <text x="256" y="450" font-family="Arial, sans-serif" font-size="40" fill="#c9a84c" text-anchor="middle" font-weight="bold">APROVA SP</text>
+</svg>

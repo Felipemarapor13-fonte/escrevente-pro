@@ -1,0 +1,305 @@
+<!-- ════════════════════════════════════════════════════
+     BANCO DE QUESTÕES - DESIGN MODERNO
+     ════════════════════════════════════════════════════ -->
+<div id="banco-questoes" class="view-section">
+  <div class="section-header">
+    <h1 class="section-title">
+      <i class="fa-solid fa-layer-group"></i>
+      Banco de Questões
+    </h1>
+    <p class="section-subtitle">Crie, organize e revise questões personalizadas</p>
+  </div>
+
+  <!-- Hero Card -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.05)); border: 1px solid rgba(102, 126, 234, 0.3);">
+    <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+      <div style="font-size: 4rem; flex-shrink: 0;">📚</div>
+      <div style="flex: 1;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Crie Sua Própria Biblioteca</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Cadastre questões das suas provas simuladas e revise com eficiência máxima.</p>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 2.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;" id="questoesCountHero">0</div>
+        <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Questões Salvas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-plus-circle" style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+        Nova Questão
+      </h3>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label style="color: var(--text-muted);">📖 Matéria</label>
+        <select id="qMateria" style="background: var(--bg-2); border: 1px solid var(--border);">
+          <option value="port">📝 Português</option>
+          <option value="penal">⚖️ Direito Penal</option>
+          <option value="proc">📋 Processo Penal & Civil</option>
+          <option value="const">🏛️ Constitucional & Administrativo</option>
+          <option value="mat">🔢 Matemática/RLM/Informática</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="color: var(--text-muted);">📍 Origem</label>
+        <input type="text" id="qOrigem" placeholder="Ex: Vunesp 2025 - TJ-SP" style="background: var(--bg-2); border: 1px solid var(--border);">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--text-muted);">📜 Enunciado</label>
+      <textarea id="qEnunciado" placeholder="Digite o enunciado completo da questão..." rows="4" style="background: var(--bg-2); border: 1px solid var(--border); min-height: 120px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--text-muted);">✏️ Alternativas</label>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: var(--gradient-primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">A</span>
+          <input type="text" id="qAltA" placeholder="Alternativa A" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: var(--gradient-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">B</span>
+          <input type="text" id="qAltB" placeholder="Alternativa B" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: var(--gradient-success); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">C</span>
+          <input type="text" id="qAltC" placeholder="Alternativa C" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: linear-gradient(135deg, #f5af19, #f12711); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">D</span>
+          <input type="text" id="qAltD" placeholder="Alternativa D" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">E</span>
+          <input type="text" id="qAltE" placeholder="Alternativa E (opcional)" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label style="color: var(--text-muted);">✅ Alternativa Correta</label>
+        <select id="qCorreta" style="background: var(--bg-2); border: 1px solid var(--border);">
+          <option value="a">Alternativa A</option>
+          <option value="b">Alternativa B</option>
+          <option value="c">Alternativa C</option>
+          <option value="d">Alternativa D</option>
+          <option value="e">Alternativa E</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="color: var(--text-muted);">💡 Comentário (opcional)</label>
+        <input type="text" id="qComentario" placeholder="Explique o porquê da resposta correta..." style="background: var(--bg-2); border: 1px solid var(--border);">
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+      <button class="btn btn-primary" id="btnSalvarQuestao" style="flex: 1; padding: 1.25rem;">
+        <i class="fa-solid fa-save"></i>
+        Salvar Questão
+      </button>
+      <button class="btn" style="background: var(--bg-2); color: var(--text-muted); border: 1px solid var(--border);" onclick="limparFormularioQuestao()">
+        <i class="fa-solid fa-eraser"></i>
+        Limpar
+      </button>
+    </div>
+  </div>
+
+  <!-- Modo Revisão -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.05)); border: 1px solid rgba(79, 172, 254, 0.3);">
+    <div class="card-header" style="border-bottom-color: rgba(79, 172, 254, 0.3);">
+      <h3 class="card-title" style="color: var(--success);">
+        <i class="fa-solid fa-brain"></i>
+        Modo Revisão Inteligente
+      </h3>
+      <select id="revisaoFiltro" style="width: auto; background: var(--bg-2); border: 1px solid var(--border); padding: 0.75rem 1.25rem;">
+        <option value="todas">📚 Todas as Matérias</option>
+        <option value="port">📝 Português</option>
+        <option value="penal">⚖️ Penal</option>
+        <option value="proc">📋 Processo</option>
+        <option value="const">🏛️ Constitucional</option>
+        <option value="mat">🔢 Matemática</option>
+      </select>
+    </div>
+    
+    <div style="text-align: center; padding: 2rem 0;">
+      <button class="btn btn-success" id="btnIniciarRevisao" style="padding: 1.25rem 3rem; font-size: 1.1rem; box-shadow: 0 12px 32px rgba(79, 172, 254, 0.4);">
+        <i class="fa-solid fa-play"></i>
+        Iniciar Revisão
+      </button>
+      <p id="revisaoStatus" style="color: var(--text-muted); margin-top: 1rem;">
+        Selecione um filtro e comece a revisar
+      </p>
+    </div>
+  </div>
+
+  <!-- Área de Revisão Ativa -->
+  <div id="revisaoAtiva" class="hidden">
+    <div class="card" style="background: var(--bg-2); border: 2px solid var(--primary); box-shadow: 0 0 60px var(--primary-glow);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">
+        <span class="badge" style="background: var(--gradient-primary);">Questão <span id="revisaoNumero">1</span></span>
+        <span style="color: var(--text-muted); font-size: 0.9rem;" id="revisaoMateriaLabel">Matéria</span>
+      </div>
+
+      <div class="questao-enunciado" id="revisaoEnunciado" style="font-size: 1.15rem; line-height: 1.8; color: var(--text); margin-bottom: 2rem;"></div>
+
+      <div class="questao-alternativas" id="revisaoAlternativas" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;"></div>
+
+      <div id="revisaoFeedback" class="hidden" style="padding: 1.5rem; border-radius: var(--r-md); margin-bottom: 2rem;"></div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <button class="btn btn-primary" id="btnProximaQuestao" style="padding: 1rem 2rem;">
+          <i class="fa-solid fa-arrow-right"></i>
+          Próxima
+        </button>
+        <button class="btn" id="btnEncerrarRevisao" style="background: var(--bg-3); color: var(--text-muted); border: 1px solid var(--border); padding: 1rem 2rem;">
+          <i class="fa-solid fa-stop"></i>
+          Encerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-list" style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+        Questões Cadastradas
+      </h3>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <select id="listaFiltro" onchange="renderBancoQuestoes()" style="width: auto; background: var(--bg-2); border: 1px solid var(--border); padding: 0.75rem 1rem;">
+          <option value="todas">Todas</option>
+          <option value="port">Português</option>
+          <option value="penal">Penal</option>
+          <option value="proc">Processo</option>
+          <option value="const">Constitucional</option>
+          <option value="mat">Matemática</option>
+        </select>
+        <span class="badge" id="questoesTotal" style="background: var(--gradient-primary);">0 questões</span>
+      </div>
+    </div>
+    <div id="listaQuestoes"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     CADERNO DE ERROS - DESIGN MODERNO
+     ════════════════════════════════════════════════════ -->
+<div id="caderno-erros" class="view-section">
+  <div class="section-header">
+    <h1 class="section-title">
+      <i class="fa-solid fa-bug"></i>
+      Caderno de Erros
+    </h1>
+    <p class="section-subtitle">Transforme seus erros em aprendizado</p>
+  </div>
+
+  <!-- Hero -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 234, 167, 0.05)); border: 1px solid rgba(255, 107, 107, 0.3);">
+    <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+      <div style="font-size: 4rem; flex-shrink: 0;">🎯</div>
+      <div style="flex: 1;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--danger);">Errar é Humano, Aprender é Divino</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Registre cada erro, entenda o motivo e nunca mais cometa o mesmo equívoco.</p>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 2.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--danger);" id="errosCountHero">0</div>
+        <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Erros Registrados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-plus" style="color: var(--danger);"></i>
+        Novo Registro
+      </h3>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label style="color: var(--text-muted);">📖 Matéria</label>
+        <select id="eMateria" style="background: var(--bg-2); border: 1px solid var(--border);">
+          <option value="port">📝 Português</option>
+          <option value="penal">⚖️ Direito Penal</option>
+          <option value="proc">📋 Processo Penal & Civil</option>
+          <option value="const">🏛️ Constitucional & Administrativo</option>
+          <option value="mat">🔢 Matemática/RLM/Informática</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="color: var(--text-muted);">🏷️ Tema/Assunto</label>
+        <input type="text" id="eTema" placeholder="Ex: Crase, Homicídio Culposo, Competência..." style="background: var(--bg-2); border: 1px solid var(--border);">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--text-muted);">📖 Contexto do Erro</label>
+      <textarea id="eContexto" placeholder="O que a questão pedia? Qual era o contexto?" rows="3" style="background: var(--bg-2); border: 1px solid var(--border); min-height: 100px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--danger);">❓ Por Que Errei?</label>
+      <textarea id="eMotivo" placeholder="Falta de conhecimento? Interpretação equivocada? Cuidado?..." rows="3" style="background: rgba(255, 107, 107, 0.05); border: 1px solid var(--danger); min-height: 100px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--success);">✅ Resposta/Fundamento Correto</label>
+      <textarea id="eResposta" placeholder="Qual é o correto? Fundamente com base legal, doutrina ou jurisprudência..." rows="4" style="background: rgba(79, 172, 254, 0.05); border: 1px solid var(--success); min-height: 120px;"></textarea>
+    </div>
+
+    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+      <button class="btn btn-primary" id="btnSalvarErro" style="flex: 1; padding: 1.25rem; background: linear-gradient(135deg, var(--danger), #ff8787); box-shadow: 0 8px 24px rgba(255, 107, 107, 0.4);">
+        <i class="fa-solid fa-save"></i>
+        Salvar Erro
+      </button>
+      <button class="btn" style="background: var(--bg-2); color: var(--text-muted); border: 1px solid var(--border);" onclick="limparFormularioErro()">
+        <i class="fa-solid fa-eraser"></i>
+        Limpar
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-clipboard-list" style="color: var(--danger);"></i>
+        Meus Erros Registrados
+      </h3>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <select id="errosFiltro" onchange="renderErros()" style="width: auto; background: var(--bg-2); border: 1px solid var(--border); padding: 0.75rem 1rem;">
+          <option value="todas">Todos</option>
+          <option value="port">Português</option>
+          <option value="penal">Penal</option>
+          <option value="proc">Processo</option>
+          <option value="const">Constitucional</option>
+          <option value="mat">Matemática</option>
+        </select>
+        <span class="badge" id="errosTotal" style="background: linear-gradient(135deg, var(--danger), #ff8787);">0 erros</span>
+      </div>
+    </div>
+    <div id="listaErros"></div>
+  </div>
+
+  <!-- Medalha -->
+  <div class="card" id="medalhaContainer" style="display: none; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(255, 234, 167, 0.05)); border: 2px solid var(--accent);">
+    <div style="display: flex; align-items: center; gap: 1.5rem; padding: 1rem;">
+      <div style="font-size: 3rem;">🏆</div>
+      <div style="flex: 1;">
+        <h4 style="font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 0.25rem;">Analista de Erros</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Você registrou 10+ erros e está no caminho da evolução constante!</p>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--accent); font-weight: 800;">UNLOCKED</div>
+    </div>
+  </div>
+</div>

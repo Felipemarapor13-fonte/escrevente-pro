@@ -1,0 +1,2509 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<title>Aprova SP | Guia do Escrevente TJ-SP</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<link rel="stylesheet" href="style.css">
+<style>
+  /* Fallback fonts */
+  @font-face { font-family: 'DM Sans Fallback'; src: local('Arial'); ascent-override: 92.77%; descent-override: 24.41%; }
+  @font-face { font-family: 'Fraunces Fallback'; src: local('Georgia'); ascent-override: 87.5%; descent-override: 28.13%; }
+  :root {
+    --bg-main: #0c0c0f;
+    --bg-panel: #141418;
+    --bg-card: #1e1e24;
+    --bg-hover: #2a2a32;
+    --accent: #c9a84c;
+    --accent-dim: rgba(201,168,76,0.12);
+    --accent-hover: #e8c96a;
+    --text-main: #f0f0f4;
+    --text-muted: #888898;
+    --text-dim: #555566;
+    --border: #26262e;
+    --border-light: #2e2e38;
+    --danger: #e05252;
+    --danger-dim: rgba(224,82,82,0.12);
+    --success: #3ecf8e;
+    --success-dim: rgba(62,207,142,0.12);
+    --info: #4f9cf9;
+    --info-dim: rgba(79,156,249,0.12);
+    --purple: #9d7cf4;
+    --purple-dim: rgba(157,124,244,0.12);
+    --sidebar-w: 260px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg-main);
+    color: var(--text-main);
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+    font-size: 15px;
+  }
+
+  /* ─── SCROLLBAR ─────────────────────── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--border-light); border-radius: 99px; }
+
+  /* ─── SIDEBAR ────────────────────────── */
+  .sidebar {
+    width: var(--sidebar-w);
+    background: var(--bg-panel);
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem 1.25rem;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 10;
+overflow-y: auto;
+  }
+
+  .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    letter-spacing: -0.02em;
+  }
+  .brand i { font-size: 1.1rem; }
+  .brand-actions { display: flex; gap: 0.4rem; margin-left: auto; }
+  .brand-btn {
+    width: 28px; height: 28px; border-radius: 6px; border: 1px solid var(--border);
+    background: var(--bg-card); color: var(--text-muted); display: flex;
+    align-items: center; justify-content: center; cursor: pointer; font-size: 0.75rem;
+    transition: all 0.2s;
+  }
+  .brand-btn:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* ─── LIGHT MODE ─────────────────── */
+  body.light-mode {
+    --bg-main: #f0f0f5;
+    --bg-panel: #ffffff;
+    --bg-card: #f5f5fa;
+    --bg-hover: #e8e8f0;
+    --text-main: #1a1a2e;
+    --text-muted: #555570;
+    --text-dim: #999ab0;
+    --border: #dddde8;
+    --border-light: #ccccdd;
+  }
+
+  .streak-box {
+    background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(224,82,82,0.1));
+    border: 1px solid rgba(201,168,76,0.25);
+    border-radius: 10px; padding: 0.85rem 1rem; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.75rem;
+  }
+  .streak-fire { font-size: 1.6rem; line-height: 1; }
+  .streak-info p { font-size: 0.82rem; font-weight: 700; color: var(--accent); }
+  .streak-info span { font-size: 0.72rem; color: var(--text-muted); }
+  .streak-bar-wrap { height: 3px; background: var(--bg-hover); border-radius: 99px; margin-top: 0.4rem; overflow: hidden; }
+  .streak-bar-fill { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.5s ease; }
+
+  .btn-focus {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.6rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+    background: var(--bg-card); border: 1px solid var(--border); color: var(--text-muted);
+    cursor: pointer; transition: all 0.2s; margin-bottom: 0.5rem; width: 100%;
+  }
+  .btn-focus:hover { background: var(--purple-dim); color: var(--purple); border-color: var(--purple); }
+  .btn-focus.active { background: var(--purple-dim); color: var(--purple); border-color: var(--purple); }
+
+  .btn-estudar {
+    display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+    padding: 0.65rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 700;
+    background: var(--accent); color: #0c0c0f; cursor: pointer;
+    transition: all 0.2s; margin-bottom: 1rem; width: 100%; border: none;
+  }
+  .btn-estudar:hover { background: var(--accent-hover); }
+
+  .nav-section-label {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--text-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 0 0.75rem;
+    margin: 1.25rem 0 0.5rem;
+  }
+
+  .nav-menu { display: flex; flex-direction: column; gap: 0.25rem; flex: 1; }
+
+  .nav-item {
+    padding: 0.65rem 0.85rem;
+    border-radius: 8px;
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.875rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    transition: all 0.18s;
+    cursor: pointer;
+    border: 1px solid transparent;
+    text-decoration: none;
+  }
+  .nav-item i { width: 16px; text-align: center; font-size: 0.85rem; }
+  .nav-item:hover { background: var(--bg-hover); color: var(--text-main); }
+  .nav-item.active { background: var(--accent-dim); color: var(--accent); border-color: rgba(201,168,76,0.2); }
+
+  .nav-badge {
+    margin-left: auto;
+    font-size: 0.65rem;
+    background: var(--danger);
+    color: #fff;
+    padding: 0.1rem 0.4rem;
+    border-radius: 99px;
+    font-weight: 700;
+  }
+
+  .user-profile {
+    display: flex; align-items: center; gap: 0.85rem;
+    padding-top: 1.25rem;
+    border-top: 1px solid var(--border);
+  }
+  .avatar {
+    width: 36px; height: 36px;
+    background: var(--accent-dim);
+    border: 1.5px solid rgba(201,168,76,0.3);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; color: var(--accent); font-size: 0.8rem;
+  }
+  .user-info p { font-size: 0.85rem; font-weight: 600; }
+  .user-info span { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ─── MAIN ───────────────────────────── */
+  .main-content { flex: 1; overflow-y: auto; padding: 2.5rem 2.75rem; }
+
+  .page-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 2rem;
+  }
+  .page-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 1.9rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+  .page-header p { color: var(--text-muted); margin-top: 0.35rem; font-size: 0.9rem; }
+
+  /* ─── SECTIONS ───────────────────────── */
+  .view-section { display: none; animation: fadeUp 0.35s ease; }
+  .view-section.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ─── STAT CARDS ─────────────────────── */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .stat-card {
+    background: var(--bg-panel);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.25rem 1.4rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .stat-card::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--clr, var(--border));
+  }
+  .stat-card.gold  { --clr: var(--accent); }
+  .stat-card.red   { --clr: var(--danger); }
+  .stat-card.green { --clr: var(--success); }
+  .stat-card.blue  { --clr: var(--info); }
+
+  .stat-label { font-size: 0.72rem; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 0.6rem; }
+  .stat-value { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 700; line-height: 1; }
+  .stat-card.gold  .stat-value { color: var(--accent); }
+  .stat-card.red   .stat-value { color: var(--danger); }
+  .stat-card.green .stat-value { color: var(--success); }
+  .stat-card.blue  .stat-value { color: var(--info); }
+  .stat-sub { font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem; }
+
+  /* ─── PROGRESS BAR ────────────────── */
+  .progress-section { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+  .progress-section h2 { font-size: 1rem; font-weight: 600; margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.5rem; }
+  .progress-row { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; }
+  .prog-item {}
+  .prog-label { display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem; }
+  .prog-label span:last-child { color: var(--accent); font-weight: 600; }
+  .prog-bar { height: 5px; background: var(--bg-hover); border-radius: 99px; overflow: hidden; }
+  .prog-fill { height: 100%; border-radius: 99px; background: var(--accent); transition: width 0.6s ease; }
+
+  /* ─── SECTION TITLE ────────────────── */
+  .section-title {
+    font-size: 1rem; font-weight: 600; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.6rem; color: var(--text-main);
+  }
+  .section-title i { color: var(--accent); font-size: 0.9rem; }
+
+  /* ─── TASK LIST ──────────────────── */
+  .task-list-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  .task-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding: 1rem 1.4rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer; transition: background 0.15s;
+  }
+  .task-item:last-child { border-bottom: none; }
+  .task-item:hover { background: var(--bg-card); }
+  .checkbox {
+    width: 20px; height: 20px;
+    border: 2px solid var(--text-dim);
+    border-radius: 5px;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s; flex-shrink: 0; margin-top: 2px;
+  }
+  .task-item.done .checkbox { background: var(--success); border-color: var(--success); }
+  .task-item.done .checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; color: #000; }
+  .task-item.done .task-text { text-decoration: line-through; color: var(--text-muted); }
+  .task-text { font-size: 0.9rem; line-height: 1.5; }
+  .task-tag { font-size: 0.68rem; color: var(--accent); font-weight: 600; text-transform: uppercase; display: block; margin-top: 0.2rem; letter-spacing: 0.04em; }
+
+  /* ─── ACCORDION ──────────────────── */
+  .accordion-container { display: flex; flex-direction: column; gap: 0.75rem; }
+  .accordion-item { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .accordion-item.active { border-color: rgba(201,168,76,0.3); }
+  .accordion-header { padding: 1.1rem 1.4rem; display: flex; justify-content: space-between; align-items: center; cursor: pointer; transition: background 0.2s; user-select: none; }
+  .accordion-header:hover { background: var(--bg-card); }
+  .acc-title { display: flex; align-items: center; gap: 0.85rem; font-weight: 600; font-size: 0.95rem; }
+  .acc-title i { color: var(--accent); font-size: 1rem; width: 20px; text-align: center; }
+  .acc-meta { display: flex; align-items: center; gap: 0.75rem; font-size: 0.8rem; color: var(--text-muted); }
+  .badge {
+    padding: 0.2rem 0.55rem; border-radius: 5px; font-weight: 700;
+    font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.03em;
+  }
+  .badge.elim   { background: var(--danger-dim);  color: var(--danger); }
+  .badge.classif { background: var(--success-dim); color: var(--success); }
+  .badge.new    { background: var(--info-dim);    color: var(--info); }
+  .badge.dif    { background: var(--purple-dim);  color: var(--purple); }
+
+  .acc-progress { font-size: 0.72rem; color: var(--text-muted); }
+  .acc-progress b { color: var(--accent); }
+
+  .accordion-body { display: none; padding: 0 1.4rem 1.4rem; border-top: 1px solid var(--border); background: var(--bg-card); }
+  .accordion-item.active .accordion-body { display: block; }
+  .acc-desc { font-size: 0.83rem; color: var(--text-muted); margin: 1rem 0; line-height: 1.6; padding: 0.75rem; background: var(--bg-panel); border-radius: 8px; border-left: 2px solid var(--accent); }
+  .topic-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.75rem; }
+  .topic-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.85rem 1rem; background: var(--bg-panel); border-radius: 8px; border: 1px solid var(--border); cursor: pointer; transition: all 0.15s; }
+  .topic-item:hover { border-color: var(--accent); }
+  .topic-item.done { opacity: 0.6; }
+  .topic-checkbox { width: 18px; height: 18px; border: 2px solid var(--text-dim); border-radius: 4px; display: flex; align-items: center; justify-content: center; margin-top: 2px; transition: all 0.2s; flex-shrink: 0; }
+  .topic-item.done .topic-checkbox { background: var(--accent); border-color: var(--accent); }
+  .topic-item.done .topic-checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; font-size: 10px; color: #000; }
+  .topic-item.done .topic-text { text-decoration: line-through; color: var(--text-muted); }
+  .topic-text { font-size: 0.875rem; line-height: 1.45; }
+  .topic-hint { font-size: 0.78rem; color: var(--info); display: block; margin-top: 0.25rem; font-style: italic; }
+
+  /* ─── MODULES GRID ───────────────── */
+  .modules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem; }
+  .module-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; display: flex; flex-direction: column; transition: transform 0.2s, border-color 0.2s; }
+  .module-card:hover { transform: translateY(-2px); border-color: rgba(201,168,76,0.35); }
+  .module-header { padding: 1rem 1.2rem; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+  .module-header h3 { font-size: 0.95rem; font-weight: 600; display: flex; align-items: center; gap: 0.5rem; }
+  .module-header i { color: var(--accent); }
+  .module-body { padding: 1rem 1.2rem; flex: 1; }
+  .resource-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .resource-item a {
+    display: flex; align-items: center; gap: 0.75rem;
+    padding: 0.65rem 0.9rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text-main);
+    text-decoration: none; font-size: 0.82rem;
+    transition: all 0.15s;
+  }
+  .resource-item a:hover { background: var(--bg-hover); border-color: var(--border-light); transform: translateX(2px); }
+  .resource-item i { font-size: 1rem; width: 18px; text-align: center; }
+  .resource-item.youtube i { color: #ff4444; }
+  .resource-item.pdf i { color: var(--accent); }
+  .resource-item.q i { color: var(--info); }
+  .resource-item.apostila i { color: var(--purple); }
+  .resource-item.free-badge::after { content: 'GRÁTIS'; font-size: 0.58rem; font-weight: 700; color: var(--success); background: var(--success-dim); padding: 0.1rem 0.4rem; border-radius: 3px; margin-left: auto; }
+
+  /* ─── PROVAS ─────────────────────── */
+  .provas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1rem; }
+  .prova-card {
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.2rem 1.4rem; text-decoration: none; color: var(--text-main);
+    display: flex; align-items: center; gap: 1rem; transition: all 0.2s;
+  }
+  .prova-card:hover { background: var(--bg-card); border-color: rgba(201,168,76,0.35); transform: translateY(-2px); }
+  .prova-icon { font-size: 1.5rem; flex-shrink: 0; }
+  .prova-title { font-weight: 600; font-size: 0.9rem; }
+  .prova-desc { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.25rem; line-height: 1.4; }
+
+  /* ─── ROTINA ─────────────────────── */
+  .cronograma { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; }
+  .cronograma-header { padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); font-weight: 600; font-size: 0.95rem; display: flex; align-items: center; gap: 0.6rem; }
+  .cronograma-header i { color: var(--accent); }
+  .dia-row { display: flex; align-items: stretch; border-bottom: 1px solid var(--border); }
+  .dia-row:last-child { border-bottom: none; }
+  .dia-label { min-width: 110px; padding: 1rem 1.2rem; background: var(--bg-card); border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+  .dia-label strong { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--accent); }
+  .dia-label span { font-size: 0.72rem; color: var(--text-muted); }
+  .dia-content { padding: 0.85rem 1.2rem; display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; }
+  .materia-pill { padding: 0.3rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
+  .mp-pt { background: var(--danger-dim); color: var(--danger); }
+  .mp-dir { background: var(--accent-dim); color: var(--accent); }
+  .mp-mat { background: var(--success-dim); color: var(--success); }
+  .mp-info { background: var(--info-dim); color: var(--info); }
+  .mp-rev { background: var(--purple-dim); color: var(--purple); }
+  .mp-q { border: 1px solid var(--border); color: var(--text-muted); }
+
+  /* ─── FERRAMENTAS ────────────────── */
+  .tools-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .tool-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; display: flex; flex-direction: column; gap: 0.85rem; }
+  .tool-icon { font-size: 1.75rem; }
+  .tool-card h3 { font-size: 0.95rem; font-weight: 600; }
+  .tool-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
+  .tool-btn {
+    display: inline-block; text-align: center;
+    background: var(--accent); color: #0c0c0f;
+    padding: 0.6rem 1rem; border-radius: 8px;
+    text-decoration: none; font-weight: 700; font-size: 0.82rem;
+    transition: background 0.15s;
+  }
+  .tool-btn:hover { background: var(--accent-hover); }
+  .tool-btn.secondary { background: var(--bg-card); color: var(--text-main); border: 1px solid var(--border); }
+  .tool-btn.secondary:hover { background: var(--bg-hover); }
+
+  /* ─── ALERT BANNER ───────────────── */
+  .alert-banner { display: flex; align-items: flex-start; gap: 1rem; background: var(--accent-dim); border: 1px solid rgba(201,168,76,0.25); border-radius: 10px; padding: 1rem 1.2rem; margin-bottom: 1.5rem; font-size: 0.85rem; line-height: 1.5; }
+  .alert-banner i { color: var(--accent); margin-top: 1px; flex-shrink: 0; }
+
+  /* ─── TOP BAR / SEARCH ──────────────── */
+  .topbar {
+    display: flex; align-items: center; gap: 1rem;
+    margin-bottom: 2rem; padding-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .search-wrap {
+    flex: 1; position: relative; max-width: 400px;
+  }
+  .search-wrap i {
+    position: absolute; left: .85rem; top: 50%; transform: translateY(-50%);
+    color: var(--text-dim); font-size: .82rem;
+  }
+  .search-input {
+    width: 100%; padding: .6rem .9rem .6rem 2.2rem;
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text-main); font-family: 'DM Sans', sans-serif;
+    font-size: .84rem; outline: none; transition: border-color .2s;
+  }
+  .search-input:focus { border-color: rgba(201,168,76,.4); }
+  .search-input::placeholder { color: var(--text-dim); }
+  .topbar-right { display: flex; align-items: center; gap: .75rem; margin-left: auto; }
+  .topbar-stat {
+    display: flex; align-items: center; gap: .4rem;
+    font-size: .78rem; color: var(--text-muted);
+    background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 7px; padding: .4rem .75rem;
+  }
+  .topbar-stat i { font-size: .75rem; }
+  .topbar-stat.fire i { color: var(--danger); }
+  .topbar-stat.days i { color: var(--success); }
+
+  /* ─── SEARCH RESULTS ────────────────── */
+  .search-results {
+    position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+    background: var(--bg-panel); border: 1px solid var(--border);
+    border-radius: 10px; z-index: 100; overflow: hidden;
+    box-shadow: 0 8px 24px rgba(0,0,0,.3); display: none;
+  }
+  .search-results.visible { display: block; }
+  .search-result-item {
+    padding: .7rem 1rem; display: flex; align-items: center; gap: .75rem;
+    font-size: .83rem; cursor: pointer; transition: background .15s; border-bottom: 1px solid var(--border);
+  }
+  .search-result-item:last-child { border-bottom: none; }
+  .search-result-item:hover { background: var(--bg-hover); }
+  .search-result-item i { color: var(--accent); width: 16px; text-align: center; font-size: .82rem; flex-shrink: 0; }
+  .sr-tag { margin-left: auto; font-size: .65rem; color: var(--text-dim); }
+  body.foco-mode .sidebar { display: none; }
+  body.foco-mode .main-content { padding: 2rem; }
+  .foco-banner {
+    display: none; position: fixed; top: 0; left: 0; right: 0;
+    background: var(--purple); color: #fff; font-size: 0.8rem; font-weight: 700;
+    text-align: center; padding: 0.4rem; z-index: 999; letter-spacing: 0.05em;
+  }
+  body.foco-mode .foco-banner { display: block; }
+  body.foco-mode .main-content { padding-top: 3rem; }
+
+  /* ─── MEDALS ─────────────────────── */
+  .medals-row { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .medal {
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 10px;
+    padding: 0.65rem 1rem; display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.8rem; font-weight: 600; transition: all 0.2s;
+  }
+  .medal.earned { border-color: rgba(201,168,76,0.4); background: var(--accent-dim); color: var(--accent); }
+  .medal.locked { opacity: 0.4; filter: grayscale(1); }
+  .medal-icon { font-size: 1.3rem; }
+
+  /* ─── RADAR CHART ────────────────── */
+  .radar-wrap { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 2rem; flex-wrap: wrap; }
+  .radar-canvas-wrap { flex: 0 0 280px; }
+  canvas#radarChart { width: 280px !important; height: 280px !important; }
+  .radar-legend { flex: 1; min-width: 200px; }
+  .radar-legend h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 1rem; }
+  .radar-row { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.6rem; font-size: 0.83rem; }
+  .radar-bar-bg { flex: 1; height: 6px; background: var(--bg-hover); border-radius: 99px; overflow: hidden; }
+  .radar-bar-fill { height: 100%; border-radius: 99px; background: var(--accent); }
+  .radar-pct { font-size: 0.75rem; font-weight: 700; color: var(--accent); min-width: 30px; text-align: right; }
+  .radar-label { min-width: 100px; color: var(--text-muted); }
+
+  /* ─── PRIORITY BOX ───────────────── */
+  .priority-box { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; margin-bottom: 1.5rem; }
+  .priority-box h3 { font-size: 0.92rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .priority-box h3 i { color: var(--accent); }
+  .priority-item { display: flex; align-items: center; gap: 0.75rem; padding: 0.6rem 0; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+  .priority-item:last-child { border-bottom: none; }
+  .priority-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .p-high { background: var(--danger); }
+  .p-mid  { background: var(--accent); }
+  .p-ok   { background: var(--success); }
+
+  /* ─── PROB BOX ───────────────────── */
+  .prob-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .prob-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.2rem; }
+  .prob-card .prob-num { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 800; margin-bottom: 0.25rem; }
+  .prob-card .prob-label { font-size: 0.78rem; color: var(--text-muted); line-height: 1.5; }
+  .prob-card.highlight { border-color: rgba(62,207,142,0.35); background: var(--success-dim); }
+  .prob-card.highlight .prob-num { color: var(--success); }
+
+  /* ─── SIMULADO ───────────────────── */
+  .sim-setup { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 2rem; max-width: 600px; margin: 0 auto 2rem; text-align: center; }
+  .sim-setup h2 { font-family: 'Fraunces', serif; font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .sim-setup p { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 1.5rem; line-height: 1.6; }
+  .sim-options { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-bottom: 1.5rem; text-align: left; }
+  .sim-opt { background: var(--bg-card); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; cursor: pointer; transition: all 0.2s; }
+  .sim-opt:hover, .sim-opt.selected { border-color: var(--accent); background: var(--accent-dim); }
+  .sim-opt h4 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.25rem; }
+  .sim-opt p { font-size: 0.78rem; color: var(--text-muted); }
+  .btn-start-sim {
+    background: var(--accent); color: #0c0c0f; border: none; padding: 0.85rem 2rem;
+    border-radius: 10px; font-weight: 800; font-size: 0.95rem; cursor: pointer;
+    transition: background 0.2s; width: 100%;
+  }
+  .btn-start-sim:hover { background: var(--accent-hover); }
+  .sim-timer-screen { display: none; }
+  .sim-timer-screen.active { display: block; }
+  .sim-setup-screen { display: block; }
+  .sim-setup-screen.hidden { display: none; }
+  .timer-display {
+    text-align: center; background: var(--bg-panel); border: 1px solid var(--border);
+    border-radius: 16px; padding: 3rem 2rem; margin-bottom: 1.5rem;
+  }
+  .timer-digits { font-family: 'Fraunces', serif; font-size: 5rem; font-weight: 800; color: var(--accent); letter-spacing: -0.03em; line-height: 1; }
+  .timer-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+  .timer-controls { display: flex; gap: 0.75rem; justify-content: center; }
+  .btn-timer {
+    padding: 0.7rem 1.5rem; border-radius: 8px; font-weight: 700; font-size: 0.85rem;
+    border: 1px solid var(--border); cursor: pointer; transition: all 0.2s; background: var(--bg-card); color: var(--text-main);
+  }
+  .btn-timer.primary { background: var(--accent); color: #0c0c0f; border-color: var(--accent); }
+  .btn-timer:hover { opacity: 0.85; }
+  .sim-materia-check { display: flex; align-items: center; gap: 0.75rem; padding: 0.7rem; background: var(--bg-card); border-radius: 8px; border: 1px solid var(--border); margin-bottom: 0.5rem; font-size: 0.85rem; }
+  .sim-materia-check input[type=checkbox] { accent-color: var(--accent); width: 16px; height: 16px; }
+
+  /* ─── REVISOES ───────────────────── */
+  .revisao-list { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; }
+  .revisao-item { display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.4rem; border-bottom: 1px solid var(--border); font-size: 0.84rem; }
+  .revisao-item:last-child { border-bottom: none; }
+  .rev-badge { padding: 0.2rem 0.6rem; border-radius: 99px; font-size: 0.68rem; font-weight: 700; flex-shrink: 0; }
+  .rev-24h { background: var(--danger-dim); color: var(--danger); }
+  .rev-7d  { background: var(--accent-dim); color: var(--accent); }
+  .rev-30d { background: var(--success-dim); color: var(--success); }
+  .rev-name { flex: 1; font-weight: 600; }
+  .rev-date { font-size: 0.75rem; color: var(--text-muted); }
+  .dicas-hero {
+    background: linear-gradient(135deg, rgba(201,168,76,0.1) 0%, rgba(157,124,244,0.08) 100%);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 14px; padding: 1.75rem 2rem; margin-bottom: 2rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .dicas-hero-icon { font-size: 3rem; flex-shrink: 0; }
+  .dicas-hero h2 { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 700; letter-spacing: -0.02em; margin-bottom: 0.35rem; }
+  .dicas-hero p { font-size: 0.875rem; color: var(--text-muted); line-height: 1.6; }
+
+  .dicas-tabs { display: flex; gap: 0.5rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .dica-tab {
+    padding: 0.5rem 1rem; border-radius: 8px; font-size: 0.8rem; font-weight: 600;
+    cursor: pointer; border: 1px solid var(--border); background: var(--bg-panel);
+    color: var(--text-muted); transition: all 0.18s;
+  }
+  .dica-tab:hover { background: var(--bg-hover); color: var(--text-main); }
+  .dica-tab.active { background: var(--accent-dim); color: var(--accent); border-color: rgba(201,168,76,0.35); }
+
+  .dica-panel { display: none; animation: fadeUp 0.3s ease; }
+  .dica-panel.active { display: block; }
+
+  .dicas-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem; margin-bottom: 1.5rem; }
+  .dica-card {
+    background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1.25rem 1.4rem; display: flex; flex-direction: column; gap: 0.75rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .dica-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-2px); }
+  .dica-card-top { display: flex; align-items: center; gap: 0.75rem; }
+  .dica-num {
+    width: 32px; height: 32px; border-radius: 8px; font-weight: 800;
+    font-size: 0.8rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .dica-num.gold { background: var(--accent-dim); color: var(--accent); }
+  .dica-num.green { background: var(--success-dim); color: var(--success); }
+  .dica-num.blue { background: var(--info-dim); color: var(--info); }
+  .dica-num.purple { background: var(--purple-dim); color: var(--purple); }
+  .dica-num.red { background: var(--danger-dim); color: var(--danger); }
+  .dica-card h4 { font-size: 0.92rem; font-weight: 700; line-height: 1.3; }
+  .dica-card p { font-size: 0.83rem; color: var(--text-muted); line-height: 1.6; }
+  .dica-tag { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 0.2rem 0.55rem; border-radius: 99px; display: inline-block; }
+  .dica-tag.warn { background: var(--danger-dim); color: var(--danger); }
+  .dica-tag.tip  { background: var(--accent-dim); color: var(--accent); }
+  .dica-tag.pro  { background: var(--purple-dim); color: var(--purple); }
+  .dica-tag.ok   { background: var(--success-dim); color: var(--success); }
+
+  .quote-block {
+    background: var(--bg-panel); border-left: 3px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 1.1rem 1.4rem;
+    font-style: italic; font-size: 0.9rem; color: var(--text-muted);
+    line-height: 1.6; margin-bottom: 1rem;
+  }
+  .quote-block strong { display: block; margin-top: 0.5rem; font-style: normal; font-size: 0.78rem; color: var(--accent); }
+
+  .mindset-list { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin-bottom: 1.5rem; }
+  .mindset-item { display: flex; align-items: flex-start; gap: 1rem; padding: 1rem 1.4rem; border-bottom: 1px solid var(--border); }
+  .mindset-item:last-child { border-bottom: none; }
+  .mindset-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+  .mindset-item h5 { font-size: 0.88rem; font-weight: 700; margin-bottom: 0.3rem; }
+  .mindset-item p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.55; }
+
+  .erros-table { width: 100%; border-collapse: collapse; background: var(--bg-panel); border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin-bottom: 1.5rem; }
+  .erros-table th { padding: 0.85rem 1.2rem; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-muted); background: var(--bg-card); border-bottom: 1px solid var(--border); text-align: left; }
+  .erros-table td { padding: 0.9rem 1.2rem; font-size: 0.84rem; border-bottom: 1px solid var(--border); vertical-align: top; line-height: 1.5; }
+  .erros-table tr:last-child td { border-bottom: none; }
+  .erros-table tr:hover td { background: var(--bg-card); }
+  .erros-table td:first-child { color: var(--danger); font-weight: 600; }
+  .erros-table td:last-child { color: var(--success); }
+
+  .checklist-card { background: var(--bg-panel); border: 1px solid var(--border); border-radius: 12px; padding: 1.4rem; margin-bottom: 1rem; }
+  .checklist-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+  .checklist-card h4 i { color: var(--accent); }
+  .check-row { display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.55rem 0; border-bottom: 1px solid var(--border); font-size: 0.84rem; line-height: 1.5; }
+  .check-row:last-child { border-bottom: none; }
+  .check-row i { color: var(--success); font-size: 0.8rem; margin-top: 3px; flex-shrink: 0; }
+
+  /* ─── DIVIDER ────────────────────── */
+  .divider { height: 1px; background: var(--border); margin: 1.5rem 0; }
+</style>
+</head>
+<body>
+
+<aside class="sidebar" role="navigation" aria-label="Menu de navegação">
+  <div class="brand">
+    <i class="fa-solid fa-scale-balanced"></i>
+    <span>Aprova SP</span>
+    <div class="brand-actions">
+      <button class="brand-btn" onclick="toggleTheme()" title="Alternar tema claro/escuro" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </div>
+
+  <!-- Streak de estudos -->
+  <div class="streak-box">
+    <div class="streak-fire">🔥</div>
+    <div class="streak-info" style="flex:1">
+      <p id="streakLabel">0 dias seguidos</p>
+      <span id="streakSub">Estude hoje para começar!</span>
+      <div class="streak-bar-wrap"><div class="streak-bar-fill" id="streakBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Estudar agora -->
+  <button class="btn-estudar" onclick="estudarAgora()" aria-label="Iniciar sessão de estudo">
+    <i class="fa-solid fa-play"></i> Continuar Estudando
+  </button>
+
+  <!-- Modo Foco -->
+  <button class="btn-focus" id="btnFoco" onclick="toggleFoco()" aria-label="Alternar modo foco">
+    <i class="fa-solid fa-brain"></i> Modo Foco
+  </button>
+
+  <nav class="nav-menu">
+    <div class="nav-section-label">Início</div>
+    <a class="nav-item active" onclick="switchTab('dashboard', this)">
+      <i class="fa-solid fa-chart-pie"></i> Painel de Progresso
+    </a>
+
+    <div class="nav-section-label">Estudo</div>
+    <a class="nav-item" onclick="switchTab('edital', this)">
+      <i class="fa-solid fa-list-check"></i> Edital Verticalizado
+    </a>
+    <a class="nav-item" onclick="switchTab('materiais', this)">
+      <i class="fa-solid fa-book-open"></i> Sala de Aula
+    </a>
+    <a class="nav-item" onclick="switchTab('apostilas', this)">
+      <i class="fa-solid fa-file-pdf"></i> Apostilas & PDFs
+    </a>
+
+    <div class="nav-section-label">Prática</div>
+    <a class="nav-item" onclick="switchTab('provas', this)">
+      <i class="fa-solid fa-file-signature"></i> Bancos & Provas
+    </a>
+    <a class="nav-item" onclick="switchTab('rotina', this)">
+      <i class="fa-solid fa-calendar-check"></i> Rotina & Cronograma
+    </a>
+    <a class="nav-item" onclick="switchTab('ferramentas', this)">
+      <i class="fa-solid fa-toolbox"></i> Ferramentas
+    </a>
+
+    <div class="nav-section-label">Mentalidade</div>
+    <a class="nav-item" onclick="switchTab('dicas', this)">
+      <i class="fa-solid fa-lightbulb"></i> Dicas de Concurseiro
+      <span class="nav-badge">NOVO</span>
+    </a>
+
+    <div class="nav-section-label">Avançado</div>
+    <a class="nav-item" onclick="switchTab('simulado', this)">
+      <i class="fa-solid fa-stopwatch"></i> Modo Simulado
+    </a>
+    <a class="nav-item" onclick="switchTab('radar', this)">
+      <i class="fa-solid fa-chart-radar"></i> Radar & Analytics
+    </a>
+  </nav>
+
+  <div class="user-profile">
+    <div class="avatar"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="user-info">
+      <p>Aluno Focado</p>
+      <span>Escrevente TJ-SP</span>
+    </div>
+  </div>
+</aside>
+
+<main class="main-content">
+
+  <!-- ── TOPBAR ──────────────────────────────── -->
+  <div class="topbar">
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input class="search-input" id="globalSearch" type="text" placeholder="Buscar tópico, lei, matéria..." oninput="runSearch(this.value)" onblur="setTimeout(()=>hideSearch(),200)">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-stat fire"><i class="fa-solid fa-fire"></i> <span id="topStreak">0</span> dias</div>
+      <div class="topbar-stat days"><i class="fa-solid fa-calendar-check"></i> <span id="topDias">—</span> dias p/ prova</div>
+    </div>
+  </div>
+
+  <!-- ═══ DASHBOARD ═════════════════════════════════ -->
+  <div id="dashboard" class="view-section active">
+    <div class="page-header">
+      <div>
+        <h1>Visão Geral</h1>
+        <p>Acompanhe sua jornada até a aprovação na Vunesp.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card gold">
+        <div class="stat-label">Meta de Acertos</div>
+        <div class="stat-value">88%</div>
+        <div class="stat-sub">Média para nomeação segura</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-label">Blocos I & II</div>
+        <div class="stat-value">&gt;50%</div>
+        <div class="stat-sub">Caráter eliminatório — cuidado!</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Dias até a Prova</div>
+        <div class="stat-value" id="diasCountdown">—</div>
+        <div class="stat-sub">Edital Vunesp 2025/2026</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Tópicos Dominados</div>
+        <div class="stat-value" id="topicsDone">0/21</div>
+        <div class="stat-sub">Marque no Edital Verticalizado</div>
+      </div>
+    </div>
+
+    <!-- Progresso por matéria -->
+    <div class="progress-section">
+      <h2><i class="fa-solid fa-chart-line" style="color:var(--accent)"></i> Progresso por Bloco</h2>
+      <div class="progress-row" id="progressBars">
+        <div class="prog-item">
+          <div class="prog-label"><span>Português</span><span id="pct-port">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-port" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Dir. Penal</span><span id="pct-penal">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-penal" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Proc. Penal & Civil</span><span id="pct-proc">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-proc" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Const. / Adm.</span><span id="pct-const">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-const" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Mat. / RLM / Info</span><span id="pct-mat">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-mat" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frase do dia + Links Rápidos -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.25rem;border-left:3px solid var(--accent)">
+        <div style="font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem">💡 Frase do Dia</div>
+        <div id="fraseHoje" style="font-size:.88rem;color:var(--text-main);line-height:1.6;font-style:italic"></div>
+        <div id="autorFrase" style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem;font-style:normal;font-weight:600"></div>
+      </div>
+      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.25rem">
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem">⚡ Acesso Rápido</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=1&board_ids[]=63" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s" onmouseover="this.style.borderLeft='2px solid var(--accent)'" onmouseout="this.style.borderLeft='2px solid transparent'">
+            <i class="fa-solid fa-pen-nib" style="color:var(--accent);width:14px"></i> Questões de Português (Vunesp)
+          </a>
+          <a href="https://www.planalto.gov.br/ccivil_03/leis/l9099.htm" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s" onmouseover="this.style.borderLeft='2px solid var(--accent)'" onmouseout="this.style.borderLeft='2px solid transparent'">
+            <i class="fa-solid fa-scale-balanced" style="color:var(--info);width:14px"></i> Lei 9.099 (Planalto)
+          </a>
+          <a href="https://www.tjsp.jus.br/Concursos" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s" onmouseover="this.style.borderLeft='2px solid var(--accent)'" onmouseout="this.style.borderLeft='2px solid transparent'">
+            <i class="fa-solid fa-gavel" style="color:var(--purple);width:14px"></i> TJ-SP — Concursos Oficiais
+          </a>
+          <a href="https://www.vunesp.com.br/" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s" onmouseover="this.style.borderLeft='2px solid var(--accent)'" onmouseout="this.style.borderLeft='2px solid transparent'">
+            <i class="fa-solid fa-file-signature" style="color:var(--success);width:14px"></i> Vunesp — Site Oficial da Banca
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-flag"></i> Meta da Semana 1 — Largada</div>
+    <div class="task-list-card" id="taskList">
+      <div class="task-item" onclick="toggleTask(this)" data-key="t1">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Baixar provas de 2023 e 2018 no site oficial do TJ-SP.</div><span class="task-tag">Dia 1</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t2">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Ler o Edital Verticalizado e marcar as matérias com maior peso.</div><span class="task-tag">Dia 1</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t3">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Assistir 2 aulas de interpretação de texto do Prof. Noslen e ler o Art. 5º da CF.</div><span class="task-tag">Dia 2</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t4">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Criar conta no QConcursos e fazer 15 questões de Português (filtro Vunesp).</div><span class="task-tag">Dia 3</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t5">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Baixar e configurar o Anki para flashcards — instalar deck de prazos do CPP.</div><span class="task-tag">Dia 4</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t6">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Ler os artigos 312-359 do Código Penal (crimes contra a administração).</div><span class="task-tag">Dia 5</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t7">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Fazer simulado cronometrado com 10 questões de Direito Constitucional (Vunesp).</div><span class="task-tag">Dia 6</span></div>
+      </div>
+      <div class="task-item" onclick="toggleTask(this)" data-key="t8">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Revisar erros da semana. Criar caderno de erros físico ou digital.</div><span class="task-tag">Dia 7</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EDITAL ═══════════════════════════════════ -->
+  <div id="edital" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Edital Verticalizado</h1>
+        <p>Mapeamento programático dissecado. Marque os tópicos conforme domina a teoria.</p>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <i class="fa-solid fa-circle-info"></i>
+      <span><strong>Como usar:</strong> Clique em cada bloco para expandir os tópicos. Marque (✓) conforme você estudar. O progresso atualiza automaticamente no Painel.</span>
+    </div>
+
+    <div class="accordion-container">
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="acc-title"><i class="fa-solid fa-pen-nib"></i> Língua Portuguesa</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco I · 16 Qs</span>
+            <span class="acc-progress"><b id="prog-port">0</b>/6</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Pilar da prova. Foco absoluto em competência semântico-textual — a banca Vunesp cobra inferência e não gramática decorada.</div>
+          <ul class="topic-list" data-group="port">
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="port1"><div class="topic-checkbox"></div><div class="topic-text">Análise e Interpretação de Textos <span class="topic-hint">Mais de 44% da prova historicamente. Foco em inferências e coerência global.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="port2"><div class="topic-checkbox"></div><div class="topic-text">Significação Contextual — Sinônimos e Antônimos <span class="topic-hint">A banca isola um vocábulo e exige substituição sem alterar o sentido.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="port3"><div class="topic-checkbox"></div><div class="topic-text">Classes de Palavras e Coesão (Conjunções, Preposições, "que" e "se") <span class="topic-hint">Decore o valor semântico de cada conjunção: causal, concessiva, condicional.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="port4"><div class="topic-checkbox"></div><div class="topic-text">Verbos e Pronomes — Vozes e Colocação Pronominal <span class="topic-hint">Regras de próclise, mesóclise e ênclise. Verbos no subjuntivo.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="port5"><div class="topic-checkbox"></div><div class="topic-text">Concordância, Regência e Crase <span class="topic-hint">Crase representa ~10% do histórico (preposição "a" + artigo "a").</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="port6"><div class="topic-checkbox"></div><div class="topic-text">Pontuação — O Uso da Vírgula <span class="topic-hint">Isolamento de orações subordinadas. Proibição de separar sujeito do predicado.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="acc-title"><i class="fa-solid fa-handcuffs"></i> Direito Penal</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco II</span>
+            <span class="acc-progress"><b id="prog-penal">0</b>/3</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Foco exclusivo nos crimes relacionados ao servidor público e à administração da Justiça. Não estude o CP inteiro.</div>
+          <ul class="topic-list" data-group="penal">
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="penal1"><div class="topic-checkbox"></div><div class="topic-text">Crimes contra a Administração Pública (Art. 312–359) <span class="topic-hint">Peculato (apropriar), Concussão (exigir), Corrupção Passiva (solicitar/receber).</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="penal2"><div class="topic-checkbox"></div><div class="topic-text">Crimes contra a Fé Pública <span class="topic-hint">Falsidade material e ideológica de documentos, uso de documento falso.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="penal3"><div class="topic-checkbox"></div><div class="topic-text">Crimes Praticados por Particulares contra a Administração <span class="topic-hint">Resistência, desobediência, desacato. Denunciação caluniosa vs. comunicação falsa.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="acc-title"><i class="fa-solid fa-scale-balanced"></i> Processo Penal e Processo Civil</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco II</span>
+            <span class="acc-progress"><b id="prog-proc">0</b>/4</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">O coração da prova para quem trabalha em cartório. Lei 9.099 tem peso altíssimo — chegou a >20% de uma prova.</div>
+          <ul class="topic-list" data-group="proc">
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="proc1"><div class="topic-checkbox"></div><div class="topic-text">[CPP] Impedimento, Suspeição e Citação <span class="topic-hint">Citação pessoal (mandado) vs. ficta (edital/hora certa). Hipóteses de nulidade.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="proc2"><div class="topic-checkbox"></div><div class="topic-text">[CPP] Juizados Especiais Criminais — Lei 9.099/95 <span class="topic-hint">Foco extremo. Transação penal, sursis processual, composição civil.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="proc3"><div class="topic-checkbox"></div><div class="topic-text">[CPC] Comunicação e Prazos Processuais (CPC/2015) <span class="topic-hint">Prazos computados EXCLUSIVAMENTE em dias úteis (art. 219). Intimação eletrônica.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="proc4"><div class="topic-checkbox"></div><div class="topic-text">[CPC] Tutela Provisória e Procedimento Comum <span class="topic-hint">Tutela de Urgência (antecipada/cautelar) vs. Tutela de Evidência.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="acc-title"><i class="fa-solid fa-landmark-dome"></i> Const., Adm. e Legislação Interna</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco II</span>
+            <span class="acc-progress"><b id="prog-const">0</b>/4</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Constitucional cobra remédios e art. 37. Administrativo cobra improbidade (versão 2021). Interno é específico do TJ-SP.</div>
+          <ul class="topic-list" data-group="const">
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="const1"><div class="topic-checkbox"></div><div class="topic-text">[CF] Direitos Fundamentais (Art. 5º) e Adm. Pública (Art. 37) <span class="topic-hint">Remédios: HC, MS, MI, HD, AP. Regras de concurso, nepotismo e estabilidade.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="const2"><div class="topic-checkbox"></div><div class="topic-text">[Adm] Lei de Improbidade Administrativa — Atualizada 2021 <span class="topic-hint">CUIDADO: exigência de dolo específico após reforma. Prescrição e sanções.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="const3"><div class="topic-checkbox"></div><div class="topic-text">[Adm] Estatuto dos Servidores de SP — Lei 10.261/68 <span class="topic-hint">Infrações puníveis com repreensão, suspensão e demissão. Vantagens e licenças.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="const4"><div class="topic-checkbox"></div><div class="topic-text">[TJ-SP] Normas da Corregedoria e eproc <span class="topic-hint">Resolução 963/2025 (pane sistêmica no eproc). Normas da CGJ. Provimento CG.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header" onclick="toggleAccordion(this)">
+          <div class="acc-title"><i class="fa-solid fa-calculator"></i> Matemática, RLM e Informática</div>
+          <div class="acc-meta">
+            <span class="badge classif">Bloco III</span>
+            <span class="acc-progress"><b id="prog-mat">0</b>/4</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Bloco classificatório — aqui é onde você separa os empatados. Excel avançado tem sido cada vez mais cobrado.</div>
+          <ul class="topic-list" data-group="mat">
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="mat1"><div class="topic-checkbox"></div><div class="topic-text">[Mat] Aritmética e Geometria Básica <span class="topic-hint">MMC, MDC, Regra de Três (simples/composta), Porcentagem, perímetro e área.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="mat2"><div class="topic-checkbox"></div><div class="topic-text">[RLM] Lógica Proposicional e Argumentação <span class="topic-hint">Tabelas-verdade (∧ ∨ →). Dedução a partir de premissas. Negação de quantificadores.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="mat3"><div class="topic-checkbox"></div><div class="topic-text">[Info] Excel Avançado e MS Word <span class="topic-hint">Referenciamento absoluto ($A$1), PROCV, SE, CONT.SES, formatações.</span></div></li>
+            <li class="topic-item" onclick="toggleTopic(this)" data-key="mat4"><div class="topic-checkbox"></div><div class="topic-text">[Info] Nuvem — Teams e OneDrive <span class="topic-hint">Criação de canais, níveis de compartilhamento e controle de versões de arquivos.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ MATERIAIS (SALA DE AULA) ═══════════════════ -->
+  <div id="materiais" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Sala de Aula</h1>
+        <p>Videoaulas, leis e exercícios de referência para cada matéria.</p>
+      </div>
+    </div>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-pen-nib"></i> Português</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@professornoslen" target="_blank"><i class="fa-brands fa-youtube"></i> Prof. Noslen — Gramática Completa</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@profletticia" target="_blank"><i class="fa-brands fa-youtube"></i> Prof. Letícia — Vunesp Específico</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=1&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Português</a></li>
+            <li class="resource-item pdf"><a href="https://www.nexojornal.com.br/" target="_blank"><i class="fa-solid fa-newspaper"></i> Nexo Jornal — Treino de Interpretação</a></li>
+            <li class="resource-item pdf"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank"><i class="fa-solid fa-gavel"></i> Constituição Federal — Art. 5º</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-book-journal-whills"></i> Dir. Constitucional</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank"><i class="fa-solid fa-gavel"></i> Constituição Federal (Lei Seca Oficial)</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@direitodiario" target="_blank"><i class="fa-brands fa-youtube"></i> Canal Direito Diário</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=direito+constitucional+art+37+vunesp" target="_blank"><i class="fa-brands fa-youtube"></i> Art. 37 — Administração Pública</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=5&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Constitucional</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-handcuffs"></i> Penal e CPP</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank"><i class="fa-solid fa-gavel"></i> Código Penal — Art. 312 a 359</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l9099.htm" target="_blank"><i class="fa-solid fa-file-contract"></i> Lei 9.099/95 — Juizados Especiais</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@estrategiaconcursos" target="_blank"><i class="fa-brands fa-youtube"></i> Estratégia Concursos — Penal</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=lei+9099+juizado+especial+criminal+vunesp" target="_blank"><i class="fa-brands fa-youtube"></i> Lei 9.099 — Aula Foco Vunesp</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=8&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Penal/CPP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-scale-unbalanced"></i> CPC & Adm.</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm" target="_blank"><i class="fa-solid fa-gavel"></i> CPC 2015 — Texto Oficial</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l8429.htm" target="_blank"><i class="fa-solid fa-triangle-exclamation"></i> Lei de Improbidade Adm. Atualizada</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=CPC+prazos+processuais+vunesp" target="_blank"><i class="fa-brands fa-youtube"></i> CPC — Prazos e Comunicações</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=lei+improbidade+administrativa+2021+concurso" target="_blank"><i class="fa-brands fa-youtube"></i> Improbidade 2021 — Dolo Específico</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-desktop"></i> Informática</h3>
+          <span class="badge dif">Classificatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=inform%C3%A1tica+excel+word+vunesp+escrevente" target="_blank"><i class="fa-brands fa-youtube"></i> Excel/Word para Vunesp</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=excel+procv+vunesp+concurso+publico" target="_blank"><i class="fa-brands fa-youtube"></i> Fórmulas Avançadas (PROCV, SE)</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.microsoft365.com/" target="_blank"><i class="fa-brands fa-microsoft"></i> Praticar MS Office Web (Grátis)</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=34&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Informática</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-building-columns"></i> Interno TJ-SP</h3>
+          <span class="badge new">Específico</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Corregedoria/Comunicados/Normas" target="_blank"><i class="fa-solid fa-file-pdf"></i> Normas da Corregedoria do TJ-SP</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.al.sp.gov.br/repositorio/legislacao/lei/1968/lei-10261-28.10.1968.html" target="_blank"><i class="fa-solid fa-gavel"></i> Estatuto dos Servidores SP — Lei 10.261</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Concursos" target="_blank"><i class="fa-solid fa-landmark"></i> Portal de Concursos TJ-SP</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=eproc+TJSP+concurso+escrevente" target="_blank"><i class="fa-brands fa-youtube"></i> eproc — Sistema Eletrônico TJ-SP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-calculator"></i> Matemática e RLM</h3>
+          <span class="badge classif">Classificatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=matematica+raciocinio+logico+vunesp+escrevente" target="_blank"><i class="fa-brands fa-youtube"></i> Matemática / RLM — Busca Vunesp no YouTube</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=raciocinio+logico+vunesp+concurso" target="_blank"><i class="fa-brands fa-youtube"></i> Raciocínio Lógico — Vunesp</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=3&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Matemática</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=4&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — RLM</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ APOSTILAS ════════════════════════════════ -->
+  <div id="apostilas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Apostilas & PDFs</h1>
+        <p>Materiais para download — gratuitos, curados e direto ao ponto.</p>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>Todos os materiais abaixo são <strong>gratuitos</strong> ou de acesso público. Não pague por resumos que você encontra aqui.</span>
+    </div>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-gavel"></i> Leis Secas Oficiais</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Constituição Federal</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Código Penal</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Código de Processo Penal (CPP)</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Código de Processo Civil (CPC 2015)</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l9099.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Lei 9.099/95 — Juizados Especiais</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l8429.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Lei 8.429/92 — Improbidade Adm.</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.al.sp.gov.br/repositorio/legislacao/lei/1968/lei-10261-28.10.1968.html" target="_blank"><i class="fa-solid fa-file-pdf"></i> Lei 10.261/68 — Estatuto SP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-file-arrow-down"></i> Resumos e Mapas</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item apostila free-badge"><a href="https://www.estrategiaconcursos.com.br/materiais-gratis/" target="_blank"><i class="fa-solid fa-star"></i> Materiais Grátis — Estratégia</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://www.grancursosonline.com.br/ebooks/" target="_blank"><i class="fa-solid fa-star"></i> eBooks Grátis — Gran Cursos</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://www.alfaconcursos.com.br/apostilas-gratis/" target="_blank"><i class="fa-solid fa-star"></i> Apostilas Grátis — Alfa Concursos</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://www.tecconcursos.com.br/conteudo/materiais-gratis" target="_blank"><i class="fa-solid fa-star"></i> Materiais Grátis — TEC Concursos</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Concursos" target="_blank"><i class="fa-solid fa-landmark"></i> Gabaritos Oficiais — TJ-SP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-brain"></i> Flashcards Prontos (Anki)</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/info/765971342" target="_blank"><i class="fa-solid fa-cards-blank"></i> Deck — Direito Constitucional (concursos)</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/info/2097492901" target="_blank"><i class="fa-solid fa-cards-blank"></i> Deck — Prazos CPC e CPP</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/info/887057243" target="_blank"><i class="fa-solid fa-cards-blank"></i> Deck — Direito Constitucional Resumão</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/decks/portugu%C3%AAs" target="_blank"><i class="fa-solid fa-cards-blank"></i> Decks — Gramática Portuguesa</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-newspaper"></i> Portais de Notícias Jurídicas</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item q free-badge"><a href="https://www.conjur.com.br/" target="_blank"><i class="fa-solid fa-globe"></i> Consultor Jurídico (Conjur)</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.jota.info/" target="_blank"><i class="fa-solid fa-globe"></i> JOTA — Notícias Jurídicas</a></li>
+            <li class="resource-item q free-badge"><a href="https://migalhas.uol.com.br/" target="_blank"><i class="fa-solid fa-globe"></i> Migalhas</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Corregedoria" target="_blank"><i class="fa-solid fa-landmark"></i> Corregedoria TJ-SP — Provimentos</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ PROVAS ════════════════════════════════════ -->
+  <div id="provas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Bancos & Provas Anteriores</h1>
+        <p>Treino é jogo. Resolva provas oficiais Vunesp cronometrado.</p>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-landmark"></i> Provas e Gabaritos Oficiais</div>
+    <div class="provas-grid" style="margin-bottom: 2rem;">
+      <a href="https://www.tjsp.jus.br/Concursos" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--accent)"><i class="fa-solid fa-landmark"></i></div>
+        <div>
+          <div class="prova-title">Provas no Site do TJ-SP</div>
+          <div class="prova-desc">Cadernos de prova e gabaritos oficiais de 2023 e 2018 — a fonte primária.</div>
+        </div>
+      </a>
+      <a href="https://www.vunesp.com.br/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--info)"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <div class="prova-title">Portal da Vunesp</div>
+          <div class="prova-desc">Acesse a organizadora para buscar editais, cadernos e gabaritos definitivos.</div>
+        </div>
+      </a>
+      <a href="https://www.pciconcursos.com.br/provas/tj-sp" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--success)"><i class="fa-solid fa-folder-open"></i></div>
+        <div>
+          <div class="prova-title">Acervo TJ-SP — PCI Concursos</div>
+          <div class="prova-desc">Histórico completo de provas anteriores para download em PDF.</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-laptop-code"></i> Plataformas de Questões</div>
+    <div class="provas-grid">
+      <a href="https://www.qconcursos.com/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--success)"><i class="fa-solid fa-laptop-code"></i></div>
+        <div>
+          <div class="prova-title">QConcursos</div>
+          <div class="prova-desc">Melhor plataforma para simular o Bloco III (Informática e Exatas). Filtro Vunesp/TJ-SP.</div>
+        </div>
+      </a>
+      <a href="https://www.tecconcursos.com.br/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--info)"><i class="fa-solid fa-circle-check"></i></div>
+        <div>
+          <div class="prova-title">TEC Concursos</div>
+          <div class="prova-desc">Ótimo para filtrar questões Vunesp por matéria e ano.</div>
+        </div>
+      </a>
+      <a href="https://www.grancursosonline.com.br/questoes-gratis/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--purple)"><i class="fa-solid fa-question-circle"></i></div>
+        <div>
+          <div class="prova-title">Gran Cursos — Questões Grátis</div>
+          <div class="prova-desc">Banco de questões gratuito com comentários de professores.</div>
+        </div>
+      </a>
+      <a href="https://www.estudaqui.com.br/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--accent)"><i class="fa-solid fa-mobile-screen"></i></div>
+        <div>
+          <div class="prova-title">Estudaqui — App Gratuito</div>
+          <div class="prova-desc">Questões pelo celular. Ótimo para usar no metrô e no tempo livre.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══ ROTINA ════════════════════════════════════ -->
+  <div id="rotina" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Rotina & Cronograma</h1>
+        <p>Plano semanal de estudos para quem trabalha durante o dia.</p>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span><strong>Método recomendado:</strong> Estude <strong>2h por dia</strong> nos dias úteis (1h de teoria + 1h de questões) e <strong>4-5h</strong> no fim de semana (revisão + simulado). Total: ~14h/semana.</span>
+    </div>
+
+    <div class="cronograma">
+      <div class="cronograma-header"><i class="fa-solid fa-calendar-week"></i> Cronograma Semanal Padrão</div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Segunda</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-pt">Português — Interpretação</span>
+          <span class="materia-pill mp-q">20 questões Vunesp</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Terça</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-dir">Dir. Penal (Art. 312–359)</span>
+          <span class="materia-pill mp-q">15 questões de Penal</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Quarta</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-dir">CPP & Lei 9.099/95</span>
+          <span class="materia-pill mp-q">20 questões de Processo</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Quinta</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-pt">Português — Gramática</span>
+          <span class="materia-pill mp-dir">CF & Adm.</span>
+          <span class="materia-pill mp-q">15 questões mistas</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Sexta</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-mat">Matemática / RLM</span>
+          <span class="materia-pill mp-info">Informática — Excel</span>
+          <span class="materia-pill mp-q">15 questões exatas</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Sábado</strong><span>4–5h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-rev">Revisão Anki (1h)</span>
+          <span class="materia-pill mp-q">Simulado 40 questões</span>
+          <span class="materia-pill mp-dir">Legislação Interna TJ-SP</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Domingo</strong><span>2–3h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-rev">Análise de erros</span>
+          <span class="materia-pill mp-pt">Leitura (treino textual)</span>
+          <span class="materia-pill mp-rev">Caderno de erros</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-rocket"></i> Técnicas de Estudo Recomendadas</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🍅</div>
+        <h3>Técnica Pomodoro</h3>
+        <p>25 minutos de foco total + 5 minutos de pausa. Após 4 ciclos, descanse 20 minutos. Usa o temporizador abaixo.</p>
+        <a href="https://pomofocus.io/" target="_blank" class="tool-btn secondary">Abrir Pomofocus</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🃏</div>
+        <h3>Flashcards (Anki)</h3>
+        <p>Para prazos, artigos e conceitos. Repetição espaçada é a forma mais eficiente de reter conteúdo jurídico.</p>
+        <a href="https://apps.ankiweb.net/" target="_blank" class="tool-btn">Baixar Anki Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📓</div>
+        <h3>Caderno de Erros</h3>
+        <p>Anote toda questão que errar: o enunciado, o motivo do erro e a regra correta. Revise semanalmente.</p>
+        <a href="https://www.notion.so/" target="_blank" class="tool-btn secondary">Usar Notion (Grátis)</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔇</div>
+        <h3>Foco Total</h3>
+        <p>Sons ambiente para concentração. Ideal para longas sessões de leitura de lei seca e resolução de questões.</p>
+        <a href="https://mynoise.net/" target="_blank" class="tool-btn secondary">MyNoise (Grátis)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FERRAMENTAS ═══════════════════════════════ -->
+  <div id="ferramentas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Ferramentas & Simuladores</h1>
+        <p>Tudo o que você precisa além das aulas para passar.</p>
+      </div>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🃏</div>
+        <h3>Anki — Flashcards</h3>
+        <p>Repetição espaçada. Obrigatório para memorizar prazos, artigos e diferenças entre crimes similares.</p>
+        <a href="https://apps.ankiweb.net/" target="_blank" class="tool-btn">Baixar Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <h3>QConcursos</h3>
+        <p>O melhor banco de questões para filtrar por banca (Vunesp), matéria e ano. Essencial para treino diário.</p>
+        <a href="https://www.qconcursos.com/" target="_blank" class="tool-btn">Acessar</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📅</div>
+        <h3>Pomofocus</h3>
+        <p>Temporizador Pomodoro online. Mantenha o foco com ciclos de 25 minutos de estudo ativo.</p>
+        <a href="https://pomofocus.io/" target="_blank" class="tool-btn secondary">Abrir</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <h3>Notion — Caderno Digital</h3>
+        <p>Crie seu caderno de erros, resumos e metas de forma organizada e gratuita.</p>
+        <a href="https://www.notion.so/" target="_blank" class="tool-btn secondary">Acessar Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔍</div>
+        <h3>Jusbrasil</h3>
+        <p>Pesquisa de jurisprudência e legislação. Útil para entender o contexto das questões de processo.</p>
+        <a href="https://www.jusbrasil.com.br/" target="_blank" class="tool-btn secondary">Acessar Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📱</div>
+        <h3>Estudaqui — App</h3>
+        <p>Questões pelo celular, sem precisar de computador. Perfeito para estudar no transporte.</p>
+        <a href="https://www.estudaqui.com.br/" target="_blank" class="tool-btn secondary">Baixar App</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🏛️</div>
+        <h3>Planalto.gov.br</h3>
+        <p>Fonte oficial de todas as leis. Sempre consulte aqui antes de confiar em resumos de terceiros.</p>
+        <a href="https://www.planalto.gov.br/" target="_blank" class="tool-btn secondary">Acessar</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">⚖️</div>
+        <h3>STJ & STF — Jurisprudência</h3>
+        <p>Pesquise precedentes para entender como as questões de processo são cobradas na prática.</p>
+        <a href="https://jurisprudencia.stj.jus.br/" target="_blank" class="tool-btn secondary">STJ — Pesquisar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DICAS DE CONCURSEIRO ══════════════════════ -->
+  <div id="dicas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Dicas de Concurseiro</h1>
+        <p>Estratégias, mentalidade e os erros que eliminam candidatos antes da hora.</p>
+      </div>
+    </div>
+
+    <div class="dicas-hero">
+      <div class="dicas-hero-icon">🏆</div>
+      <div>
+        <h2>Aprovação é método, não sorte.</h2>
+        <p>Candidatos que passam no TJ-SP não são necessariamente os mais inteligentes — são os mais <strong>consistentes</strong>. Esta aba reúne os princípios que separam quem é nomeado de quem tenta novamente.</p>
+      </div>
+    </div>
+
+    <!-- TABS INTERNAS -->
+    <div class="dicas-tabs">
+      <div class="dica-tab active" onclick="switchDicaTab('estrategia', this)">⚔️ Estratégia de Prova</div>
+      <div class="dica-tab" onclick="switchDicaTab('estudo', this)">🧠 Técnicas de Estudo</div>
+      <div class="dica-tab" onclick="switchDicaTab('erros', this)">🚫 Erros Fatais</div>
+      <div class="dica-tab" onclick="switchDicaTab('mentalidade', this)">💪 Mentalidade</div>
+      <div class="dica-tab" onclick="switchDicaTab('diaprova', this)">📋 Dia da Prova</div>
+    </div>
+
+    <!-- ── ESTRATÉGIA ──────────────────────────── -->
+    <div id="dica-estrategia" class="dica-panel active">
+      <div class="section-title"><i class="fa-solid fa-chess"></i> Estratégia para a Vunesp</div>
+
+      <div class="dicas-grid">
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">01</div>
+            <h4>Resolva provas antigas ANTES de estudar tudo</h4>
+          </div>
+          <p>Baixe as provas de 2023 e 2018 no 1º dia. Faça sem estudar. Isso mapeia suas lacunas reais e evita que você perca semanas com temas que a banca raramente cobra.</p>
+          <span class="dica-tag tip">Diagnóstico</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num red">02</div>
+            <h4>Português é eliminatório — não é negociável</h4>
+          </div>
+          <p>O Bloco I (Português) tem caráter eliminatório com nota mínima de 50%. Histórico mostra que é aqui que a maioria cai. Dedique pelo menos 40% do seu tempo de estudo inicial a ele.</p>
+          <span class="dica-tag warn">Eliminatório</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num blue">03</div>
+            <h4>A Lei 9.099 pode valer mais de 20% da nota</h4>
+          </div>
+          <p>Juizados Especiais Criminais e Cíveis. Em provas anteriores, esse tema sozinho representou mais de 4 questões. Domine transação penal, sursis processual e composição civil.</p>
+          <span class="dica-tag pro">Alto Peso</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num green">04</div>
+            <h4>Questões de Informática valem pontos fáceis</h4>
+          </div>
+          <p>Excel, Word, Teams e OneDrive costumam ser subestimados. São questões concretas, objetivas e previsíveis. Candidatos que estudam bem Informática frequentemente separam 2–3 posições no ranking.</p>
+          <span class="dica-tag ok">Oportunidade</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num purple">05</div>
+            <h4>Filtre questões por banca (Vunesp) no QConcursos</h4>
+          </div>
+          <p>A Vunesp tem linguagem, nível de dificuldade e pegadinhas próprias. Questões de outras bancas treinam o raciocínio, mas não preparam para o estilo Vunesp. Priorize sempre o filtro da banca certa.</p>
+          <span class="dica-tag tip">Banca específica</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">06</div>
+            <h4>Interprete a questão antes de ler as alternativas</h4>
+          </div>
+          <p>Especialmente em Português e Raciocínio Lógico. Leia o enunciado, pense na resposta certa, e só então veja as opções. Isso reduz o efeito das alternativas "quase certas" que a Vunesp usa para confundir.</p>
+          <span class="dica-tag tip">Técnica de prova</span>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "A maioria dos candidatos estuda muito. Os aprovados estudam o que cai."
+        <strong>— Princípio da Seletividade</strong>
+      </div>
+
+      <div class="section-title"><i class="fa-solid fa-bullseye"></i> Distribuição Inteligente de Tempo</div>
+      <div class="checklist-card">
+        <h4><i class="fa-solid fa-clock"></i> Como dividir seus estudos semanais</h4>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Português — 35% do tempo:</strong> Interpretação de texto todos os dias, mesmo que por 20 min. É músculo, precisa de treino diário.</span></div>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Direito (Penal + Proc. + Const.) — 40% do tempo:</strong> Foque nos artigos mais cobrados. Leia a lei seca, não apenas resumos.</span></div>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Mat. / RLM / Informática — 15% do tempo:</strong> Resolvendo questões. Teoria mínima, muita prática.</span></div>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Revisão e caderno de erros — 10% do tempo:</strong> Quem revisa os erros aprende. Quem não revisa repete os mesmos erros na prova.</span></div>
+      </div>
+    </div>
+
+    <!-- ── TÉCNICAS DE ESTUDO ─────────────────── -->
+    <div id="dica-estudo" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-brain"></i> Técnicas com Evidência Científica</div>
+
+      <div class="dicas-grid">
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">🍅</div>
+            <h4>Pomodoro Adaptado para Concursos</h4>
+          </div>
+          <p><strong>25 min foco + 5 min pausa.</strong> Após 4 ciclos, 20–30 min de descanso. Para leitura de lei seca, use ciclos de 45 min. A pausa é obrigatória — o cérebro consolida memória durante o descanso.</p>
+          <span class="dica-tag ok">Comprovado</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num blue">🃏</div>
+            <h4>Repetição Espaçada (Anki)</h4>
+          </div>
+          <p>Para prazos processuais, artigos e diferenças entre crimes. Configure o Anki para revisar cartões nos intervalos: 1 dia → 3 dias → 7 dias → 14 dias. <strong>Nunca memorize sem espaçamento.</strong></p>
+          <span class="dica-tag pro">Obrigatório</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num purple">✍️</div>
+            <h4>Active Recall (não releitura)</h4>
+          </div>
+          <p>Após ler um tema, feche o material e escreva/fale tudo que lembra. É doloroso e lento no começo, mas consolida 3–4x mais que reler. Use para revisar lei seca antes de cada sessão de questões.</p>
+          <span class="dica-tag pro">Alta Eficiência</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num green">📓</div>
+            <h4>Caderno de Erros — Como Fazer Direito</h4>
+          </div>
+          <p>Para cada questão errada: (1) copie o enunciado, (2) escreva por que errou, (3) anote a regra correta com o artigo. Revise semanalmente. Em 30 dias você verá padrões de erro — e vai eliminar cada um.</p>
+          <span class="dica-tag tip">Diferencial</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num red">🧩</div>
+            <h4>Mapa Mental para Leis Extensas</h4>
+          </div>
+          <p>Lei 9.099, Estatuto dos Servidores, Art. 37. Faça um mapa mental com as "ramificações" de cada lei. Funciona melhor que resumo linear para entender relações entre institutos jurídicos.</p>
+          <span class="dica-tag tip">Organização</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">⏰</div>
+            <h4>Estudo em Blocos de Matéria Única</h4>
+          </div>
+          <p>Evite estudar 3 matérias diferentes em um mesmo dia, a não ser na revisão. Foco profundo em uma matéria por sessão produz mais retenção do que saltar entre temas. Reserve a segunda matéria para o próximo dia.</p>
+          <span class="dica-tag ok">Produtividade</span>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "O segredo não é estudar mais horas. É estudar de forma que o cérebro não consiga esquecer."
+        <strong>— Baseado em ciência cognitiva</strong>
+      </div>
+    </div>
+
+    <!-- ── ERROS FATAIS ──────────────────────── -->
+    <div id="dica-erros" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Erros que Eliminam Candidatos</div>
+
+      <table class="erros-table">
+        <thead>
+          <tr>
+            <th>❌ Erro Fatal</th>
+            <th>Por que elimina</th>
+            <th>✅ O que fazer no lugar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Estudar sem fazer questões</td>
+            <td>Você acha que sabe, mas não reconhece o tema quando a banca muda o enunciado.</td>
+            <td>Faça questões desde a 1ª semana. Teoria e prática sempre juntas.</td>
+          </tr>
+          <tr>
+            <td>Ignorar a lei seca</td>
+            <td>A Vunesp cobra letra da lei com frequência. Resumo de terceiros pode ter erros ou omissões.</td>
+            <td>Leia os artigos diretamente no Planalto.gov.br. Sublinhe o que cai.</td>
+          </tr>
+          <tr>
+            <td>Não simular condições de prova</td>
+            <td>Na prova real, o tempo pressiona. Candidatos que nunca treinaram cronometrados travam.</td>
+            <td>Faça pelo menos 1 simulado completo por mês nas últimas 8 semanas antes da prova.</td>
+          </tr>
+          <tr>
+            <td>Estudar matérias que não estão no edital</td>
+            <td>Perde tempo com temas que não valem ponto. Muito comum com Penal completo.</td>
+            <td>Leia o edital verticalizado desta aba. Estude APENAS o que está mapeado.</td>
+          </tr>
+          <tr>
+            <td>Deixar revisão para a última semana</td>
+            <td>A última semana deve ser de revisão leve, não de aprender conteúdo novo. Chegam à prova sobrecarregados.</td>
+            <td>Revise progressivamente. Na última semana: só questões e caderno de erros.</td>
+          </tr>
+          <tr>
+            <td>Não dormir bem antes da prova</td>
+            <td>Privação de sono reduz memória de trabalho em até 40%. Pior que não estudar o conteúdo.</td>
+            <td>Durma 7–8h nos 3 dias anteriores à prova. Não estude na madrugada anterior.</td>
+          </tr>
+          <tr>
+            <td>Mudar de material constantemente</td>
+            <td>"Síndrome do material perfeito." Você nunca termina nada e fica com lacunas em tudo.</td>
+            <td>Escolha 1 apostila ou 1 curso por matéria. Siga até o fim. Questões completam o resto.</td>
+          </tr>
+          <tr>
+            <td>Comparar progresso com outros</td>
+            <td>Cada candidato tem ritmo diferente. Comparação gera ansiedade e desmotivação.</td>
+            <td>Compare apenas com você mesmo de uma semana atrás. Use o painel desta ferramenta.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert-banner">
+        <i class="fa-solid fa-fire-flame-curved"></i>
+        <span><strong>Alerta crítico:</strong> O maior erro não está na lista acima — é <strong>começar tarde demais</strong>. Cada semana desperdiçada reduz a margem de segurança no ranking final. Se você está lendo isso agora, comece hoje.</span>
+      </div>
+    </div>
+
+    <!-- ── MENTALIDADE ─────────────────────────── -->
+    <div id="dica-mentalidade" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-fire"></i> Mentalidade de Aprovação</div>
+
+      <div class="quote-block">
+        "Disciplina é escolher entre o que você quer agora e o que você quer mais."
+        <strong>— Abraham Lincoln</strong>
+      </div>
+
+      <div class="mindset-list">
+        <div class="mindset-item">
+          <div class="mindset-icon">🎯</div>
+          <div>
+            <h5>Processo &gt; Resultado</h5>
+            <p>Não acorde pensando "preciso passar". Acorde pensando "o que vou estudar hoje?". Quem foca no processo diário inevitavelmente chega ao resultado. Quem foca só no resultado fica paralisado pela ansiedade.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">📅</div>
+          <div>
+            <h5>Consistência de 1% ao dia bate intensidade esporádica</h5>
+            <p>2 horas todos os dias por 6 meses > 14 horas todo fim de semana. O cérebro consolida memória no sono. Estudo diário, mesmo que curto, cria trilhas neurais que o cérebro reforça enquanto você dorme.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🔄</div>
+          <div>
+            <h5>Errar é obrigatório (no treino)</h5>
+            <p>Candidatos que têm medo de errar evitam questões difíceis e ficam em zona de conforto. Os que passam buscam ativamente o que não sabem. Cada erro no treino é um acerto na prova real.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🧘</div>
+          <div>
+            <h5>Cuide do físico — é parte do estudo</h5>
+            <p>Sono de qualidade, exercício físico (mesmo que 20 min de caminhada), e alimentação adequada aumentam retenção de memória e capacidade de concentração. Sacrificar sono para estudar mais é matematicamente burro.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🗓️</div>
+          <div>
+            <h5>Planeje a semana, não o dia</h5>
+            <p>Planejar dia a dia gera frustração quando um imprevisto acontece. Defina metas semanais e distribua conforme sua semana se desenrola. Se não estudou segunda, compense na terça — sem culpa, sem drama.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🏃</div>
+          <div>
+            <h5>A prova não espera que você esteja "pronto"</h5>
+            <p>Ninguém chega a uma prova de concurso sabendo tudo. A aprovação vai para quem sabe mais que os outros candidatos, não para quem sabe tudo. Foque em performance relativa, não perfeição absoluta.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">📵</div>
+          <div>
+            <h5>Proteja suas horas de estudo como reuniões importantes</h5>
+            <p>Desligue notificações. Use modo "Não perturbe". Diga às pessoas da sua casa que você está "em reunião". Cada interrupção custa 23 minutos de atenção plena para recuperar o foco (pesquisa da UC Irvine).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DIA DA PROVA ─────────────────────────── -->
+    <div id="dica-diaprova" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-calendar-day"></i> Checklist — Dia da Prova</div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-moon"></i> Na véspera (noite anterior)</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Separe os documentos: RG original, CPF, comprovante de inscrição impresso.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Confira o local de prova no Google Maps. Calcule o tempo de deslocamento com margem.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Prepare canetas azuis (leve 3 — a Vunesp exige caneta azul ou preta).</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Não estude conteúdo novo. Revise só o caderno de erros por no máximo 30 min.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Durma às 22h. 7–8h de sono é mais valioso do que qualquer revisão noturna.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Prepare sua roupa e lanche para o dia seguinte agora.</span></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-sun"></i> No dia da prova (manhã)</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Acorde com 2h de antecedência mínima. Café da manhã leve (evite açúcar em excesso).</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Chegue ao local 45–60 min antes. Filas de identificação podem demorar.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Não discuta respostas com outros candidatos na fila — gera ansiedade desnecessária.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Leve água e um lanche para o intervalo (se houver).</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Celular desligado ou no modo avião ANTES de entrar na sala.</span></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-pen-to-square"></i> Durante a prova</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Leia o caderno todo antes de responder. 2–3 min bem investidos.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Resolva primeiro o que você sabe. Marque e volte para as questões difíceis.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Controle o tempo: ~2 min por questão. Se travar, pule e volta.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Não mude respostas sem motivo sólido. O primeiro instinto tende a ser certo.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Transfira respostas para o gabarito com 20 min de sobra. Confira a numeração.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Respire fundo se travar. 3 respirações profundas reduzem o cortisol rapidamente.</span></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-star"></i> Dicas Específicas da Vunesp</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>A Vunesp costuma colocar questões de Português no início — que são as mais longas. Não gaste mais de 3 min em cada.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Questões de Interpretação: a resposta certa sempre está no texto. Desconfie de alternativas que fazem inferências além do texto.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Em questões de Direito, elimine as alternativas claramente erradas. A Vunesp usa distractores muito similares — eliminação é mais segura que adivinhação.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Questões de Informática da Vunesp tendem a ser práticas (o que acontece quando você faz X). Não tente decorar teoria — pratique no computador.</span></div>
+        </div>
+      </div>
+
+      <div class="quote-block" style="margin-top:1rem">
+        "A prova só testa o que você treinou. Confie no processo que você fez até aqui."
+        <strong>— Lembre disso antes de entrar na sala</strong>
+      </div>
+    </div>
+
+  </div><!-- /dicas -->
+
+  <!-- ═══ MODO SIMULADO ═══════════════════════════ -->
+  <div id="simulado" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Modo Simulado</h1>
+        <p>Simule condições reais de prova com cronômetro, bloqueio de distrações e controle de tempo.</p>
+      </div>
+    </div>
+
+    <!-- Setup -->
+    <div class="sim-setup-screen" id="simSetupScreen">
+      <div class="sim-setup">
+        <div style="font-size:3rem;margin-bottom:1rem">🎯</div>
+        <h2>Configurar Simulado</h2>
+        <p>Escolha o tipo de simulado. O cronômetro começa quando você clicar em iniciar — não pause, não consulte material. É treino real.</p>
+
+        <div class="sim-options" id="simOptions">
+          <div class="sim-opt selected" onclick="selectSim(this, 300)" data-mins="300">
+            <h4>⚖️ Prova Completa</h4>
+            <p>5 horas — simula a prova real Vunesp</p>
+          </div>
+          <div class="sim-opt" onclick="selectSim(this, 60)" data-mins="60">
+            <h4>🔥 Bloco Eliminatório</h4>
+            <p>1 hora — só Português (Bloco I)</p>
+          </div>
+          <div class="sim-opt" onclick="selectSim(this, 90)" data-mins="90">
+            <h4>⚡ Meia Prova</h4>
+            <p>90 min — metade das questões</p>
+          </div>
+          <div class="sim-opt" onclick="selectSim(this, 30)" data-mins="30">
+            <h4>🧠 Treino Rápido</h4>
+            <p>30 min — 15 questões temáticas</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.25rem;text-align:left">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem">Matérias do simulado</div>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-port"> Língua Portuguesa</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-penal"> Direito Penal</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-proc"> Processo Penal & Civil</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-const"> Constitucional & Administrativo</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-mat"> Matemática / RLM / Informática</label>
+        </div>
+
+        <button class="btn-start-sim" onclick="iniciarSimulado()">
+          <i class="fa-solid fa-play"></i> &nbsp;Iniciar Simulado Agora
+        </button>
+      </div>
+    </div>
+
+    <!-- Timer ativo -->
+    <div class="sim-timer-screen" id="simTimerScreen">
+      <div class="timer-display">
+        <div style="font-size:0.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem" id="simTipoLabel">Prova Completa</div>
+        <div class="timer-digits" id="timerDisplay">5:00:00</div>
+        <div class="timer-label" id="timerStatus">Cronômetro em andamento — não consulte material</div>
+        <div style="margin-top:1.5rem">
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden;max-width:400px;margin:0 auto">
+            <div id="timerProgress" style="height:100%;background:var(--accent);border-radius:99px;width:100%;transition:width 1s linear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="timer-controls">
+        <button class="btn-timer primary" id="btnPauseTimer" onclick="toggleTimer()"><i class="fa-solid fa-pause"></i> Pausar</button>
+        <button class="btn-timer" onclick="encerrarSimulado()"><i class="fa-solid fa-stop"></i> Encerrar</button>
+      </div>
+
+      <div style="margin-top:2rem">
+        <div class="section-title"><i class="fa-solid fa-list-check"></i> Anotações durante o simulado</div>
+        <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.2rem">
+          <textarea id="simNotes" placeholder="Anote aqui questões que ficou em dúvida, temas para revisar depois..." style="width:100%;background:transparent;border:none;color:var(--text-main);font-family:'DM Sans',sans-serif;font-size:0.88rem;resize:vertical;min-height:120px;outline:none;line-height:1.6"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Histórico de simulados -->
+    <div style="margin-top:2rem">
+      <div class="section-title"><i class="fa-solid fa-history"></i> Histórico de Simulados</div>
+      <div id="simHistorico" class="task-list-card">
+        <div style="padding:2rem;text-align:center;color:var(--text-muted);font-size:0.88rem">
+          <i class="fa-solid fa-clock" style="font-size:2rem;margin-bottom:.75rem;display:block;opacity:.3"></i>
+          Nenhum simulado realizado ainda. Complete seu primeiro para ver o histórico aqui.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RADAR & ANALYTICS ═════════════════════ -->
+  <div id="radar" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Radar & Analytics</h1>
+        <p>Visualize suas forças, fraquezas e a probabilidade real de aprovação.</p>
+      </div>
+    </div>
+
+    <!-- Probabilidade realista -->
+    <div class="section-title"><i class="fa-solid fa-percent"></i> Probabilidade Real de Aprovação</div>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-num" style="color:var(--danger)">0,22%</div>
+        <div class="prob-label">Probabilidade bruta<br><span style="color:var(--text-dim)">180.000 inscritos · 400 vagas</span></div>
+      </div>
+      <div class="prob-card highlight">
+        <div class="prob-num">13%</div>
+        <div class="prob-label">Probabilidade real<br><span style="color:var(--text-dim)">~3.000 candidatos realmente preparados disputam as vagas</span></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num" style="color:var(--info)">~90%</div>
+        <div class="prob-label">Candidatos que desistem<br><span style="color:var(--text-dim)">Estudam 2 semanas e abandonam</span></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num" style="color:var(--purple)">400</div>
+        <div class="prob-label">Vagas totais<br><span style="color:var(--text-dim)">Cada matéria dominada aumenta sua posição no ranking</span></div>
+      </div>
+    </div>
+
+    <div class="alert-banner" style="margin-bottom:1.5rem">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span><strong>Conclusão estratégica:</strong> Você não compete com 180 mil pessoas. Compete com ~3 mil que realmente estão estudando. Seja um desses 3 mil — e suas chances sobem para 13%. Domine os tópicos desta plataforma e você estará no top.</span>
+    </div>
+
+    <!-- Radar de matérias -->
+    <div class="section-title"><i class="fa-solid fa-chart-simple"></i> Radar de Desempenho por Matéria</div>
+    <div class="radar-wrap">
+      <div class="radar-canvas-wrap">
+        <canvas id="radarChart"></canvas>
+      </div>
+      <div class="radar-legend">
+        <h3>Progresso por área</h3>
+        <div class="radar-row">
+          <span class="radar-label">Português</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-port" style="width:0%"></div></div>
+          <span class="radar-pct" id="rp-port">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Dir. Penal</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-penal" style="width:0%;background:var(--danger)"></div></div>
+          <span class="radar-pct" id="rp-penal">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Proc. Penal/Civil</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-proc" style="width:0%;background:var(--info)"></div></div>
+          <span class="radar-pct" id="rp-proc">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Const./Adm.</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-const" style="width:0%;background:var(--purple)"></div></div>
+          <span class="radar-pct" id="rp-const">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Mat./RLM/Info</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-mat" style="width:0%;background:var(--success)"></div></div>
+          <span class="radar-pct" id="rp-mat">0%</span>
+        </div>
+        <div style="margin-top:1rem;padding:0.85rem;background:var(--bg-card);border-radius:8px;font-size:0.82rem;color:var(--text-muted);line-height:1.5">
+          <i class="fa-solid fa-circle-info" style="color:var(--accent);margin-right:.4rem"></i>
+          O radar atualiza automaticamente conforme você marca tópicos no <strong>Edital Verticalizado</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Prioridade de estudo hoje -->
+    <div class="section-title"><i class="fa-solid fa-fire-flame-curved"></i> Prioridade de Estudo Hoje</div>
+    <div class="priority-box" id="priorityBox">
+      <h3><i class="fa-solid fa-chart-bar"></i> Baseado no seu progresso atual</h3>
+      <div id="priorityList">
+        <div class="priority-item"><div class="priority-dot p-high"></div><span>Carregando...</span></div>
+      </div>
+    </div>
+
+    <!-- Conquistas / medalhas -->
+    <div class="section-title"><i class="fa-solid fa-medal"></i> Conquistas</div>
+    <div class="medals-row" id="medalsRow">
+      <div class="medal locked" id="medal-7"><div class="medal-icon">🏅</div> 7 dias seguidos</div>
+      <div class="medal locked" id="medal-30"><div class="medal-icon">🥈</div> 30 dias seguidos</div>
+      <div class="medal locked" id="medal-100"><div class="medal-icon">🥇</div> 100 dias seguidos</div>
+      <div class="medal locked" id="medal-topics"><div class="medal-icon">📚</div> 10 tópicos concluídos</div>
+      <div class="medal locked" id="medal-sim1"><div class="medal-icon">🎯</div> 1º simulado completo</div>
+      <div class="medal locked" id="medal-allTopics"><div class="medal-icon">🏆</div> Edital 100% dominado</div>
+    </div>
+
+    <!-- Revisões pendentes -->
+    <div class="section-title"><i class="fa-solid fa-rotate-right"></i> Revisões Pendentes (Espaçada)</div>
+    <div class="revisao-list">
+      <div class="revisao-item"><span class="rev-badge rev-24h">24h</span><span class="rev-name">Interpretação de Texto</span><span class="rev-date">Revisar hoje</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-7d">7 dias</span><span class="rev-name">Lei 9.099 — Juizados Especiais</span><span class="rev-date">Revisar em 3 dias</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-30d">30 dias</span><span class="rev-name">Art. 312–359 — Crimes contra a Adm.</span><span class="rev-date">Revisar em 12 dias</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-24h">24h</span><span class="rev-name">Crase e Concordância</span><span class="rev-date">Revisar hoje</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-7d">7 dias</span><span class="rev-name">Art. 37 CF — Administração Pública</span><span class="rev-date">Revisar em 5 dias</span></div>
+    </div>
+
+    <!-- Comportamento da banca -->
+    <div class="section-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Análise da Banca Vunesp</div>
+    <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.5rem">
+      <div style="padding:1rem 1.4rem;border-bottom:1px solid var(--border);font-weight:600;font-size:0.92rem;display:flex;align-items:center;gap:.5rem"><i class="fa-solid fa-pen-nib" style="color:var(--accent)"></i> Língua Portuguesa — distribuição histórica</div>
+      <div style="padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:.85rem">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Interpretação de Texto</span><span style="color:var(--accent);font-weight:700">44%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:44%;height:100%;background:var(--accent);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Semântica / Vocabulário</span><span style="color:var(--info);font-weight:700">18%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:18%;height:100%;background:var(--info);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Concordância & Regência</span><span style="color:var(--purple);font-weight:700">14%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:14%;height:100%;background:var(--purple);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Crase</span><span style="color:var(--danger);font-weight:700">10%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:10%;height:100%;background:var(--danger);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Pontuação</span><span style="color:var(--success);font-weight:700">8%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:8%;height:100%;background:var(--success);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Outros (colocação, vozes)</span><span style="color:var(--text-muted);font-weight:700">6%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:6%;height:100%;background:var(--text-dim);border-radius:99px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapa de Aprovação -->
+    <div class="section-title"><i class="fa-solid fa-map-location-dot"></i> Mapa de Aprovação</div>
+    <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem">
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="mapa-step" id="mapa-1" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:.5rem;transition:all .3s">
+          <div style="font-size:1.75rem">🌱</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Iniciante</div><div style="font-size:.78rem;color:var(--text-muted)">Estudando os primeiros tópicos</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">0–25%</div>
+        </div>
+        <div style="width:2px;height:12px;background:var(--border);margin-left:2rem"></div>
+        <div class="mapa-step" id="mapa-2" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:.5rem;transition:all .3s">
+          <div style="font-size:1.75rem">⚔️</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Sobrevivente da Vunesp</div><div style="font-size:.78rem;color:var(--text-muted)">Já conhece a banca, está no ritmo</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">25–50%</div>
+        </div>
+        <div style="width:2px;height:12px;background:var(--border);margin-left:2rem"></div>
+        <div class="mapa-step" id="mapa-3" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:.5rem;transition:all .3s">
+          <div style="font-size:1.75rem">🎯</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Aprovável</div><div style="font-size:.78rem;color:var(--text-muted)">Na zona de corte — qualquer empurrão te aprova</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">50–80%</div>
+        </div>
+        <div style="width:2px;height:12px;background:var(--border);margin-left:2rem"></div>
+        <div class="mapa-step" id="mapa-4" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);transition:all .3s">
+          <div style="font-size:1.75rem">🏆</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Nomeação</div><div style="font-size:.78rem;color:var(--text-muted)">Edital dominado. Pronto para assinar a posse.</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">80–100%</div>
+        </div>
+      </div>
+      <div id="mapaStatus" style="margin-top:1rem;padding:.85rem 1rem;background:var(--accent-dim);border-radius:8px;font-size:.84rem;color:var(--accent);font-weight:600;text-align:center">
+        📍 Você está em: Iniciante (0%) — Continue marcando tópicos no Edital!
+      </div>
+    </div>
+
+  </div><!-- /radar -->
+
+</main>
+
+<div class="foco-banner">🧠 MODO FOCO ATIVADO — Sidebar oculta. Clique em "Modo Foco" na sidebar para desativar.</div>
+
+<script>
+  // Carrega Chart.js via CDN
+  const chartScript = document.createElement('script');
+  chartScript.src = 'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js';
+  document.head.appendChild(chartScript);
+  chartScript.onload = () => drawRadar();
+
+  // ─── BUSCA GLOBAL ──────────────────────────
+  const searchIndex = [
+    { label: 'Interpretação de Texto', tab: 'edital', icon: 'fa-pen-nib', tag: 'Português' },
+    { label: 'Crase e Concordância', tab: 'edital', icon: 'fa-pen-nib', tag: 'Português' },
+    { label: 'Colocação Pronominal', tab: 'edital', icon: 'fa-pen-nib', tag: 'Português' },
+    { label: 'Pontuação — Uso da Vírgula', tab: 'edital', icon: 'fa-pen-nib', tag: 'Português' },
+    { label: 'Peculato, Concussão, Corrupção', tab: 'edital', icon: 'fa-handcuffs', tag: 'Dir. Penal' },
+    { label: 'Crimes contra a Fé Pública', tab: 'edital', icon: 'fa-handcuffs', tag: 'Dir. Penal' },
+    { label: 'Lei 9.099 — Juizados Especiais', tab: 'edital', icon: 'fa-scale-balanced', tag: 'Processo' },
+    { label: 'Prazos Processuais — CPC/2015', tab: 'edital', icon: 'fa-scale-balanced', tag: 'Processo' },
+    { label: 'Tutela Provisória', tab: 'edital', icon: 'fa-scale-balanced', tag: 'Processo' },
+    { label: 'Art. 37 CF — Administração Pública', tab: 'edital', icon: 'fa-landmark-dome', tag: 'Constitucional' },
+    { label: 'Lei de Improbidade — 2021', tab: 'edital', icon: 'fa-landmark-dome', tag: 'Administrativo' },
+    { label: 'Estatuto Servidores SP — 10.261/68', tab: 'edital', icon: 'fa-landmark-dome', tag: 'Legislação' },
+    { label: 'Excel: PROCV, SE, CONT.SES', tab: 'edital', icon: 'fa-calculator', tag: 'Informática' },
+    { label: 'OneDrive e Teams', tab: 'edital', icon: 'fa-calculator', tag: 'Informática' },
+    { label: 'Raciocínio Lógico', tab: 'edital', icon: 'fa-calculator', tag: 'Mat/RLM' },
+    { label: 'Provas anteriores TJ-SP', tab: 'provas', icon: 'fa-file-signature', tag: 'Provas' },
+    { label: 'Cronograma semanal', tab: 'rotina', icon: 'fa-calendar-check', tag: 'Rotina' },
+    { label: 'Técnica Pomodoro', tab: 'rotina', icon: 'fa-clock', tag: 'Rotina' },
+    { label: 'Anki flashcards', tab: 'ferramentas', icon: 'fa-toolbox', tag: 'Ferramentas' },
+    { label: 'QConcursos questões', tab: 'ferramentas', icon: 'fa-toolbox', tag: 'Ferramentas' },
+    { label: 'Iniciar simulado', tab: 'simulado', icon: 'fa-stopwatch', tag: 'Simulado' },
+    { label: 'Radar de desempenho', tab: 'radar', icon: 'fa-chart-radar', tag: 'Analytics' },
+    { label: 'Dicas de estudo', tab: 'dicas', icon: 'fa-lightbulb', tag: 'Dicas' },
+    { label: 'Erros fatais de concurseiro', tab: 'dicas', icon: 'fa-triangle-exclamation', tag: 'Dicas' },
+    { label: 'Checklist dia da prova', tab: 'dicas', icon: 'fa-calendar-day', tag: 'Dicas' },
+  ];
+
+  function runSearch(query) {
+    const box = document.getElementById('searchResults');
+    if (!query || query.length < 2) { box.classList.remove('visible'); return; }
+    const q = query.toLowerCase();
+    const results = searchIndex.filter(s => s.label.toLowerCase().includes(q)).slice(0, 6);
+    if (!results.length) { box.classList.remove('visible'); return; }
+    box.innerHTML = results.map(r => `
+      <div class="search-result-item" onclick="goSearch('${r.tab}')">
+        <i class="fa-solid ${r.icon}"></i>
+        <span>${r.label}</span>
+        <span class="sr-tag">${r.tag}</span>
+      </div>`).join('');
+    box.classList.add('visible');
+  }
+
+  function goSearch(tab) {
+    const navItem = document.querySelector(`[onclick*="'${tab}'"]`);
+    if (navItem) switchTab(tab, navItem);
+    hideSearch();
+    document.getElementById('globalSearch').value = '';
+  }
+
+  function hideSearch() {
+    const box = document.getElementById('searchResults');
+    if (box) box.classList.remove('visible');
+  }
+
+  // ─── TOPBAR SYNC ───────────────────────────
+  function syncTopbar() {
+    const ts = document.getElementById('topStreak');
+    const td = document.getElementById('topDias');
+    if (ts) ts.textContent = localStorage.getItem('studyStreak') || '0';
+    if (td) {
+      const diff = Math.ceil((new Date('2026-08-01') - new Date()) / 86400000);
+      td.textContent = diff > 0 ? diff : '—';
+    }
+  }
+
+  // ─── FRASE DO DIA ──────────────────────────
+  const frases = [
+    { txt: "A disciplina é a ponte entre metas e realizações.", autor: "Jim Rohn" },
+    { txt: "O sucesso é a soma de pequenos esforços repetidos dia após dia.", autor: "Robert Collier" },
+    { txt: "Aprovação é método, não sorte.", autor: "Princípio do concurseiro" },
+    { txt: "Cada questão errada hoje é um acerto garantido na prova real.", autor: "Método ativo de estudo" },
+    { txt: "Você não compete com 180 mil. Compete com 3 mil que realmente estudam.", autor: "Estratégia de concurso" },
+    { txt: "A melhor hora para começar era ontem. A segunda melhor é agora.", autor: "Provérbio chinês" },
+    { txt: "O caminho para a nomeação é feito de dias simples, repetidos com constância.", autor: "Mentalidade de concurseiro" },
+    { txt: "Não existe vento favorável para quem não sabe para onde vai.", autor: "Sêneca" },
+    { txt: "Revise seus erros. Quem aprende com eles já saiu na frente.", autor: "Caderno de erros" },
+    { txt: "Consistência de 1% ao dia supera intensidade esporádica.", autor: "James Clear — Hábitos Atômicos" },
+    { txt: "Estude como se precisasse, porque você precisa.", autor: "Realidade do concurso público" },
+    { txt: "A prova não espera que você esteja pronto. Seja o mais pronto possível.", autor: "Mentalidade de performance" },
+  ];
+
+  function loadFrase() {
+    const idx = new Date().getDate() % frases.length;
+    const f = frases[idx];
+    const el = document.getElementById('fraseHoje');
+    const a = document.getElementById('autorFrase');
+    if (el) el.textContent = '"' + f.txt + '"';
+    if (a) a.textContent = '— ' + f.autor;
+  }
+
+  // ─── TEMA CLARO / ESCURO ───────────────────
+  function toggleTheme() {
+    document.body.classList.toggle('light-mode');
+    const btn = document.getElementById('themeBtn');
+    const isLight = document.body.classList.contains('light-mode');
+    btn.innerHTML = isLight ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  }
+
+  function loadTheme() {
+    if (localStorage.getItem('theme') === 'light') {
+      document.body.classList.add('light-mode');
+      const btn = document.getElementById('themeBtn');
+      if (btn) btn.innerHTML = '<i class="fa-solid fa-sun"></i>';
+    }
+  }
+
+  // ─── NAVEGAÇÃO ─────────────────────────────
+  function switchTab(tabId, element) {
+    document.querySelectorAll('.view-section').forEach(el => el.classList.remove('active'));
+    document.getElementById(tabId).classList.add('active');
+    document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+    if (tabId === 'radar') { setTimeout(drawRadar, 100); updateRadar(); updateMaapa(); updatePriority(); updateMedals(); }
+  }
+
+  // ─── TABS DICAS ────────────────────────────
+  function switchDicaTab(panelId, element) {
+    document.querySelectorAll('.dica-panel').forEach(el => el.classList.remove('active'));
+    document.getElementById('dica-' + panelId).classList.add('active');
+    document.querySelectorAll('.dica-tab').forEach(el => el.classList.remove('active'));
+    element.classList.add('active');
+  }
+
+  // ─── MODO FOCO ─────────────────────────────
+  function toggleFoco() {
+    document.body.classList.toggle('foco-mode');
+    const btn = document.getElementById('btnFoco');
+    btn.classList.toggle('active');
+  }
+
+  // ─── ESTUDAR AGORA ─────────────────────────
+  function estudarAgora() {
+    // Encontra primeiro tópico não marcado
+    const items = document.querySelectorAll('.topic-item:not(.done)');
+    if (items.length > 0) {
+      switchTab('edital', document.querySelector('[onclick*="edital"]'));
+      // Abre o accordion do primeiro tópico não marcado
+      const acc = items[0].closest('.accordion-item');
+      if (acc && !acc.classList.contains('active')) {
+        acc.querySelector('.accordion-header').click();
+      }
+      setTimeout(() => items[0].scrollIntoView({ behavior: 'smooth', block: 'center' }), 300);
+    } else {
+      switchTab('rotina', document.querySelector('[onclick*="rotina"]'));
+    }
+  }
+
+  // ─── STREAK ────────────────────────────────
+  function getStreak() {
+    const today = new Date().toDateString();
+    const lastStudy = localStorage.getItem('lastStudyDate');
+    let streak = parseInt(localStorage.getItem('studyStreak') || '0');
+
+    if (lastStudy === today) return streak;
+
+    const yesterday = new Date();
+    yesterday.setDate(yesterday.getDate() - 1);
+    if (lastStudy === yesterday.toDateString()) {
+      streak += 1;
+    } else if (lastStudy !== today) {
+      streak = 1;
+    }
+    localStorage.setItem('studyStreak', streak);
+    localStorage.setItem('lastStudyDate', today);
+    return streak;
+  }
+
+  function updateStreakUI() {
+    const streak = getStreak();
+    const label = document.getElementById('streakLabel');
+    const sub = document.getElementById('streakSub');
+    const bar = document.getElementById('streakBar');
+    if (label) label.textContent = streak + (streak === 1 ? ' dia seguido' : ' dias seguidos');
+    if (sub) sub.textContent = streak < 7 ? 'Meta: 7 dias 🏅' : streak < 30 ? 'Meta: 30 dias 🥈' : 'Meta: 100 dias 🥇';
+    const goal = streak < 7 ? 7 : streak < 30 ? 30 : 100;
+    if (bar) bar.style.width = Math.min(100, (streak / goal) * 100) + '%';
+  }
+
+  // ─── ACCORDION ─────────────────────────────
+  function toggleAccordion(header) {
+    const item = header.parentElement;
+    item.classList.toggle('active');
+    const icon = header.querySelector('.acc-meta i.fa-chevron-down, .acc-meta i.fa-chevron-up');
+    if (icon) {
+      if (item.classList.contains('active')) {
+        icon.classList.replace('fa-chevron-down', 'fa-chevron-up');
+      } else {
+        icon.classList.replace('fa-chevron-up', 'fa-chevron-down');
+      }
+    }
+  }
+
+  // ─── TÓPICOS DO EDITAL ─────────────────────
+  const topicGroups = {
+    port:  ['port1','port2','port3','port4','port5','port6'],
+    penal: ['penal1','penal2','penal3'],
+    proc:  ['proc1','proc2','proc3','proc4'],
+    const: ['const1','const2','const3','const4'],
+    mat:   ['mat1','mat2','mat3','mat4'],
+  };
+
+  function toggleTopic(topic) {
+    event.stopPropagation();
+    topic.classList.toggle('done');
+    const key = topic.dataset.key;
+    if (topic.classList.contains('done')) {
+      localStorage.setItem('topic_' + key, '1');
+    } else {
+      localStorage.removeItem('topic_' + key);
+    }
+    updateProgress();
+    updateRadar();
+    updateMaapa();
+    updatePriority();
+    updateMedals();
+  }
+
+  function loadTopics() {
+    document.querySelectorAll('.topic-item[data-key]').forEach(item => {
+      if (localStorage.getItem('topic_' + item.dataset.key)) {
+        item.classList.add('done');
+      }
+    });
+  }
+
+  function updateProgress() {
+    let total = 0, done = 0;
+    for (const [group, keys] of Object.entries(topicGroups)) {
+      const groupDone = keys.filter(k => localStorage.getItem('topic_' + k)).length;
+      const el = document.getElementById('prog-' + group);
+      if (el) el.textContent = groupDone;
+      total += keys.length;
+      done += groupDone;
+      const pct = Math.round((groupDone / keys.length) * 100);
+      const fillEl = document.getElementById('fill-' + group);
+      const pctEl = document.getElementById('pct-' + group);
+      if (fillEl) fillEl.style.width = pct + '%';
+      if (pctEl) pctEl.textContent = pct + '%';
+    }
+    document.getElementById('topicsDone').textContent = done + '/' + total;
+  }
+
+  // ─── RADAR CHART ───────────────────────────
+  let radarChartInstance = null;
+
+  function getPcts() {
+    const pcts = {};
+    for (const [group, keys] of Object.entries(topicGroups)) {
+      pcts[group] = Math.round((keys.filter(k => localStorage.getItem('topic_' + k)).length / keys.length) * 100);
+    }
+    return pcts;
+  }
+
+  function drawRadar() {
+    const canvas = document.getElementById('radarChart');
+    if (!canvas || typeof Chart === 'undefined') return;
+    const pcts = getPcts();
+    const data = [pcts.port, pcts.penal, pcts.proc, pcts.const, pcts.mat];
+
+    if (radarChartInstance) { radarChartInstance.destroy(); }
+    radarChartInstance = new Chart(canvas, {
+      type: 'radar',
+      data: {
+        labels: ['Português', 'Dir. Penal', 'Processo', 'Const./Adm.', 'Mat./Info'],
+        datasets: [{
+          data,
+          backgroundColor: 'rgba(201,168,76,0.15)',
+          borderColor: 'rgba(201,168,76,0.8)',
+          borderWidth: 2,
+          pointBackgroundColor: '#c9a84c',
+          pointRadius: 4,
+        }]
+      },
+      options: {
+        responsive: false,
+        scales: {
+          r: {
+            min: 0, max: 100,
+            ticks: { display: false },
+            grid: { color: 'rgba(255,255,255,0.06)' },
+            angleLines: { color: 'rgba(255,255,255,0.06)' },
+            pointLabels: { color: '#888898', font: { size: 11, family: 'DM Sans' } }
+          }
+        },
+        plugins: { legend: { display: false } }
+      }
+    });
+  }
+
+  function updateRadar() {
+    const pcts = getPcts();
+    const map = { port: 'port', penal: 'penal', proc: 'proc', const: 'const', mat: 'mat' };
+    for (const [g, p] of Object.entries(pcts)) {
+      const rb = document.getElementById('rb-' + g);
+      const rp = document.getElementById('rp-' + g);
+      if (rb) rb.style.width = p + '%';
+      if (rp) rp.textContent = p + '%';
+    }
+    if (radarChartInstance) {
+      radarChartInstance.data.datasets[0].data = [pcts.port, pcts.penal, pcts.proc, pcts.const, pcts.mat];
+      radarChartInstance.update();
+    }
+  }
+
+  // ─── MAPA DE APROVAÇÃO ─────────────────────
+  function updateMaapa() {
+    let total = 0, done = 0;
+    for (const [group, keys] of Object.entries(topicGroups)) {
+      total += keys.length;
+      done += keys.filter(k => localStorage.getItem('topic_' + k)).length;
+    }
+    const pct = total > 0 ? Math.round((done / total) * 100) : 0;
+    const steps = [
+      { id: 'mapa-1', emoji: '🌱', label: 'Iniciante', range: '0–25%', from: 0, to: 25 },
+      { id: 'mapa-2', emoji: '⚔️', label: 'Sobrevivente da Vunesp', range: '25–50%', from: 25, to: 50 },
+      { id: 'mapa-3', emoji: '🎯', label: 'Aprovável', range: '50–80%', from: 50, to: 80 },
+      { id: 'mapa-4', emoji: '🏆', label: 'Nomeação', range: '80–100%', from: 80, to: 101 },
+    ];
+    let current = steps[0];
+    steps.forEach(s => {
+      const el = document.getElementById(s.id);
+      if (!el) return;
+      if (pct >= s.from && pct < s.to) {
+        el.style.borderColor = 'rgba(201,168,76,0.5)';
+        el.style.background = 'var(--accent-dim)';
+        current = s;
+      } else {
+        el.style.borderColor = 'var(--border)';
+        el.style.background = 'var(--bg-card)';
+      }
+    });
+    const status = document.getElementById('mapaStatus');
+    if (status) status.textContent = '📍 Você está em: ' + current.label + ' (' + pct + '%) — ' + (pct < 100 ? 'Continue marcando tópicos no Edital!' : 'Parabéns! Agora é focar nos simulados!');
+  }
+
+  // ─── PRIORIDADE INTELIGENTE ─────────────────
+  function updatePriority() {
+    const pcts = getPcts();
+    const labels = { port:'Língua Portuguesa', penal:'Direito Penal', proc:'Processo Penal & Civil', const:'Const./Administrativo', mat:'Mat./RLM/Informática' };
+    const sorted = Object.entries(pcts).sort(([,a],[,b]) => a - b);
+    const list = document.getElementById('priorityList');
+    if (!list) return;
+    list.innerHTML = sorted.map(([g, p]) => {
+      const cls = p < 34 ? 'p-high' : p < 67 ? 'p-mid' : 'p-ok';
+      const icon = p < 34 ? '⚠️' : p < 67 ? '📌' : '✅';
+      return `<div class="priority-item"><div class="priority-dot ${cls}"></div><span>${icon} <strong>${labels[g]}</strong> — ${p}% concluído</span></div>`;
+    }).join('');
+  }
+
+  // ─── MEDALHAS ──────────────────────────────
+  function updateMedals() {
+    const streak = parseInt(localStorage.getItem('studyStreak') || '0');
+    let done = 0;
+    for (const [group, keys] of Object.entries(topicGroups)) {
+      done += keys.filter(k => localStorage.getItem('topic_' + k)).length;
+    }
+    const simDone = parseInt(localStorage.getItem('simCount') || '0');
+    const all = Object.values(topicGroups).flat().length;
+
+    const checks = {
+      'medal-7': streak >= 7,
+      'medal-30': streak >= 30,
+      'medal-100': streak >= 100,
+      'medal-topics': done >= 10,
+      'medal-sim1': simDone >= 1,
+      'medal-allTopics': done >= all,
+    };
+    for (const [id, earned] of Object.entries(checks)) {
+      const el = document.getElementById(id);
+      if (!el) continue;
+      el.classList.toggle('earned', earned);
+      el.classList.toggle('locked', !earned);
+    }
+  }
+
+  // ─── TAREFAS DO DASHBOARD ──────────────────
+  function toggleTask(element) {
+    element.classList.toggle('done');
+    const key = element.dataset.key;
+    if (key) {
+      if (element.classList.contains('done')) {
+        localStorage.setItem('task_' + key, '1');
+      } else {
+        localStorage.removeItem('task_' + key);
+      }
+    }
+  }
+
+  function loadTasks() {
+    document.querySelectorAll('.task-item[data-key]').forEach(item => {
+      if (localStorage.getItem('task_' + item.dataset.key)) {
+        item.classList.add('done');
+      }
+    });
+  }
+
+  // ─── COUNTDOWN ─────────────────────────────
+  function updateCountdown() {
+    const provaDate = new Date('2026-08-01');
+    const hoje = new Date();
+    const diff = Math.ceil((provaDate - hoje) / (1000 * 60 * 60 * 24));
+    const el = document.getElementById('diasCountdown');
+    if (el) el.textContent = diff > 0 ? diff : '—';
+  }
+
+  // ─── SIMULADO ──────────────────────────────
+  let simTotalSecs = 0, simRemaining = 0, simInterval = null, simRunning = false;
+
+  function selectSim(el, mins) {
+    document.querySelectorAll('.sim-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    simTotalSecs = mins * 60;
+  }
+
+  function formatTime(secs) {
+    const h = Math.floor(secs / 3600);
+    const m = Math.floor((secs % 3600) / 60);
+    const s = secs % 60;
+    if (h > 0) return `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+    return `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+  }
+
+  function iniciarSimulado() {
+    const selected = document.querySelector('.sim-opt.selected');
+    simTotalSecs = selected ? parseInt(selected.dataset.mins) * 60 : 300 * 60;
+    simRemaining = simTotalSecs;
+
+    document.getElementById('simSetupScreen').classList.add('hidden');
+    document.getElementById('simTimerScreen').classList.add('active');
+    document.getElementById('simTipoLabel').textContent = selected ? selected.querySelector('h4').textContent : 'Prova Completa';
+
+    simRunning = true;
+    simInterval = setInterval(tickTimer, 1000);
+    tickTimer();
+  }
+
+  function tickTimer() {
+    if (!simRunning) return;
+    document.getElementById('timerDisplay').textContent = formatTime(simRemaining);
+    const pct = (simRemaining / simTotalSecs) * 100;
+    document.getElementById('timerProgress').style.width = pct + '%';
+    document.getElementById('timerProgress').style.background = pct > 50 ? 'var(--accent)' : pct > 20 ? 'var(--danger)' : '#ff2222';
+    if (simRemaining <= 0) {
+      clearInterval(simInterval);
+      document.getElementById('timerStatus').textContent = '⏰ Tempo esgotado! Simulado encerrado.';
+      encerrarSimulado(true);
+      return;
+    }
+    simRemaining--;
+  }
+
+  function toggleTimer() {
+    simRunning = !simRunning;
+    const btn = document.getElementById('btnPauseTimer');
+    if (simRunning) {
+      simInterval = setInterval(tickTimer, 1000);
+      btn.innerHTML = '<i class="fa-solid fa-pause"></i> Pausar';
+    } else {
+      clearInterval(simInterval);
+      btn.innerHTML = '<i class="fa-solid fa-play"></i> Retomar';
+    }
+  }
+
+  function encerrarSimulado(timeout = false) {
+    clearInterval(simInterval);
+    const elapsed = simTotalSecs - simRemaining;
+    const count = parseInt(localStorage.getItem('simCount') || '0') + 1;
+    localStorage.setItem('simCount', count);
+    const hist = JSON.parse(localStorage.getItem('simHistorico') || '[]');
+    hist.unshift({ data: new Date().toLocaleDateString('pt-BR'), duracao: formatTime(elapsed), tipo: document.getElementById('simTipoLabel').textContent, notas: document.getElementById('simNotes').value });
+    if (hist.length > 10) hist.pop();
+    localStorage.setItem('simHistorico', JSON.stringify(hist));
+    renderHistorico();
+    document.getElementById('simSetupScreen').classList.remove('hidden');
+    document.getElementById('simTimerScreen').classList.remove('active');
+    document.getElementById('simNotes').value = '';
+    updateMedals();
+  }
+
+  function renderHistorico() {
+    const hist = JSON.parse(localStorage.getItem('simHistorico') || '[]');
+    const el = document.getElementById('simHistorico');
+    if (!el) return;
+    if (hist.length === 0) {
+      el.innerHTML = '<div style="padding:2rem;text-align:center;color:var(--text-muted);font-size:.88rem"><i class="fa-solid fa-clock" style="font-size:2rem;margin-bottom:.75rem;display:block;opacity:.3"></i>Nenhum simulado realizado ainda.</div>';
+      return;
+    }
+    el.innerHTML = hist.map(s => `
+      <div class="task-item" style="cursor:default">
+        <div class="checkbox" style="background:var(--success);border-color:var(--success)"></div>
+        <div>
+          <div class="task-text">${s.tipo} — ${s.duracao} estudados</div>
+          <span class="task-tag">${s.data}${s.notas ? ' · com anotações' : ''}</span>
+        </div>
+      </div>`).join('');
+  }
+
+  // ─── INIT ──────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    loadTheme();
+    loadFrase();
+    syncTopbar();
+    loadTopics();
+    loadTasks();
+    updateProgress();
+    updateCountdown();
+    updateStreakUI();
+    renderHistorico();
+    updateMedals();
+
+    // Seleciona simulado padrão
+    const defaultSim = document.querySelector('.sim-opt.selected');
+    if (defaultSim) simTotalSecs = parseInt(defaultSim.dataset.mins) * 60;
+  });
+</script>
+</body>
+</html>

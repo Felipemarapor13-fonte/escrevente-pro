@@ -1,0 +1,1716 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#c9a84c">
+  <meta name="description" content="Guia do Escrevente TJ-SP - Aprova SP">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="assets/icon-192.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fraunces:ital,wght@0,600;0,700;0,800;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Aprova SP | Guia do Escrevente TJ-SP</title>
+</head>
+<body>
+
+  <!-- Menu Toggle Button (Mobile) -->
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+  
+  <!-- Menu Overlay (Mobile) -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+
+
+<div class="foco-banner" id="focoBanner"><i class="fa-solid fa-brain"></i> MODO FOCO ATIVADO — Pressione ESC para sair</div>
+
+
+<aside class="sidebar" role="navigation" aria-label="Menu de navegação">
+  <div class="brand">
+    <i class="fa-solid fa-scale-balanced"></i>
+    <span>Aprova SP</span>
+    <div class="brand-actions">
+      <button class="brand-btn" title="Alternar tema claro/escuro" id="themeBtn"><i class="fa-solid fa-moon"></i></button>
+    </div>
+  </div>
+
+  <!-- Streak de estudos -->
+  <div class="streak-box">
+    <div class="streak-fire">🔥</div>
+    <div class="streak-info" style="flex:1">
+      <p id="streakLabel">0 dias seguidos</p>
+      <span id="streakSub">Estude hoje para começar!</span>
+      <div class="streak-bar-wrap"><div class="streak-bar-fill" id="streakBar" style="width:0%"></div></div>
+    </div>
+  </div>
+
+  <!-- Estudar agora -->
+  <button class="btn-estudar" id="btnEstudar" aria-label="Iniciar sessão de estudo">
+      <i class="fa-solid fa-play"></i> Continuar Estudando
+    </button>
+
+  <!-- Modo Foco -->
+  <button class="btn-focus" id="btnFoco" aria-label="Alternar modo foco">
+    <i class="fa-solid fa-brain"></i> Modo Foco
+  </button>
+
+  <nav class="nav-menu">
+    <div class="nav-section-label">Início</div>
+    <a class="nav-item active" data-section="dashboard"> <i class="fa-solid fa-chart-pie"></i> Painel de Progresso
+    </a>
+
+    <div class="nav-section-label">Estudo</div>
+    <a class="nav-item" data-section="edital"> <i class="fa-solid fa-list-check"></i> Edital Verticalizado
+    </a>
+    <a class="nav-item" data-section="materiais"> <i class="fa-solid fa-book-open"></i> Sala de Aula
+    </a>
+    <a class="nav-item" data-section="apostilas"> <i class="fa-solid fa-file-pdf"></i> Apostilas & PDFs
+    </a>
+
+    <div class="nav-section-label">Prática</div>
+    <a class="nav-item" data-section="provas"> <i class="fa-solid fa-file-signature"></i> Bancos & Provas
+    </a>
+    <a class="nav-item" data-section="rotina"> <i class="fa-solid fa-calendar-check"></i> Rotina & Cronograma
+    </a>
+    <a class="nav-item" data-section="ferramentas"> <i class="fa-solid fa-toolbox"></i> Ferramentas
+    </a>
+
+    <div class="nav-section-label">Mentalidade</div>
+    <a class="nav-item" data-section="dicas"> <i class="fa-solid fa-lightbulb"></i> Dicas de Concurseiro
+      <span class="nav-badge">NOVO</span>
+    </a>
+
+    <div class="nav-section-label">Avançado</div>
+        <a class="nav-item" data-section="simulado"> <i class="fa-solid fa-stopwatch"></i> Modo Simulado
+        </a>
+        <a class="nav-item" data-section="banco-questoes"> <i class="fa-solid fa-layer-group"></i> Banco de Questões
+        </a>
+        <a class="nav-item" data-section="caderno-erros"> <i class="fa-solid fa-bug"></i> Caderno de Erros
+        </a>
+        <a class="nav-item" data-section="radar"> <i class="fa-solid fa-chart-radar"></i> Radar & Analytics
+        </a>
+      </nav>
+
+  <div class="user-profile">
+    <div class="avatar"><i class="fa-solid fa-graduation-cap"></i></div>
+    <div class="user-info">
+      <p>Aluno Focado</p>
+      <span>Escrevente TJ-SP</span>
+    </div>
+  </div>
+</aside>
+
+<main class="main-content">
+
+  <!-- ── TOPBAR ──────────────────────────────── -->
+  <div class="topbar">
+    <div class="search-wrap">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input class="search-input" id="globalSearch" type="text" placeholder="Buscar tópico, lei, matéria...">
+      <div class="search-results" id="searchResults"></div>
+    </div>
+    <div class="topbar-right">
+      <div class="topbar-stat fire"><i class="fa-solid fa-fire"></i> <span id="topStreak">0</span> dias</div>
+      <div class="topbar-stat days"><i class="fa-solid fa-calendar-check"></i> <span id="topDias">—</span> dias p/ prova</div>
+    </div>
+  </div>
+
+  <!-- ═══ DASHBOARD ═════════════════════════════════ -->
+  <div id="dashboard" class="view-section active">
+    <div class="page-header">
+      <div>
+        <h1>Visão Geral</h1>
+        <p>Acompanhe sua jornada até a aprovação na Vunesp.</p>
+      </div>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card gold">
+        <div class="stat-label">Meta de Acertos</div>
+        <div class="stat-value">88%</div>
+        <div class="stat-sub">Média para nomeação segura</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-label">Blocos I & II</div>
+        <div class="stat-value">&gt;50%</div>
+        <div class="stat-sub">Caráter eliminatório — cuidado!</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-label">Dias até a Prova</div>
+        <div class="stat-value" id="diasCountdown">—</div>
+        <div class="stat-sub">Edital Vunesp 2025/2026</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-label">Tópicos Dominados</div>
+        <div class="stat-value" id="topicsDone">0/21</div>
+        <div class="stat-sub">Marque no Edital Verticalizado</div>
+      </div>
+    </div>
+
+    <!-- Progresso por matéria -->
+    <div class="progress-section">
+      <h2><i class="fa-solid fa-chart-line" style="color:var(--accent)"></i> Progresso por Bloco</h2>
+      <div class="progress-row" id="progressBars">
+        <div class="prog-item">
+          <div class="prog-label"><span>Português</span><span id="pct-port">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-port" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Dir. Penal</span><span id="pct-penal">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-penal" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Proc. Penal & Civil</span><span id="pct-proc">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-proc" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Const. / Adm.</span><span id="pct-const">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-const" style="width:0%"></div></div>
+        </div>
+        <div class="prog-item">
+          <div class="prog-label"><span>Mat. / RLM / Info</span><span id="pct-mat">0%</span></div>
+          <div class="prog-bar"><div class="prog-fill" id="fill-mat" style="width:0%"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Frase do dia + Links Rápidos -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.5rem">
+      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.25rem;border-left:3px solid var(--accent)">
+        <div style="font-size:.7rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.6rem">💡 Frase do Dia</div>
+        <div id="fraseHoje" style="font-size:.88rem;color:var(--text-main);line-height:1.6;font-style:italic"></div>
+        <div id="autorFrase" style="font-size:.75rem;color:var(--text-muted);margin-top:.5rem;font-style:normal;font-weight:600"></div>
+      </div>
+      <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.25rem">
+        <div style="font-size:.7rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.75rem">⚡ Acesso Rápido</div>
+        <div style="display:flex;flex-direction:column;gap:.4rem">
+          <a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=1&board_ids[]=63" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s">
+            <i class="fa-solid fa-pen-nib" style="color:var(--accent);width:14px"></i> Questões de Português (Vunesp)
+          </a>
+          <a href="https://www.planalto.gov.br/ccivil_03/leis/l9099.htm" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s">
+            <i class="fa-solid fa-scale-balanced" style="color:var(--info);width:14px"></i> Lei 9.099 (Planalto)
+          </a>
+          <a href="https://www.tjsp.jus.br/Concursos" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s">
+            <i class="fa-solid fa-gavel" style="color:var(--purple);width:14px"></i> TJ-SP — Concursos Oficiais
+          </a>
+          <a href="https://www.vunesp.com.br/" target="_blank" style="display:flex;align-items:center;gap:.6rem;padding:.5rem .75rem;background:var(--bg-card);border-radius:7px;color:var(--text-main);text-decoration:none;font-size:.81rem;transition:all .15s">
+            <i class="fa-solid fa-file-signature" style="color:var(--success);width:14px"></i> Vunesp — Site Oficial da Banca
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-flag"></i> Meta da Semana 1 — Largada</div>
+    <div class="task-list-card" id="taskList">
+      <div class="task-item" data-key="t1">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Baixar provas de 2023 e 2018 no site oficial do TJ-SP.</div><span class="task-tag">Dia 1</span></div>
+      </div>
+      <div class="task-item" data-key="t2">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Ler o Edital Verticalizado e marcar as matérias com maior peso.</div><span class="task-tag">Dia 1</span></div>
+      </div>
+      <div class="task-item" data-key="t3">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Assistir 2 aulas de interpretação de texto do Prof. Noslen e ler o Art. 5º da CF.</div><span class="task-tag">Dia 2</span></div>
+      </div>
+      <div class="task-item" data-key="t4">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Criar conta no QConcursos e fazer 15 questões de Português (filtro Vunesp).</div><span class="task-tag">Dia 3</span></div>
+      </div>
+      <div class="task-item" data-key="t5">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Baixar e configurar o Anki para flashcards — instalar deck de prazos do CPP.</div><span class="task-tag">Dia 4</span></div>
+      </div>
+      <div class="task-item" data-key="t6">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Ler os artigos 312-359 do Código Penal (crimes contra a administração).</div><span class="task-tag">Dia 5</span></div>
+      </div>
+      <div class="task-item" data-key="t7">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Fazer simulado cronometrado com 10 questões de Direito Constitucional (Vunesp).</div><span class="task-tag">Dia 6</span></div>
+      </div>
+      <div class="task-item" data-key="t8">
+        <div class="checkbox"></div>
+        <div><div class="task-text">Revisar erros da semana. Criar caderno de erros físico ou digital.</div><span class="task-tag">Dia 7</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ EDITAL ═══════════════════════════════════ -->
+  <div id="edital" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="edital" data-section="edital">Edital Verticalizado</h1>
+        <p>Mapeamento programático dissecado. Marque os tópicos conforme domina a teoria.</p>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <i class="fa-solid fa-circle-info"></i>
+      <span><strong>Como usar:</strong> Clique em cada bloco para expandir os tópicos. Marque (✓) conforme você estudar. O progresso atualiza automaticamente no Painel.</span>
+    </div>
+
+    <div class="accordion-container">
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="acc-title"><i class="fa-solid fa-pen-nib"></i> Língua Portuguesa</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco I · 16 Qs</span>
+            <span class="acc-progress"><b id="prog-port">0</b>/6</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Pilar da prova. Foco absoluto em competência semântico-textual — a banca Vunesp cobra inferência e não gramática decorada.</div>
+          <ul class="topic-list" data-group="port">
+            <li class="topic-item" data-key="port1"><div class="topic-checkbox"></div><div class="topic-text">Análise e Interpretação de Textos <span class="topic-hint">Mais de 44% da prova historicamente. Foco em inferências e coerência global.</span></div></li>
+            <li class="topic-item" data-key="port2"><div class="topic-checkbox"></div><div class="topic-text">Significação Contextual — Sinônimos e Antônimos <span class="topic-hint">A banca isola um vocábulo e exige substituição sem alterar o sentido.</span></div></li>
+            <li class="topic-item" data-key="port3"><div class="topic-checkbox"></div><div class="topic-text">Classes de Palavras e Coesão (Conjunções, Preposições, "que" e "se") <span class="topic-hint">Decore o valor semântico de cada conjunção: causal, concessiva, condicional.</span></div></li>
+            <li class="topic-item" data-key="port4"><div class="topic-checkbox"></div><div class="topic-text">Verbos e Pronomes — Vozes e Colocação Pronominal <span class="topic-hint">Regras de próclise, mesóclise e ênclise. Verbos no subjuntivo.</span></div></li>
+            <li class="topic-item" data-key="port5"><div class="topic-checkbox"></div><div class="topic-text">Concordância, Regência e Crase <span class="topic-hint">Crase representa ~10% do histórico (preposição "a" + artigo "a").</span></div></li>
+            <li class="topic-item" data-key="port6"><div class="topic-checkbox"></div><div class="topic-text">Pontuação — O Uso da Vírgula <span class="topic-hint">Isolamento de orações subordinadas. Proibição de separar sujeito do predicado.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="acc-title"><i class="fa-solid fa-handcuffs"></i> Direito Penal</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco II</span>
+            <span class="acc-progress"><b id="prog-penal">0</b>/3</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Foco exclusivo nos crimes relacionados ao servidor público e à administração da Justiça. Não estude o CP inteiro.</div>
+          <ul class="topic-list" data-group="penal">
+            <li class="topic-item" data-key="penal1"><div class="topic-checkbox"></div><div class="topic-text">Crimes contra a Administração Pública (Art. 312–359) <span class="topic-hint">Peculato (apropriar), Concussão (exigir), Corrupção Passiva (solicitar/receber).</span></div></li>
+            <li class="topic-item" data-key="penal2"><div class="topic-checkbox"></div><div class="topic-text">Crimes contra a Fé Pública <span class="topic-hint">Falsidade material e ideológica de documentos, uso de documento falso.</span></div></li>
+            <li class="topic-item" data-key="penal3"><div class="topic-checkbox"></div><div class="topic-text">Crimes Praticados por Particulares contra a Administração <span class="topic-hint">Resistência, desobediência, desacato. Denunciação caluniosa vs. comunicação falsa.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="acc-title"><i class="fa-solid fa-scale-balanced"></i> Processo Penal e Processo Civil</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco II</span>
+            <span class="acc-progress"><b id="prog-proc">0</b>/4</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">O coração da prova para quem trabalha em cartório. Lei 9.099 tem peso altíssimo — chegou a >20% de uma prova.</div>
+          <ul class="topic-list" data-group="proc">
+            <li class="topic-item" data-key="proc1"><div class="topic-checkbox"></div><div class="topic-text">[CPP] Impedimento, Suspeição e Citação <span class="topic-hint">Citação pessoal (mandado) vs. ficta (edital/hora certa). Hipóteses de nulidade.</span></div></li>
+            <li class="topic-item" data-key="proc2"><div class="topic-checkbox"></div><div class="topic-text">[CPP] Juizados Especiais Criminais — Lei 9.099/95 <span class="topic-hint">Foco extremo. Transação penal, sursis processual, composição civil.</span></div></li>
+            <li class="topic-item" data-key="proc3"><div class="topic-checkbox"></div><div class="topic-text">[CPC] Comunicação e Prazos Processuais (CPC/2015) <span class="topic-hint">Prazos computados EXCLUSIVAMENTE em dias úteis (art. 219). Intimação eletrônica.</span></div></li>
+            <li class="topic-item" data-key="proc4"><div class="topic-checkbox"></div><div class="topic-text">[CPC] Tutela Provisória e Procedimento Comum <span class="topic-hint">Tutela de Urgência (antecipada/cautelar) vs. Tutela de Evidência.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="acc-title"><i class="fa-solid fa-landmark-dome"></i> Const., Adm. e Legislação Interna</div>
+          <div class="acc-meta">
+            <span class="badge elim">Bloco II</span>
+            <span class="acc-progress"><b id="prog-const">0</b>/4</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Constitucional cobra remédios e art. 37. Administrativo cobra improbidade (versão 2021). Interno é específico do TJ-SP.</div>
+          <ul class="topic-list" data-group="const">
+            <li class="topic-item" data-key="const1"><div class="topic-checkbox"></div><div class="topic-text">[CF] Direitos Fundamentais (Art. 5º) e Adm. Pública (Art. 37) <span class="topic-hint">Remédios: HC, MS, MI, HD, AP. Regras de concurso, nepotismo e estabilidade.</span></div></li>
+            <li class="topic-item" data-key="const2"><div class="topic-checkbox"></div><div class="topic-text">[Adm] Lei de Improbidade Administrativa — Atualizada 2021 <span class="topic-hint">CUIDADO: exigência de dolo específico após reforma. Prescrição e sanções.</span></div></li>
+            <li class="topic-item" data-key="const3"><div class="topic-checkbox"></div><div class="topic-text">[Adm] Estatuto dos Servidores de SP — Lei 10.261/68 <span class="topic-hint">Infrações puníveis com repreensão, suspensão e demissão. Vantagens e licenças.</span></div></li>
+            <li class="topic-item" data-key="const4"><div class="topic-checkbox"></div><div class="topic-text">[TJ-SP] Normas da Corregedoria e eproc <span class="topic-hint">Resolução 963/2025 (pane sistêmica no eproc). Normas da CGJ. Provimento CG.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="accordion-item">
+        <div class="accordion-header">
+          <div class="acc-title"><i class="fa-solid fa-calculator"></i> Matemática, RLM e Informática</div>
+          <div class="acc-meta">
+            <span class="badge classif">Bloco III</span>
+            <span class="acc-progress"><b id="prog-mat">0</b>/4</span>
+            <i class="fa-solid fa-chevron-down"></i>
+          </div>
+        </div>
+        <div class="accordion-body">
+          <div class="acc-desc">Bloco classificatório — aqui é onde você separa os empatados. Excel avançado tem sido cada vez mais cobrado.</div>
+          <ul class="topic-list" data-group="mat">
+            <li class="topic-item" data-key="mat1"><div class="topic-checkbox"></div><div class="topic-text">[Mat] Aritmética e Geometria Básica <span class="topic-hint">MMC, MDC, Regra de Três (simples/composta), Porcentagem, perímetro e área.</span></div></li>
+            <li class="topic-item" data-key="mat2"><div class="topic-checkbox"></div><div class="topic-text">[RLM] Lógica Proposicional e Argumentação <span class="topic-hint">Tabelas-verdade (∧ ∨ →). Dedução a partir de premissas. Negação de quantificadores.</span></div></li>
+            <li class="topic-item" data-key="mat3"><div class="topic-checkbox"></div><div class="topic-text">[Info] Excel Avançado e MS Word <span class="topic-hint">Referenciamento absoluto ($A$1), PROCV, SE, CONT.SES, formatações.</span></div></li>
+            <li class="topic-item" data-key="mat4"><div class="topic-checkbox"></div><div class="topic-text">[Info] Nuvem — Teams e OneDrive <span class="topic-hint">Criação de canais, níveis de compartilhamento e controle de versões de arquivos.</span></div></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ MATERIAIS (SALA DE AULA) ═══════════════════ -->
+  <div id="materiais" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="materiais" data-section="materiais">Sala de Aula</h1>
+        <p>Videoaulas, leis e exercícios de referência para cada matéria.</p>
+      </div>
+    </div>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-pen-nib"></i> Português</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@professornoslen" target="_blank"><i class="fa-brands fa-youtube"></i> Prof. Noslen — Gramática Completa</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@profletticia" target="_blank"><i class="fa-brands fa-youtube"></i> Prof. Letícia — Vunesp Específico</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=1&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Português</a></li>
+            <li class="resource-item pdf"><a href="https://www.nexojornal.com.br/" target="_blank"><i class="fa-solid fa-newspaper"></i> Nexo Jornal — Treino de Interpretação</a></li>
+            <li class="resource-item pdf"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank"><i class="fa-solid fa-gavel"></i> Constituição Federal — Art. 5º</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-book-journal-whills"></i> Dir. Constitucional</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank"><i class="fa-solid fa-gavel"></i> Constituição Federal (Lei Seca Oficial)</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@direitodiario" target="_blank"><i class="fa-brands fa-youtube"></i> Canal Direito Diário</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=direito+constitucional+art+37+vunesp" target="_blank"><i class="fa-brands fa-youtube"></i> Art. 37 — Administração Pública</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=5&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Constitucional</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-handcuffs"></i> Penal e CPP</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank"><i class="fa-solid fa-gavel"></i> Código Penal — Art. 312 a 359</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l9099.htm" target="_blank"><i class="fa-solid fa-file-contract"></i> Lei 9.099/95 — Juizados Especiais</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/@estrategiaconcursos" target="_blank"><i class="fa-brands fa-youtube"></i> Estratégia Concursos — Penal</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=lei+9099+juizado+especial+criminal+vunesp" target="_blank"><i class="fa-brands fa-youtube"></i> Lei 9.099 — Aula Foco Vunesp</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=8&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Penal/CPP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-scale-unbalanced"></i> CPC & Adm.</h3>
+          <span class="badge elim">Eliminatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm" target="_blank"><i class="fa-solid fa-gavel"></i> CPC 2015 — Texto Oficial</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l8429.htm" target="_blank"><i class="fa-solid fa-triangle-exclamation"></i> Lei de Improbidade Adm. Atualizada</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=CPC+prazos+processuais+vunesp" target="_blank"><i class="fa-brands fa-youtube"></i> CPC — Prazos e Comunicações</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=lei+improbidade+administrativa+2021+concurso" target="_blank"><i class="fa-brands fa-youtube"></i> Improbidade 2021 — Dolo Específico</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-desktop"></i> Informática</h3>
+          <span class="badge dif">Classificatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=inform%C3%A1tica+excel+word+vunesp+escrevente" target="_blank"><i class="fa-brands fa-youtube"></i> Excel/Word para Vunesp</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=excel+procv+vunesp+concurso+publico" target="_blank"><i class="fa-brands fa-youtube"></i> Fórmulas Avançadas (PROCV, SE)</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.microsoft365.com/" target="_blank"><i class="fa-brands fa-microsoft"></i> Praticar MS Office Web (Grátis)</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=34&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Informática</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-building-columns"></i> Interno TJ-SP</h3>
+          <span class="badge new">Específico</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Corregedoria/Comunicados/Normas" target="_blank"><i class="fa-solid fa-file-pdf"></i> Normas da Corregedoria do TJ-SP</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.al.sp.gov.br/repositorio/legislacao/lei/1968/lei-10261-28.10.1968.html" target="_blank"><i class="fa-solid fa-gavel"></i> Estatuto dos Servidores SP — Lei 10.261</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Concursos" target="_blank"><i class="fa-solid fa-landmark"></i> Portal de Concursos TJ-SP</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=eproc+TJSP+concurso+escrevente" target="_blank"><i class="fa-brands fa-youtube"></i> eproc — Sistema Eletrônico TJ-SP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-calculator"></i> Matemática e RLM</h3>
+          <span class="badge classif">Classificatório</span>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=matematica+raciocinio+logico+vunesp+escrevente" target="_blank"><i class="fa-brands fa-youtube"></i> Matemática / RLM — Busca Vunesp no YouTube</a></li>
+            <li class="resource-item youtube free-badge"><a href="https://www.youtube.com/results?search_query=raciocinio+logico+vunesp+concurso" target="_blank"><i class="fa-brands fa-youtube"></i> Raciocínio Lógico — Vunesp</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=3&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — Matemática</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.qconcursos.com/questoes-de-concursos/questoes?discipline_ids[]=4&board_ids[]=63" target="_blank"><i class="fa-solid fa-list-check"></i> Questões Vunesp — RLM</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ APOSTILAS ════════════════════════════════ -->
+  <div id="apostilas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="apostilas" data-section="apostilas">Apostilas & PDFs</h1>
+        <p>Materiais para download — gratuitos, curados e direto ao ponto.</p>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <i class="fa-solid fa-circle-info"></i>
+      <span>Todos os materiais abaixo são <strong>gratuitos</strong> ou de acesso público. Não pague por resumos que você encontra aqui.</span>
+    </div>
+
+    <div class="modules-grid">
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-gavel"></i> Leis Secas Oficiais</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/constituicao/constituicao.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Constituição Federal</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del2848compilado.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Código Penal</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/decreto-lei/del3689compilado.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Código de Processo Penal (CPP)</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2015/lei/l13105.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Código de Processo Civil (CPC 2015)</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l9099.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Lei 9.099/95 — Juizados Especiais</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.planalto.gov.br/ccivil_03/leis/l8429.htm" target="_blank"><i class="fa-solid fa-file-pdf"></i> Lei 8.429/92 — Improbidade Adm.</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.al.sp.gov.br/repositorio/legislacao/lei/1968/lei-10261-28.10.1968.html" target="_blank"><i class="fa-solid fa-file-pdf"></i> Lei 10.261/68 — Estatuto SP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-file-arrow-down"></i> Resumos e Mapas</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item apostila free-badge"><a href="https://www.estrategiaconcursos.com.br/materiais-gratis/" target="_blank"><i class="fa-solid fa-star"></i> Materiais Grátis — Estratégia</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://www.grancursosonline.com.br/ebooks/" target="_blank"><i class="fa-solid fa-star"></i> eBooks Grátis — Gran Cursos</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://www.alfaconcursos.com.br/apostilas-gratis/" target="_blank"><i class="fa-solid fa-star"></i> Apostilas Grátis — Alfa Concursos</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://www.tecconcursos.com.br/conteudo/materiais-gratis" target="_blank"><i class="fa-solid fa-star"></i> Materiais Grátis — TEC Concursos</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Concursos" target="_blank"><i class="fa-solid fa-landmark"></i> Gabaritos Oficiais — TJ-SP</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-brain"></i> Flashcards Prontos (Anki)</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/info/765971342" target="_blank"><i class="fa-solid fa-cards-blank"></i> Deck — Direito Constitucional (concursos)</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/info/2097492901" target="_blank"><i class="fa-solid fa-cards-blank"></i> Deck — Prazos CPC e CPP</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/info/887057243" target="_blank"><i class="fa-solid fa-cards-blank"></i> Deck — Direito Constitucional Resumão</a></li>
+            <li class="resource-item apostila free-badge"><a href="https://ankiweb.net/shared/decks/portugu%C3%AAs" target="_blank"><i class="fa-solid fa-cards-blank"></i> Decks — Gramática Portuguesa</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="module-card">
+        <div class="module-header">
+          <h3><i class="fa-solid fa-newspaper"></i> Portais de Notícias Jurídicas</h3>
+        </div>
+        <div class="module-body">
+          <ul class="resource-list">
+            <li class="resource-item q free-badge"><a href="https://www.conjur.com.br/" target="_blank"><i class="fa-solid fa-globe"></i> Consultor Jurídico (Conjur)</a></li>
+            <li class="resource-item q free-badge"><a href="https://www.jota.info/" target="_blank"><i class="fa-solid fa-globe"></i> JOTA — Notícias Jurídicas</a></li>
+            <li class="resource-item q free-badge"><a href="https://migalhas.uol.com.br/" target="_blank"><i class="fa-solid fa-globe"></i> Migalhas</a></li>
+            <li class="resource-item pdf free-badge"><a href="https://www.tjsp.jus.br/Corregedoria" target="_blank"><i class="fa-solid fa-landmark"></i> Corregedoria TJ-SP — Provimentos</a></li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══ PROVAS ════════════════════════════════════ -->
+  <div id="provas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Bancos & Provas Anteriores</h1>
+        <p>Treino é jogo. Resolva provas oficiais Vunesp cronometrado.</p>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-landmark"></i> Provas e Gabaritos Oficiais</div>
+    <div class="provas-grid" style="margin-bottom: 2rem;">
+      <a href="https://www.tjsp.jus.br/Concursos" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--accent)"><i class="fa-solid fa-landmark"></i></div>
+        <div>
+          <div class="prova-title">Provas no Site do TJ-SP</div>
+          <div class="prova-desc">Cadernos de prova e gabaritos oficiais de 2023 e 2018 — a fonte primária.</div>
+        </div>
+      </a>
+      <a href="https://www.vunesp.com.br/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--info)"><i class="fa-solid fa-globe"></i></div>
+        <div>
+          <div class="prova-title">Portal da Vunesp</div>
+          <div class="prova-desc">Acesse a organizadora para buscar editais, cadernos e gabaritos definitivos.</div>
+        </div>
+      </a>
+      <a href="https://www.pciconcursos.com.br/provas/tj-sp" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--success)"><i class="fa-solid fa-folder-open"></i></div>
+        <div>
+          <div class="prova-title">Acervo TJ-SP — PCI Concursos</div>
+          <div class="prova-desc">Histórico completo de provas anteriores para download em PDF.</div>
+        </div>
+      </a>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-laptop-code"></i> Plataformas de Questões</div>
+    <div class="provas-grid">
+      <a href="https://www.qconcursos.com/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--success)"><i class="fa-solid fa-laptop-code"></i></div>
+        <div>
+          <div class="prova-title">QConcursos</div>
+          <div class="prova-desc">Melhor plataforma para simular o Bloco III (Informática e Exatas). Filtro Vunesp/TJ-SP.</div>
+        </div>
+      </a>
+      <a href="https://www.tecconcursos.com.br/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--info)"><i class="fa-solid fa-circle-check"></i></div>
+        <div>
+          <div class="prova-title">TEC Concursos</div>
+          <div class="prova-desc">Ótimo para filtrar questões Vunesp por matéria e ano.</div>
+        </div>
+      </a>
+      <a href="https://www.grancursosonline.com.br/questoes-gratis/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--purple)"><i class="fa-solid fa-question-circle"></i></div>
+        <div>
+          <div class="prova-title">Gran Cursos — Questões Grátis</div>
+          <div class="prova-desc">Banco de questões gratuito com comentários de professores.</div>
+        </div>
+      </a>
+      <a href="https://www.estudaqui.com.br/" target="_blank" class="prova-card">
+        <div class="prova-icon" style="color: var(--accent)"><i class="fa-solid fa-mobile-screen"></i></div>
+        <div>
+          <div class="prova-title">Estudaqui — App Gratuito</div>
+          <div class="prova-desc">Questões pelo celular. Ótimo para usar no metrô e no tempo livre.</div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- ═══ ROTINA ════════════════════════════════════ -->
+  <div id="rotina" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="rotina" data-section="rotina">Rotina & Cronograma</h1>
+        <p>Plano semanal de estudos para quem trabalha durante o dia.</p>
+      </div>
+    </div>
+
+    <div class="alert-banner">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span><strong>Método recomendado:</strong> Estude <strong>2h por dia</strong> nos dias úteis (1h de teoria + 1h de questões) e <strong>4-5h</strong> no fim de semana (revisão + simulado). Total: ~14h/semana.</span>
+    </div>
+
+    <div class="cronograma">
+      <div class="cronograma-header"><i class="fa-solid fa-calendar-week"></i> Cronograma Semanal Padrão</div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Segunda</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-pt">Português — Interpretação</span>
+          <span class="materia-pill mp-q">20 questões Vunesp</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Terça</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-dir">Dir. Penal (Art. 312–359)</span>
+          <span class="materia-pill mp-q">15 questões de Penal</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Quarta</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-dir">CPP & Lei 9.099/95</span>
+          <span class="materia-pill mp-q">20 questões de Processo</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Quinta</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-pt">Português — Gramática</span>
+          <span class="materia-pill mp-dir">CF & Adm.</span>
+          <span class="materia-pill mp-q">15 questões mistas</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Sexta</strong><span>2h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-mat">Matemática / RLM</span>
+          <span class="materia-pill mp-info">Informática — Excel</span>
+          <span class="materia-pill mp-q">15 questões exatas</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Sábado</strong><span>4–5h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-rev">Revisão Anki (1h)</span>
+          <span class="materia-pill mp-q">Simulado 40 questões</span>
+          <span class="materia-pill mp-dir">Legislação Interna TJ-SP</span>
+        </div>
+      </div>
+      <div class="dia-row">
+        <div class="dia-label"><strong>Domingo</strong><span>2–3h</span></div>
+        <div class="dia-content">
+          <span class="materia-pill mp-rev">Análise de erros</span>
+          <span class="materia-pill mp-pt">Leitura (treino textual)</span>
+          <span class="materia-pill mp-rev">Caderno de erros</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title"><i class="fa-solid fa-rocket"></i> Técnicas de Estudo Recomendadas</div>
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🍅</div>
+        <h3>Técnica Pomodoro</h3>
+        <p>25 minutos de foco total + 5 minutos de pausa. Após 4 ciclos, descanse 20 minutos. Usa o temporizador abaixo.</p>
+        <a href="https://pomofocus.io/" target="_blank" class="tool-btn secondary">Abrir Pomofocus</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🃏</div>
+        <h3>Flashcards (Anki)</h3>
+        <p>Para prazos, artigos e conceitos. Repetição espaçada é a forma mais eficiente de reter conteúdo jurídico.</p>
+        <a href="https://apps.ankiweb.net/" target="_blank" class="tool-btn">Baixar Anki Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📓</div>
+        <h3>Caderno de Erros</h3>
+        <p>Anote toda questão que errar: o enunciado, o motivo do erro e a regra correta. Revise semanalmente.</p>
+        <a href="https://www.notion.so/" target="_blank" class="tool-btn secondary">Usar Notion (Grátis)</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔇</div>
+        <h3>Foco Total</h3>
+        <p>Sons ambiente para concentração. Ideal para longas sessões de leitura de lei seca e resolução de questões.</p>
+        <a href="https://mynoise.net/" target="_blank" class="tool-btn secondary">MyNoise (Grátis)</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ FERRAMENTAS ═══════════════════════════════ -->
+  <div id="ferramentas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1>Ferramentas & Simuladores</h1>
+        <p>Tudo o que você precisa além das aulas para passar.</p>
+      </div>
+    </div>
+
+    <div class="tools-grid">
+      <div class="tool-card">
+        <div class="tool-icon">🃏</div>
+        <h3>Anki — Flashcards</h3>
+        <p>Repetição espaçada. Obrigatório para memorizar prazos, artigos e diferenças entre crimes similares.</p>
+        <a href="https://apps.ankiweb.net/" target="_blank" class="tool-btn">Baixar Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <h3>QConcursos</h3>
+        <p>O melhor banco de questões para filtrar por banca (Vunesp), matéria e ano. Essencial para treino diário.</p>
+        <a href="https://www.qconcursos.com/" target="_blank" class="tool-btn">Acessar</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📅</div>
+        <h3>Pomofocus</h3>
+        <p>Temporizador Pomodoro online. Mantenha o foco com ciclos de 25 minutos de estudo ativo.</p>
+        <a href="https://pomofocus.io/" target="_blank" class="tool-btn secondary">Abrir</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <h3>Notion — Caderno Digital</h3>
+        <p>Crie seu caderno de erros, resumos e metas de forma organizada e gratuita.</p>
+        <a href="https://www.notion.so/" target="_blank" class="tool-btn secondary">Acessar Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔍</div>
+        <h3>Jusbrasil</h3>
+        <p>Pesquisa de jurisprudência e legislação. Útil para entender o contexto das questões de processo.</p>
+        <a href="https://www.jusbrasil.com.br/" target="_blank" class="tool-btn secondary">Acessar Grátis</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📱</div>
+        <h3>Estudaqui — App</h3>
+        <p>Questões pelo celular, sem precisar de computador. Perfeito para estudar no transporte.</p>
+        <a href="https://www.estudaqui.com.br/" target="_blank" class="tool-btn secondary">Baixar App</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🏛️</div>
+        <h3>Planalto.gov.br</h3>
+        <p>Fonte oficial de todas as leis. Sempre consulte aqui antes de confiar em resumos de terceiros.</p>
+        <a href="https://www.planalto.gov.br/" target="_blank" class="tool-btn secondary">Acessar</a>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">⚖️</div>
+        <h3>STJ & STF — Jurisprudência</h3>
+        <p>Pesquise precedentes para entender como as questões de processo são cobradas na prática.</p>
+        <a href="https://jurisprudencia.stj.jus.br/" target="_blank" class="tool-btn secondary">STJ — Pesquisar</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ DICAS DE CONCURSEIRO ══════════════════════ -->
+  <div id="dicas" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="dicas" data-section="dicas">Dicas de Concurseiro</h1>
+        <p>Estratégias, mentalidade e os erros que eliminam candidatos antes da hora.</p>
+      </div>
+    </div>
+
+    <div class="dicas-hero">
+      <div class="dicas-hero-icon">🏆</div>
+      <div>
+        <h2>Aprovação é método, não sorte.</h2>
+        <p>Candidatos que passam no TJ-SP não são necessariamente os mais inteligentes — são os mais <strong>consistentes</strong>. Esta aba reúne os princípios que separam quem é nomeado de quem tenta novamente.</p>
+      </div>
+    </div>
+
+    <!-- TABS INTERNAS -->
+    <div class="dicas-tabs">
+      <div class="dica-tab active" data-panel="estrategia">⚔️ Estratégia de Prova</div>
+            <div class="dica-tab" data-panel="estudo">🧠 Técnicas de Estudo</div>
+            <div class="dica-tab" data-panel="erros">🚫 Erros Fatais</div>
+            <div class="dica-tab" data-panel="mentalidade">💪 Mentalidade</div>
+            <div class="dica-tab" data-panel="diaprova">📋 Dia da Prova</div>
+    </div>
+
+    <!-- ── ESTRATÉGIA ──────────────────────────── -->
+    <div id="dica-estrategia" class="dica-panel active">
+      <div class="section-title"><i class="fa-solid fa-chess"></i> Estratégia para a Vunesp</div>
+
+      <div class="dicas-grid">
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">01</div>
+            <h4>Resolva provas antigas ANTES de estudar tudo</h4>
+          </div>
+          <p>Baixe as provas de 2023 e 2018 no 1º dia. Faça sem estudar. Isso mapeia suas lacunas reais e evita que você perca semanas com temas que a banca raramente cobra.</p>
+          <span class="dica-tag tip">Diagnóstico</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num red">02</div>
+            <h4>Português é eliminatório — não é negociável</h4>
+          </div>
+          <p>O Bloco I (Português) tem caráter eliminatório com nota mínima de 50%. Histórico mostra que é aqui que a maioria cai. Dedique pelo menos 40% do seu tempo de estudo inicial a ele.</p>
+          <span class="dica-tag warn">Eliminatório</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num blue">03</div>
+            <h4>A Lei 9.099 pode valer mais de 20% da nota</h4>
+          </div>
+          <p>Juizados Especiais Criminais e Cíveis. Em provas anteriores, esse tema sozinho representou mais de 4 questões. Domine transação penal, sursis processual e composição civil.</p>
+          <span class="dica-tag pro">Alto Peso</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num green">04</div>
+            <h4>Questões de Informática valem pontos fáceis</h4>
+          </div>
+          <p>Excel, Word, Teams e OneDrive costumam ser subestimados. São questões concretas, objetivas e previsíveis. Candidatos que estudam bem Informática frequentemente separam 2–3 posições no ranking.</p>
+          <span class="dica-tag ok">Oportunidade</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num purple">05</div>
+            <h4>Filtre questões por banca (Vunesp) no QConcursos</h4>
+          </div>
+          <p>A Vunesp tem linguagem, nível de dificuldade e pegadinhas próprias. Questões de outras bancas treinam o raciocínio, mas não preparam para o estilo Vunesp. Priorize sempre o filtro da banca certa.</p>
+          <span class="dica-tag tip">Banca específica</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">06</div>
+            <h4>Interprete a questão antes de ler as alternativas</h4>
+          </div>
+          <p>Especialmente em Português e Raciocínio Lógico. Leia o enunciado, pense na resposta certa, e só então veja as opções. Isso reduz o efeito das alternativas "quase certas" que a Vunesp usa para confundir.</p>
+          <span class="dica-tag tip">Técnica de prova</span>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "A maioria dos candidatos estuda muito. Os aprovados estudam o que cai."
+        <strong>— Princípio da Seletividade</strong>
+      </div>
+
+      <div class="section-title"><i class="fa-solid fa-bullseye"></i> Distribuição Inteligente de Tempo</div>
+      <div class="checklist-card">
+        <h4><i class="fa-solid fa-clock"></i> Como dividir seus estudos semanais</h4>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Português — 35% do tempo:</strong> Interpretação de texto todos os dias, mesmo que por 20 min. É músculo, precisa de treino diário.</span></div>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Direito (Penal + Proc. + Const.) — 40% do tempo:</strong> Foque nos artigos mais cobrados. Leia a lei seca, não apenas resumos.</span></div>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Mat. / RLM / Informática — 15% do tempo:</strong> Resolvendo questões. Teoria mínima, muita prática.</span></div>
+        <div class="check-row"><i class="fa-solid fa-check-circle"></i><span><strong>Revisão e caderno de erros — 10% do tempo:</strong> Quem revisa os erros aprende. Quem não revisa repete os mesmos erros na prova.</span></div>
+      </div>
+    </div>
+
+    <!-- ── TÉCNICAS DE ESTUDO ─────────────────── -->
+    <div id="dica-estudo" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-brain"></i> Técnicas com Evidência Científica</div>
+
+      <div class="dicas-grid">
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">🍅</div>
+            <h4>Pomodoro Adaptado para Concursos</h4>
+          </div>
+          <p><strong>25 min foco + 5 min pausa.</strong> Após 4 ciclos, 20–30 min de descanso. Para leitura de lei seca, use ciclos de 45 min. A pausa é obrigatória — o cérebro consolida memória durante o descanso.</p>
+          <span class="dica-tag ok">Comprovado</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num blue">🃏</div>
+            <h4>Repetição Espaçada (Anki)</h4>
+          </div>
+          <p>Para prazos processuais, artigos e diferenças entre crimes. Configure o Anki para revisar cartões nos intervalos: 1 dia → 3 dias → 7 dias → 14 dias. <strong>Nunca memorize sem espaçamento.</strong></p>
+          <span class="dica-tag pro">Obrigatório</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num purple">✍️</div>
+            <h4>Active Recall (não releitura)</h4>
+          </div>
+          <p>Após ler um tema, feche o material e escreva/fale tudo que lembra. É doloroso e lento no começo, mas consolida 3–4x mais que reler. Use para revisar lei seca antes de cada sessão de questões.</p>
+          <span class="dica-tag pro">Alta Eficiência</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num green">📓</div>
+            <h4>Caderno de Erros — Como Fazer Direito</h4>
+          </div>
+          <p>Para cada questão errada: (1) copie o enunciado, (2) escreva por que errou, (3) anote a regra correta com o artigo. Revise semanalmente. Em 30 dias você verá padrões de erro — e vai eliminar cada um.</p>
+          <span class="dica-tag tip">Diferencial</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num red">🧩</div>
+            <h4>Mapa Mental para Leis Extensas</h4>
+          </div>
+          <p>Lei 9.099, Estatuto dos Servidores, Art. 37. Faça um mapa mental com as "ramificações" de cada lei. Funciona melhor que resumo linear para entender relações entre institutos jurídicos.</p>
+          <span class="dica-tag tip">Organização</span>
+        </div>
+        <div class="dica-card">
+          <div class="dica-card-top">
+            <div class="dica-num gold">⏰</div>
+            <h4>Estudo em Blocos de Matéria Única</h4>
+          </div>
+          <p>Evite estudar 3 matérias diferentes em um mesmo dia, a não ser na revisão. Foco profundo em uma matéria por sessão produz mais retenção do que saltar entre temas. Reserve a segunda matéria para o próximo dia.</p>
+          <span class="dica-tag ok">Produtividade</span>
+        </div>
+      </div>
+
+      <div class="quote-block">
+        "O segredo não é estudar mais horas. É estudar de forma que o cérebro não consiga esquecer."
+        <strong>— Baseado em ciência cognitiva</strong>
+      </div>
+    </div>
+
+    <!-- ── ERROS FATAIS ──────────────────────── -->
+    <div id="dica-erros" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-triangle-exclamation"></i> Erros que Eliminam Candidatos</div>
+
+      <table class="erros-table">
+        <thead>
+          <tr>
+            <th>❌ Erro Fatal</th>
+            <th>Por que elimina</th>
+            <th>✅ O que fazer no lugar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Estudar sem fazer questões</td>
+            <td>Você acha que sabe, mas não reconhece o tema quando a banca muda o enunciado.</td>
+            <td>Faça questões desde a 1ª semana. Teoria e prática sempre juntas.</td>
+          </tr>
+          <tr>
+            <td>Ignorar a lei seca</td>
+            <td>A Vunesp cobra letra da lei com frequência. Resumo de terceiros pode ter erros ou omissões.</td>
+            <td>Leia os artigos diretamente no Planalto.gov.br. Sublinhe o que cai.</td>
+          </tr>
+          <tr>
+            <td>Não simular condições de prova</td>
+            <td>Na prova real, o tempo pressiona. Candidatos que nunca treinaram cronometrados travam.</td>
+            <td>Faça pelo menos 1 simulado completo por mês nas últimas 8 semanas antes da prova.</td>
+          </tr>
+          <tr>
+            <td>Estudar matérias que não estão no edital</td>
+            <td>Perde tempo com temas que não valem ponto. Muito comum com Penal completo.</td>
+            <td>Leia o edital verticalizado desta aba. Estude APENAS o que está mapeado.</td>
+          </tr>
+          <tr>
+            <td>Deixar revisão para a última semana</td>
+            <td>A última semana deve ser de revisão leve, não de aprender conteúdo novo. Chegam à prova sobrecarregados.</td>
+            <td>Revise progressivamente. Na última semana: só questões e caderno de erros.</td>
+          </tr>
+          <tr>
+            <td>Não dormir bem antes da prova</td>
+            <td>Privação de sono reduz memória de trabalho em até 40%. Pior que não estudar o conteúdo.</td>
+            <td>Durma 7–8h nos 3 dias anteriores à prova. Não estude na madrugada anterior.</td>
+          </tr>
+          <tr>
+            <td>Mudar de material constantemente</td>
+            <td>"Síndrome do material perfeito." Você nunca termina nada e fica com lacunas em tudo.</td>
+            <td>Escolha 1 apostila ou 1 curso por matéria. Siga até o fim. Questões completam o resto.</td>
+          </tr>
+          <tr>
+            <td>Comparar progresso com outros</td>
+            <td>Cada candidato tem ritmo diferente. Comparação gera ansiedade e desmotivação.</td>
+            <td>Compare apenas com você mesmo de uma semana atrás. Use o painel desta ferramenta.</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="alert-banner">
+        <i class="fa-solid fa-fire-flame-curved"></i>
+        <span><strong>Alerta crítico:</strong> O maior erro não está na lista acima — é <strong>começar tarde demais</strong>. Cada semana desperdiçada reduz a margem de segurança no ranking final. Se você está lendo isso agora, comece hoje.</span>
+      </div>
+    </div>
+
+    <!-- ── MENTALIDADE ─────────────────────────── -->
+    <div id="dica-mentalidade" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-fire"></i> Mentalidade de Aprovação</div>
+
+      <div class="quote-block">
+        "Disciplina é escolher entre o que você quer agora e o que você quer mais."
+        <strong>— Abraham Lincoln</strong>
+      </div>
+
+      <div class="mindset-list">
+        <div class="mindset-item">
+          <div class="mindset-icon">🎯</div>
+          <div>
+            <h5>Processo &gt; Resultado</h5>
+            <p>Não acorde pensando "preciso passar". Acorde pensando "o que vou estudar hoje?". Quem foca no processo diário inevitavelmente chega ao resultado. Quem foca só no resultado fica paralisado pela ansiedade.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">📅</div>
+          <div>
+            <h5>Consistência de 1% ao dia bate intensidade esporádica</h5>
+            <p>2 horas todos os dias por 6 meses > 14 horas todo fim de semana. O cérebro consolida memória no sono. Estudo diário, mesmo que curto, cria trilhas neurais que o cérebro reforça enquanto você dorme.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🔄</div>
+          <div>
+            <h5>Errar é obrigatório (no treino)</h5>
+            <p>Candidatos que têm medo de errar evitam questões difíceis e ficam em zona de conforto. Os que passam buscam ativamente o que não sabem. Cada erro no treino é um acerto na prova real.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🧘</div>
+          <div>
+            <h5>Cuide do físico — é parte do estudo</h5>
+            <p>Sono de qualidade, exercício físico (mesmo que 20 min de caminhada), e alimentação adequada aumentam retenção de memória e capacidade de concentração. Sacrificar sono para estudar mais é matematicamente burro.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🗓️</div>
+          <div>
+            <h5>Planeje a semana, não o dia</h5>
+            <p>Planejar dia a dia gera frustração quando um imprevisto acontece. Defina metas semanais e distribua conforme sua semana se desenrola. Se não estudou segunda, compense na terça — sem culpa, sem drama.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">🏃</div>
+          <div>
+            <h5>A prova não espera que você esteja "pronto"</h5>
+            <p>Ninguém chega a uma prova de concurso sabendo tudo. A aprovação vai para quem sabe mais que os outros candidatos, não para quem sabe tudo. Foque em performance relativa, não perfeição absoluta.</p>
+          </div>
+        </div>
+        <div class="mindset-item">
+          <div class="mindset-icon">📵</div>
+          <div>
+            <h5>Proteja suas horas de estudo como reuniões importantes</h5>
+            <p>Desligue notificações. Use modo "Não perturbe". Diga às pessoas da sua casa que você está "em reunião". Cada interrupção custa 23 minutos de atenção plena para recuperar o foco (pesquisa da UC Irvine).</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── DIA DA PROVA ─────────────────────────── -->
+    <div id="dica-diaprova" class="dica-panel">
+      <div class="section-title"><i class="fa-solid fa-calendar-day"></i> Checklist — Dia da Prova</div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1rem;">
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-moon"></i> Na véspera (noite anterior)</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Separe os documentos: RG original, CPF, comprovante de inscrição impresso.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Confira o local de prova no Google Maps. Calcule o tempo de deslocamento com margem.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Prepare canetas azuis (leve 3 — a Vunesp exige caneta azul ou preta).</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Não estude conteúdo novo. Revise só o caderno de erros por no máximo 30 min.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Durma às 22h. 7–8h de sono é mais valioso do que qualquer revisão noturna.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Prepare sua roupa e lanche para o dia seguinte agora.</span></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-sun"></i> No dia da prova (manhã)</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Acorde com 2h de antecedência mínima. Café da manhã leve (evite açúcar em excesso).</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Chegue ao local 45–60 min antes. Filas de identificação podem demorar.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Não discuta respostas com outros candidatos na fila — gera ansiedade desnecessária.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Leve água e um lanche para o intervalo (se houver).</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Celular desligado ou no modo avião ANTES de entrar na sala.</span></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-pen-to-square"></i> Durante a prova</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Leia o caderno todo antes de responder. 2–3 min bem investidos.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Resolva primeiro o que você sabe. Marque e volte para as questões difíceis.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Controle o tempo: ~2 min por questão. Se travar, pule e volta.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Não mude respostas sem motivo sólido. O primeiro instinto tende a ser certo.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Transfira respostas para o gabarito com 20 min de sobra. Confira a numeração.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Respire fundo se travar. 3 respirações profundas reduzem o cortisol rapidamente.</span></div>
+        </div>
+
+        <div class="checklist-card">
+          <h4><i class="fa-solid fa-star"></i> Dicas Específicas da Vunesp</h4>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>A Vunesp costuma colocar questões de Português no início — que são as mais longas. Não gaste mais de 3 min em cada.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Questões de Interpretação: a resposta certa sempre está no texto. Desconfie de alternativas que fazem inferências além do texto.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Em questões de Direito, elimine as alternativas claramente erradas. A Vunesp usa distractores muito similares — eliminação é mais segura que adivinhação.</span></div>
+          <div class="check-row"><i class="fa-solid fa-check-circle"></i><span>Questões de Informática da Vunesp tendem a ser práticas (o que acontece quando você faz X). Não tente decorar teoria — pratique no computador.</span></div>
+        </div>
+      </div>
+
+      <div class="quote-block" style="margin-top:1rem">
+        "A prova só testa o que você treinou. Confie no processo que você fez até aqui."
+        <strong>— Lembre disso antes de entrar na sala</strong>
+      </div>
+    </div>
+
+  </div><!-- /dicas -->
+
+  <!-- ═══ MODO SIMULADO ═══════════════════════════ -->
+  <div id="simulado" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="simulado" data-section="simulado">Modo Simulado</h1>
+        <p>Simule condições reais de prova com cronômetro, bloqueio de distrações e controle de tempo.</p>
+      </div>
+    </div>
+
+    <!-- Setup -->
+    <div class="sim-setup-screen" id="simSetupScreen">
+      <div class="sim-setup">
+        <div style="font-size:3rem;margin-bottom:1rem">🎯</div>
+        <h2>Configurar Simulado</h2>
+        <p>Escolha o tipo de simulado. O cronômetro começa quando você clicar em iniciar — não pause, não consulte material. É treino real.</p>
+
+        <div class="sim-options" id="simOptions">
+          <div class="sim-opt selected" data-mins="300">
+            <h4>⚖️ Prova Completa</h4>
+            <p>5 horas — simula a prova real Vunesp</p>
+          </div>
+          <div class="sim-opt" data-mins="60">
+            <h4>🔥 Bloco Eliminatório</h4>
+            <p>1 hora — só Português (Bloco I)</p>
+          </div>
+          <div class="sim-opt" data-mins="90">
+            <h4>⚡ Meia Prova</h4>
+            <p>90 min — metade das questões</p>
+          </div>
+          <div class="sim-opt" data-mins="30">
+            <h4>🧠 Treino Rápido</h4>
+            <p>30 min — 15 questões temáticas</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom:1.25rem;text-align:left">
+          <div style="font-size:0.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.6rem">Matérias do simulado</div>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-port"> Língua Portuguesa</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-penal"> Direito Penal</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-proc"> Processo Penal & Civil</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-const"> Constitucional & Administrativo</label>
+          <label class="sim-materia-check"><input type="checkbox" checked id="sm-mat"> Matemática / RLM / Informática</label>
+        </div>
+
+        <button class="btn-start-sim">
+          <i class="fa-solid fa-play"></i> &nbsp;Iniciar Simulado Agora
+        </button>
+      </div>
+    </div>
+
+    <!-- Timer ativo -->
+    <div class="sim-timer-screen" id="simTimerScreen">
+      <div class="timer-display">
+        <div style="font-size:0.8rem;font-weight:700;color:var(--text-muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1rem" id="simTipoLabel">Prova Completa</div>
+        <div class="timer-digits" id="timerDisplay">5:00:00</div>
+        <div class="timer-label" id="timerStatus">Cronômetro em andamento — não consulte material</div>
+        <div style="margin-top:1.5rem">
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden;max-width:400px;margin:0 auto">
+            <div id="timerProgress" style="height:100%;background:var(--accent);border-radius:99px;width:100%;transition:width 1s linear"></div>
+          </div>
+        </div>
+      </div>
+      <div class="timer-controls">
+        <button class="btn-timer primary" id="btnPauseTimer"><i class="fa-solid fa-pause"></i> Pausar</button>
+                <button class="btn-timer" id="btnStopSim"><i class="fa-solid fa-stop"></i> Encerrar</button>
+      </div>
+
+      <div style="margin-top:2rem">
+        <div class="section-title"><i class="fa-solid fa-list-check"></i> Anotações durante o simulado</div>
+        <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.2rem">
+          <textarea id="simNotes" placeholder="Anote aqui questões que ficou em dúvida, temas para revisar depois..." style="width:100%;background:transparent;border:none;color:var(--text-main);font-family:'DM Sans',sans-serif;font-size:0.88rem;resize:vertical;min-height:120px;outline:none;line-height:1.6"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Histórico de simulados -->
+    <div style="margin-top:2rem">
+      <div class="section-title"><i class="fa-solid fa-history"></i> Histórico de Simulados</div>
+      <div id="simHistorico" class="task-list-card">
+        <div style="padding:2rem;text-align:center;color:var(--text-muted);font-size:0.88rem">
+          <i class="fa-solid fa-clock" style="font-size:2rem;margin-bottom:.75rem;display:block;opacity:.3"></i>
+          Nenhum simulado realizado ainda. Complete seu primeiro para ver o histórico aqui.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RADAR & ANALYTICS ═════════════════════ -->
+  <!-- ─── BANCO DE QUESTÕES ──────────────────────────── -->
+    <!-- ════════════════════════════════════════════════════
+     BANCO DE QUESTÕES - DESIGN MODERNO
+     ════════════════════════════════════════════════════ -->
+<div id="banco-questoes" class="view-section">
+  <div class="section-header">
+    <h1 class="section-title">
+      <i class="fa-solid fa-layer-group"></i>
+      Banco de Questões
+    </h1>
+    <p class="section-subtitle">Crie, organize e revise questões personalizadas</p>
+  </div>
+
+  <!-- Hero Card -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(240, 147, 251, 0.05)); border: 1px solid rgba(102, 126, 234, 0.3);">
+    <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+      <div style="font-size: 4rem; flex-shrink: 0;">📚</div>
+      <div style="flex: 1;">
+        <h2 class="card-title-gradient">Crie Sua Própria Biblioteca</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Cadastre questões das suas provas simuladas e revise com eficiência máxima.</p>
+      </div>
+      <div style="text-align: right;">
+        <div class="hero-counter" id="questoesCountHero">0</div>
+        <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Questões Salvas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-plus-circle" style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+        Nova Questão
+      </h3>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label style="color: var(--text-muted);">📖 Matéria</label>
+        <select id="qMateria" style="background: var(--bg-2); border: 1px solid var(--border);">
+          <option value="port">📝 Português</option>
+          <option value="penal">⚖️ Direito Penal</option>
+          <option value="proc">📋 Processo Penal & Civil</option>
+          <option value="const">🏛️ Constitucional & Administrativo</option>
+          <option value="mat">🔢 Matemática/RLM/Informática</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="color: var(--text-muted);">📍 Origem</label>
+        <input type="text" id="qOrigem" placeholder="Ex: Vunesp 2025 - TJ-SP" style="background: var(--bg-2); border: 1px solid var(--border);">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--text-muted);">📜 Enunciado</label>
+      <textarea id="qEnunciado" placeholder="Digite o enunciado completo da questão..." rows="4" style="background: var(--bg-2); border: 1px solid var(--border); min-height: 120px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--text-muted);">✏️ Alternativas</label>
+      <div style="display: flex; flex-direction: column; gap: 0.75rem;">
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: var(--gradient-primary); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">A</span>
+          <input type="text" id="qAltA" placeholder="Alternativa A" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: var(--gradient-accent); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">B</span>
+          <input type="text" id="qAltB" placeholder="Alternativa B" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: var(--gradient-success); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">C</span>
+          <input type="text" id="qAltC" placeholder="Alternativa C" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: linear-gradient(135deg, #f5af19, #f12711); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">D</span>
+          <input type="text" id="qAltD" placeholder="Alternativa D" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+        <div style="display: flex; gap: 0.75rem; align-items: center;">
+          <span style="width: 32px; height: 32px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">E</span>
+          <input type="text" id="qAltE" placeholder="Alternativa E (opcional)" style="flex: 1; background: var(--bg-2); border: 1px solid var(--border);">
+        </div>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label style="color: var(--text-muted);">✅ Alternativa Correta</label>
+        <select id="qCorreta" style="background: var(--bg-2); border: 1px solid var(--border);">
+          <option value="a">Alternativa A</option>
+          <option value="b">Alternativa B</option>
+          <option value="c">Alternativa C</option>
+          <option value="d">Alternativa D</option>
+          <option value="e">Alternativa E</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="color: var(--text-muted);">💡 Comentário (opcional)</label>
+        <input type="text" id="qComentario" placeholder="Explique o porquê da resposta correta..." style="background: var(--bg-2); border: 1px solid var(--border);">
+      </div>
+    </div>
+
+    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+      <button class="btn btn-primary" id="btnSalvarQuestao" style="flex: 1; padding: 1.25rem;">
+        <i class="fa-solid fa-save"></i>
+        Salvar Questão
+      </button>
+      <button class="btn" style="background: var(--bg-2); color: var(--text-muted); border: 1px solid var(--border);" onclick="limparFormularioQuestao()">
+        <i class="fa-solid fa-eraser"></i>
+        Limpar
+      </button>
+    </div>
+  </div>
+
+  <!-- Modo Revisão -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.05)); border: 1px solid rgba(79, 172, 254, 0.3);">
+    <div class="card-header" style="border-bottom-color: rgba(79, 172, 254, 0.3);">
+      <h3 class="card-title" style="color: var(--success);">
+        <i class="fa-solid fa-brain"></i>
+        Modo Revisão Inteligente
+      </h3>
+      <select id="revisaoFiltro" style="width: auto; background: var(--bg-2); border: 1px solid var(--border); padding: 0.75rem 1.25rem;">
+        <option value="todas">📚 Todas as Matérias</option>
+        <option value="port">📝 Português</option>
+        <option value="penal">⚖️ Penal</option>
+        <option value="proc">📋 Processo</option>
+        <option value="const">🏛️ Constitucional</option>
+        <option value="mat">🔢 Matemática</option>
+      </select>
+    </div>
+    
+    <div style="text-align: center; padding: 2rem 0;">
+      <button class="btn btn-success" id="btnIniciarRevisao" style="padding: 1.25rem 3rem; font-size: 1.1rem; box-shadow: 0 12px 32px rgba(79, 172, 254, 0.4);">
+        <i class="fa-solid fa-play"></i>
+        Iniciar Revisão
+      </button>
+      <p id="revisaoStatus" style="color: var(--text-muted); margin-top: 1rem;">
+        Selecione um filtro e comece a revisar
+      </p>
+    </div>
+  </div>
+
+  <!-- Área de Revisão Ativa -->
+  <div id="revisaoAtiva" class="hidden">
+    <div class="card" style="background: var(--bg-2); border: 2px solid var(--primary); box-shadow: 0 0 60px var(--primary-glow);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border);">
+        <span class="badge badge-primary">Questão <span id="revisaoNumero">1</span></span>
+        <span style="color: var(--text-muted); font-size: 0.9rem;" id="revisaoMateriaLabel">Matéria</span>
+      </div>
+
+      <div class="questao-enunciado" id="revisaoEnunciado" style="font-size: 1.15rem; line-height: 1.8; color: var(--text); margin-bottom: 2rem;"></div>
+
+      <div class="questao-alternativas" id="revisaoAlternativas" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;"></div>
+
+      <div id="revisaoFeedback" class="hidden" style="padding: 1.5rem; border-radius: var(--r-md); margin-bottom: 2rem;"></div>
+
+      <div style="display: flex; gap: 1rem; justify-content: center; padding-top: 1.5rem; border-top: 1px solid var(--border);">
+        <button class="btn btn-primary" id="btnProximaQuestao" style="padding: 1rem 2rem;">
+          <i class="fa-solid fa-arrow-right"></i>
+          Próxima
+        </button>
+        <button class="btn" id="btnEncerrarRevisao" style="background: var(--bg-3); color: var(--text-muted); border: 1px solid var(--border); padding: 1rem 2rem;">
+          <i class="fa-solid fa-stop"></i>
+          Encerrar
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Lista -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-list" style="background: var(--gradient-primary); -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+        Questões Cadastradas
+      </h3>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <select id="listaFiltro" onchange="renderBancoQuestoes()" style="width: auto; background: var(--bg-2); border: 1px solid var(--border); padding: 0.75rem 1rem;">
+          <option value="todas">Todas</option>
+          <option value="port">Português</option>
+          <option value="penal">Penal</option>
+          <option value="proc">Processo</option>
+          <option value="const">Constitucional</option>
+          <option value="mat">Matemática</option>
+        </select>
+        <span class="badge badge-primary" id="questoesTotal">0 questões</span>
+      </div>
+    </div>
+    <div id="listaQuestoes"></div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════════════
+     CADERNO DE ERROS - DESIGN MODERNO
+     ════════════════════════════════════════════════════ -->
+<div id="caderno-erros" class="view-section">
+  <div class="section-header">
+    <h1 class="section-title">
+      <i class="fa-solid fa-bug"></i>
+      Caderno de Erros
+    </h1>
+    <p class="section-subtitle">Transforme seus erros em aprendizado</p>
+  </div>
+
+  <!-- Hero -->
+  <div class="card" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.15), rgba(255, 234, 167, 0.05)); border: 1px solid rgba(255, 107, 107, 0.3);">
+    <div style="display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+      <div style="font-size: 4rem; flex-shrink: 0;">🎯</div>
+      <div style="flex: 1;">
+        <h2 style="font-size: 1.5rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--danger);">Errar é Humano, Aprender é Divino</h2>
+        <p style="color: var(--text-muted); font-size: 1rem;">Registre cada erro, entenda o motivo e nunca mais cometa o mesmo equívoco.</p>
+      </div>
+      <div style="text-align: right;">
+        <div style="font-size: 2.5rem; font-weight: 800; font-family: 'JetBrains Mono', monospace; color: var(--danger);" id="errosCountHero">0</div>
+        <div style="color: var(--text-muted); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Erros Registrados</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Formulário -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-plus" style="color: var(--danger);"></i>
+        Novo Registro
+      </h3>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label style="color: var(--text-muted);">📖 Matéria</label>
+        <select id="eMateria" style="background: var(--bg-2); border: 1px solid var(--border);">
+          <option value="port">📝 Português</option>
+          <option value="penal">⚖️ Direito Penal</option>
+          <option value="proc">📋 Processo Penal & Civil</option>
+          <option value="const">🏛️ Constitucional & Administrativo</option>
+          <option value="mat">🔢 Matemática/RLM/Informática</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label style="color: var(--text-muted);">🏷️ Tema/Assunto</label>
+        <input type="text" id="eTema" placeholder="Ex: Crase, Homicídio Culposo, Competência..." style="background: var(--bg-2); border: 1px solid var(--border);">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--text-muted);">📖 Contexto do Erro</label>
+      <textarea id="eContexto" placeholder="O que a questão pedia? Qual era o contexto?" rows="3" style="background: var(--bg-2); border: 1px solid var(--border); min-height: 100px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--danger);">❓ Por Que Errei?</label>
+      <textarea id="eMotivo" placeholder="Falta de conhecimento? Interpretação equivocada? Cuidado?..." rows="3" style="background: rgba(255, 107, 107, 0.05); border: 1px solid var(--danger); min-height: 100px;"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label style="color: var(--success);">✅ Resposta/Fundamento Correto</label>
+      <textarea id="eResposta" placeholder="Qual é o correto? Fundamente com base legal, doutrina ou jurisprudência..." rows="4" style="background: rgba(79, 172, 254, 0.05); border: 1px solid var(--success); min-height: 120px;"></textarea>
+    </div>
+
+    <div style="display: flex; gap: 1rem; margin-top: 2rem;">
+      <button class="btn btn-primary" id="btnSalvarErro" style="flex: 1; padding: 1.25rem; background: linear-gradient(135deg, var(--danger), #ff8787); box-shadow: 0 8px 24px rgba(255, 107, 107, 0.4);">
+        <i class="fa-solid fa-save"></i>
+        Salvar Erro
+      </button>
+      <button class="btn" style="background: var(--bg-2); color: var(--text-muted); border: 1px solid var(--border);" onclick="limparFormularioErro()">
+        <i class="fa-solid fa-eraser"></i>
+        Limpar
+      </button>
+    </div>
+  </div>
+
+  <!-- Lista -->
+  <div class="card">
+    <div class="card-header">
+      <h3 class="card-title">
+        <i class="fa-solid fa-clipboard-list" style="color: var(--danger);"></i>
+        Meus Erros Registrados
+      </h3>
+      <div style="display: flex; gap: 1rem; align-items: center;">
+        <select id="errosFiltro" onchange="renderErros()" style="width: auto; background: var(--bg-2); border: 1px solid var(--border); padding: 0.75rem 1rem;">
+          <option value="todas">Todos</option>
+          <option value="port">Português</option>
+          <option value="penal">Penal</option>
+          <option value="proc">Processo</option>
+          <option value="const">Constitucional</option>
+          <option value="mat">Matemática</option>
+        </select>
+        <span class="badge badge-danger" id="errosTotal">0 erros</span>
+      </div>
+    </div>
+    <div id="listaErros"></div>
+  </div>
+
+  <!-- Medalha -->
+  <div class="card" id="medalhaContainer" style="display: none; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1), rgba(255, 234, 167, 0.05)); border: 2px solid var(--accent);">
+    <div style="display: flex; align-items: center; gap: 1.5rem; padding: 1rem;">
+      <div style="font-size: 3rem;">🏆</div>
+      <div style="flex: 1;">
+        <h4 style="font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 0.25rem;">Analista de Erros</h4>
+        <p style="color: var(--text-muted); font-size: 0.9rem;">Você registrou 10+ erros e está no caminho da evolução constante!</p>
+      </div>
+      <div style="font-size: 1.5rem; color: var(--accent); font-weight: 800;">UNLOCKED</div>
+    </div>
+  </div>
+</div>
+
+    <!-- RADAR -->
+    <div id="radar" class="view-section">
+    <div class="page-header">
+      <div>
+        <h1 data-section="radar" data-section="radar">Radar & Analytics</h1>
+        <p>Visualize suas forças, fraquezas e a probabilidade real de aprovação.</p>
+      </div>
+    </div>
+
+    <!-- Probabilidade realista -->
+    <div class="section-title"><i class="fa-solid fa-percent"></i> Probabilidade Real de Aprovação</div>
+    <div class="prob-grid">
+      <div class="prob-card">
+        <div class="prob-num" style="color:var(--danger)">0,22%</div>
+        <div class="prob-label">Probabilidade bruta<br><span style="color:var(--text-dim)">180.000 inscritos · 400 vagas</span></div>
+      </div>
+      <div class="prob-card highlight">
+        <div class="prob-num">13%</div>
+        <div class="prob-label">Probabilidade real<br><span style="color:var(--text-dim)">~3.000 candidatos realmente preparados disputam as vagas</span></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num" style="color:var(--info)">~90%</div>
+        <div class="prob-label">Candidatos que desistem<br><span style="color:var(--text-dim)">Estudam 2 semanas e abandonam</span></div>
+      </div>
+      <div class="prob-card">
+        <div class="prob-num" style="color:var(--purple)">400</div>
+        <div class="prob-label">Vagas totais<br><span style="color:var(--text-dim)">Cada matéria dominada aumenta sua posição no ranking</span></div>
+      </div>
+    </div>
+
+    <div class="alert-banner" style="margin-bottom:1.5rem">
+      <i class="fa-solid fa-lightbulb"></i>
+      <span><strong>Conclusão estratégica:</strong> Você não compete com 180 mil pessoas. Compete com ~3 mil que realmente estão estudando. Seja um desses 3 mil — e suas chances sobem para 13%. Domine os tópicos desta plataforma e você estará no top.</span>
+    </div>
+
+    <!-- Radar de matérias -->
+    <div class="section-title"><i class="fa-solid fa-chart-simple"></i> Radar de Desempenho por Matéria</div>
+    <div class="radar-wrap">
+      <div class="radar-canvas-wrap">
+        <canvas id="radarChart"></canvas>
+      </div>
+      <div class="radar-legend">
+        <h3>Progresso por área</h3>
+        <div class="radar-row">
+          <span class="radar-label">Português</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-port" style="width:0%"></div></div>
+          <span class="radar-pct" id="rp-port">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Dir. Penal</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-penal" style="width:0%;background:var(--danger)"></div></div>
+          <span class="radar-pct" id="rp-penal">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Proc. Penal/Civil</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-proc" style="width:0%;background:var(--info)"></div></div>
+          <span class="radar-pct" id="rp-proc">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Const./Adm.</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-const" style="width:0%;background:var(--purple)"></div></div>
+          <span class="radar-pct" id="rp-const">0%</span>
+        </div>
+        <div class="radar-row">
+          <span class="radar-label">Mat./RLM/Info</span>
+          <div class="radar-bar-bg"><div class="radar-bar-fill" id="rb-mat" style="width:0%;background:var(--success)"></div></div>
+          <span class="radar-pct" id="rp-mat">0%</span>
+        </div>
+        <div style="margin-top:1rem;padding:0.85rem;background:var(--bg-card);border-radius:8px;font-size:0.82rem;color:var(--text-muted);line-height:1.5">
+          <i class="fa-solid fa-circle-info" style="color:var(--accent);margin-right:.4rem"></i>
+          O radar atualiza automaticamente conforme você marca tópicos no <strong data-section="edital" data-section="edital">Edital Verticalizado</strong>.
+        </div>
+      </div>
+    </div>
+
+    <!-- Prioridade de estudo hoje -->
+    <div class="section-title"><i class="fa-solid fa-fire-flame-curved"></i> Prioridade de Estudo Hoje</div>
+    <div class="priority-box" id="priorityBox">
+      <h3><i class="fa-solid fa-chart-bar"></i> Baseado no seu progresso atual</h3>
+      <div id="priorityList">
+        <div class="priority-item"><div class="priority-dot p-high"></div><span>Carregando...</span></div>
+      </div>
+    </div>
+
+    <!-- Conquistas / medalhas -->
+    <div class="section-title"><i class="fa-solid fa-medal"></i> Conquistas</div>
+    <div class="medals-row" id="medalsRow">
+      <div class="medal locked" id="medal-7"><div class="medal-icon">🏅</div> 7 dias seguidos</div>
+      <div class="medal locked" id="medal-30"><div class="medal-icon">🥈</div> 30 dias seguidos</div>
+      <div class="medal locked" id="medal-100"><div class="medal-icon">🥇</div> 100 dias seguidos</div>
+      <div class="medal locked" id="medal-topics"><div class="medal-icon">📚</div> 10 tópicos concluídos</div>
+      <div class="medal locked" id="medal-sim1"><div class="medal-icon">🎯</div> 1º simulado completo</div>
+      <div class="medal locked" id="medal-allTopics"><div class="medal-icon">🏆</div> Edital 100% dominado</div>
+    </div>
+
+    <!-- Revisões pendentes -->
+    <div class="section-title"><i class="fa-solid fa-rotate-right"></i> Revisões Pendentes (Espaçada)</div>
+    <div class="revisao-list">
+      <div class="revisao-item"><span class="rev-badge rev-24h">24h</span><span class="rev-name">Interpretação de Texto</span><span class="rev-date">Revisar hoje</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-7d">7 dias</span><span class="rev-name">Lei 9.099 — Juizados Especiais</span><span class="rev-date">Revisar em 3 dias</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-30d">30 dias</span><span class="rev-name">Art. 312–359 — Crimes contra a Adm.</span><span class="rev-date">Revisar em 12 dias</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-24h">24h</span><span class="rev-name">Crase e Concordância</span><span class="rev-date">Revisar hoje</span></div>
+      <div class="revisao-item"><span class="rev-badge rev-7d">7 dias</span><span class="rev-name">Art. 37 CF — Administração Pública</span><span class="rev-date">Revisar em 5 dias</span></div>
+    </div>
+
+    <!-- Comportamento da banca -->
+    <div class="section-title"><i class="fa-solid fa-magnifying-glass-chart"></i> Análise da Banca Vunesp</div>
+    <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:1.5rem">
+      <div style="padding:1rem 1.4rem;border-bottom:1px solid var(--border);font-weight:600;font-size:0.92rem;display:flex;align-items:center;gap:.5rem"><i class="fa-solid fa-pen-nib" style="color:var(--accent)"></i> Língua Portuguesa — distribuição histórica</div>
+      <div style="padding:1.2rem 1.4rem;display:flex;flex-direction:column;gap:.85rem">
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Interpretação de Texto</span><span style="color:var(--accent);font-weight:700">44%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:44%;height:100%;background:var(--accent);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Semântica / Vocabulário</span><span style="color:var(--info);font-weight:700">18%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:18%;height:100%;background:var(--info);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Concordância & Regência</span><span style="color:var(--purple);font-weight:700">14%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:14%;height:100%;background:var(--purple);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Crase</span><span style="color:var(--danger);font-weight:700">10%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:10%;height:100%;background:var(--danger);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Pontuação</span><span style="color:var(--success);font-weight:700">8%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:8%;height:100%;background:var(--success);border-radius:99px"></div></div>
+        </div>
+        <div>
+          <div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:.3rem"><span>Outros (colocação, vozes)</span><span style="color:var(--text-muted);font-weight:700">6%</span></div>
+          <div style="height:6px;background:var(--bg-hover);border-radius:99px;overflow:hidden"><div style="width:6%;height:100%;background:var(--text-dim);border-radius:99px"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mapa de Aprovação -->
+    <div class="section-title"><i class="fa-solid fa-map-location-dot"></i> Mapa de Aprovação</div>
+    <div style="background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:1.5rem;margin-bottom:1.5rem">
+      <div style="display:flex;flex-direction:column;gap:0">
+        <div class="mapa-step" id="mapa-1" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:.5rem;transition:all .3s">
+          <div style="font-size:1.75rem">🌱</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Iniciante</div><div style="font-size:.78rem;color:var(--text-muted)">Estudando os primeiros tópicos</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">0–25%</div>
+        </div>
+        <div style="width:2px;height:12px;background:var(--border);margin-left:2rem"></div>
+        <div class="mapa-step" id="mapa-2" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:.5rem;transition:all .3s">
+          <div style="font-size:1.75rem">⚔️</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Sobrevivente da Vunesp</div><div style="font-size:.78rem;color:var(--text-muted)">Já conhece a banca, está no ritmo</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">25–50%</div>
+        </div>
+        <div style="width:2px;height:12px;background:var(--border);margin-left:2rem"></div>
+        <div class="mapa-step" id="mapa-3" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);margin-bottom:.5rem;transition:all .3s">
+          <div style="font-size:1.75rem">🎯</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Aprovável</div><div style="font-size:.78rem;color:var(--text-muted)">Na zona de corte — qualquer empurrão te aprova</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">50–80%</div>
+        </div>
+        <div style="width:2px;height:12px;background:var(--border);margin-left:2rem"></div>
+        <div class="mapa-step" id="mapa-4" style="display:flex;align-items:center;gap:1rem;padding:1rem;border-radius:10px;background:var(--bg-card);border:1px solid var(--border);transition:all .3s">
+          <div style="font-size:1.75rem">🏆</div>
+          <div style="flex:1"><div style="font-weight:700;font-size:.9rem">Nomeação</div><div style="font-size:.78rem;color:var(--text-muted)">Edital dominado. Pronto para assinar a posse.</div></div>
+          <div style="font-size:.75rem;color:var(--text-dim)">80–100%</div>
+        </div>
+      </div>
+      <div id="mapaStatus" style="margin-top:1rem;padding:.85rem 1rem;background:var(--accent-dim);border-radius:8px;font-size:.84rem;color:var(--accent);font-weight:600;text-align:center">
+        📍 Você está em: Iniciante (0%) — Continue marcando tópicos no Edital!
+      </div>
+    </div>
+
+  </div><!-- /radar -->
+
+</main>
+<script src="js/app.js" defer></script>
+<script>
+
+// Menu Toggle para Mobile
+function toggleMenu() {
+  const body = document.body;
+  body.classList.toggle('menu-open');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const menuToggle = document.getElementById('menuToggle');
+  const menuOverlay = document.getElementById('menuOverlay');
+  
+  if(menuToggle) {
+    menuToggle.addEventListener('click', toggleMenu);
+  }
+  
+  if(menuOverlay) {
+    menuOverlay.addEventListener('click', toggleMenu);
+  }
+});
+
+</script>
+</body>
+</html>

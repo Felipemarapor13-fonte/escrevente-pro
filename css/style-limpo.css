@@ -1,0 +1,264 @@
+/* =====================================================
+   APROVA SP - CSS LIMPO E ORGANIZADO
+   Design: Minimalista, SEM excessos
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap');
+
+:root {
+  /* Backgrounds - MANTER originais */
+  --bg-main: #0f172a;
+  --bg-panel: #1e293b;
+  --bg-card: #334155;
+  --bg-hover: #475569;
+  
+  /* Cores base */
+  --bg-0: #0a0a0f;
+  --bg-1: #12121a;
+  --bg-2: #1a1a25;
+  --bg-3: #252535;
+  
+  /* Cores semânticas */
+  --primary: #667eea;
+  --accent: #f093fb;
+  --success: #4facfe;
+  --danger: #ff6b6b;
+  --warning: #ffeaa7;
+  --purple: #a29bfe;
+  
+  /* Texto */
+  --text: #ffffff;
+  --text-muted: #a0a0b0;
+  --text-dim: #666680;
+  
+  /* Border */
+  --border: rgba(255, 255, 255, 0.08);
+  
+  /* Radius */
+  --r-sm: 12px;
+  --r-md: 16px;
+  --r-lg: 24px;
+}
+
+/* =====================================================
+   BASE
+   ===================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg-0);
+  color: var(--text);
+  line-height: 1.6;
+}
+
+/* =====================================================
+   TOPBAR STATS - ÚNICA DEFINIÇÃO
+   ===================================================== */
+.topbar-stat {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  transition: all 0.3s;
+}
+
+.topbar-stat.fire {
+  border-left: 3px solid rgba(255, 107, 107, 0.5);
+}
+
+.topbar-stat.days {
+  border-left: 3px solid rgba(16, 185, 129, 0.5);
+}
+
+.topbar-stat:hover {
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(-2px);
+}
+
+.topbar-stat .fa-fire {
+  font-size: 1.25rem;
+  color: #ff6b6b;
+}
+
+.topbar-stat .fa-calendar-check {
+  font-size: 1.1rem;
+  color: #10b981;
+}
+
+#topStreak, #topDias {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #667eea;
+  line-height: 1;
+}
+
+.topbar-stat > span:not([id]) {
+  font-size: 0.75rem;
+  color: #a0a0b0;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+/* Wrapper stats */
+.main-content > div:has(.topbar-stat) {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+}
+
+/* =====================================================
+   SECTION TITLE - ÚNICA DEFINIÇÃO
+   ===================================================== */
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.section-title i {
+  color: #667eea;
+  font-size: 1.2rem;
+}
+
+.section-subtitle {
+  font-size: 0.85rem;
+  color: #a0a0b0;
+  margin-top: 0;
+}
+
+/* =====================================================
+   MODULES (Sala de Aula, Apostilas)
+   ===================================================== */
+.modules-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.module-card {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 16px;
+  padding: 1.25rem;
+  transition: all 0.3s;
+}
+
+.module-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(102, 126, 234, 0.3);
+  transform: translateY(-2px);
+}
+
+.module-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.module-header h3 {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.resource-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.resource-item a {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 8px;
+  color: #a0a0b0;
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.resource-item a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #ffffff;
+}
+
+/* =====================================================
+   TABELAS (Dicas - Erros Fatais)
+   ===================================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--bg-card);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  margin: 1rem 0;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+th {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+td {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+tr:last-child td {
+  border-bottom: none;
+}
+
+tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* =====================================================
+   CARD TITLE GRADIENT (para substituir inline)
+   ===================================================== */
+.card-title-gradient {
+  font-size: 1.5rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline-block;
+}
+
+/* Mantém resto do CSS original intacto - adicionar apenas se necessário */
