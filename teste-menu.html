@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teste Menu Mobile</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      background: #0f172a;
+      color: white;
+      min-height: 100vh;
+    }
+    
+    /* BOTÃO DO MENU */
+    .menu-toggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 10000;
+      width: 44px;
+      height: 44px;
+      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
+    
+    .menu-toggle i {
+      color: white;
+      font-size: 20px;
+    }
+    
+    .menu-toggle .fa-times {
+      display: none;
+    }
+    
+    /* OVERLAY */
+    .menu-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 9998;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 280px;
+      background: #0a0a0f;
+      z-index: 9999;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+      overflow-x: hidden;
+      padding: 80px 20px 20px;
+      box-shadow: 4px 0 30px rgba(0,0,0,0.5);
+    }
+    
+    .sidebar nav a {
+      display: block;
+      color: #a0a0b0;
+      text-decoration: none;
+      padding: 12px;
+      margin: 8px 0;
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
+    
+    .sidebar nav a:hover {
+      background: rgba(255,255,255,0.05);
+      color: white;
+    }
+    
+    /* ESTADO: Menu aberto */
+    body.menu-open .menu-overlay {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    body.menu-open .sidebar {
+      transform: translateX(0);
+    }
+    
+    body.menu-open .menu-toggle .fa-bars {
+      display: none;
+    }
+    
+    body.menu-open .menu-toggle .fa-times {
+      display: block;
+    }
+    
+    /* CONTEÚDO DE EXEMPLO */
+    .main-content {
+      padding: 80px 20px 20px;
+    }
+    
+    h1 {
+      margin-bottom: 20px;
+    }
+    
+    p {
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- Botão do Menu -->
+  <button class="menu-toggle" id="menuToggle">
+    <i class="fa-solid fa-bars"></i>
+    <i class="fa-solid fa-times"></i>
+  </button>
+  
+  <!-- Overlay -->
+  <div class="menu-overlay" id="menuOverlay"></div>
+  
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <nav>
+      <a href="#">📊 Dashboard</a>
+      <a href="#">📝 Edital</a>
+      <a href="#">📚 Sala de Aula</a>
+      <a href="#">📁 PDFs</a>
+      <a href="#">🏆 Provas</a>
+    </nav>
+  </aside>
+  
+  <!-- Conteúdo Principal -->
+  <main class="main-content">
+    <h1>Teste Menu Mobile</h1>
+    <p>Abra o DevTools (F12) → Ative Device Toolbar (Ctrl+Shift+M) → Selecione iPhone</p>
+    <p>O botão deve aparecer no canto superior esquerdo.</p>
+    <p>Clique para abrir/fechar o menu.</p>
+    <p>O menu deve deslizar suavemente da esquerda.</p>
+  </main>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var menuBtn = document.getElementById('menuToggle');
+      var overlay = document.getElementById('menuOverlay');
+      var body = document.body;
+      
+      if (!menuBtn || !overlay) return;
+      
+      // Toggle menu
+      menuBtn.onclick = function(e) {
+        e.stopPropagation();
+        body.classList.toggle('menu-open');
+        console.log(body.classList.contains('menu-open') ? '✅ ABERTO' : '❌ FECHADO');
+      };
+      
+      // Fechar no overlay
+      overlay.onclick = function() {
+        body.classList.remove('menu-open');
+        console.log('❌ FECHADO (overlay)');
+      };
+      
+      // Fechar nos links
+      var links = document.querySelectorAll('.sidebar nav a');
+      links.forEach(function(link) {
+        link.onclick = function() {
+          body.classList.remove('menu-open');
+          console.log('❌ FECHADO (link)');
+        };
+      });
+      
+      // Fechar com ESC
+      document.onkeydown = function(e) {
+        if (e.key === 'Escape') {
+          body.classList.remove('menu-open');
+          console.log('❌ FECHADO (ESC)');
+        }
+      };
+      
+      console.log('✅ Menu inicializado');
+    });
+  </script>
+</body>
+</html>

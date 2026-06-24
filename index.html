@@ -19,6 +19,7 @@
   <!-- Menu Toggle Button (Mobile) -->
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
     <i class="fa-solid fa-bars"></i>
+    <i class="fa-solid fa-times"></i>
   </button>
   
   <!-- Menu Overlay (Mobile) -->
@@ -1690,66 +1691,43 @@
 
 </main>
 <script src="js/app.js" defer></script>
-<script>
 
-
-// Menu Mobile - VERSÃO SIMPLES E FUNCIONAL
-document.addEventListener('DOMContentLoaded', () => {
-  const menuToggle = document.getElementById('menuToggle');
-  const menuOverlay = document.getElementById('menuOverlay');
-  const sidebar = document.querySelector('.sidebar');
-  const body = document.body;
-  
-  if (!menuToggle || !menuOverlay || !sidebar) {
-    console.error('Elementos do menu não encontrados!');
-    return;
-  }
-  
-  // FUNÇÃO: Abrir menu
-  function openMenu(e) {
-    if (e) {
-      e.preventDefault();
+  <script>
+  // Menu Mobile - Mínimo e Funcional
+  document.addEventListener('DOMContentLoaded', function() {
+    var menuBtn = document.getElementById('menuToggle');
+    var overlay = document.getElementById('menuOverlay');
+    var body = document.body;
+    
+    if (!menuBtn || !overlay) return;
+    
+    // Abrir/Fechar menu
+    menuBtn.onclick = function(e) {
       e.stopPropagation();
-    }
-    body.classList.add('menu-open');
-    document.body.style.overflow = 'hidden';
-    console.log('✅ Menu ABERTO');
-  }
-  
-  // FUNÇÃO: Fechar menu
-  function closeMenu(e) {
-    if (e) {
-      e.preventDefault();
-      e.stopPropagation();
-    }
-    body.classList.remove('menu-open');
-    document.body.style.overflow = '';
-    console.log('❌ Menu FECHADO');
-  }
-  
-  // BOTÃO: abre o menu
-  menuToggle.addEventListener('click', openMenu);
-  menuToggle.addEventListener('touchstart', openMenu, { passive: false });
-  
-  // OVERLAY: fecha o menu (clicar fora)
-  menuOverlay.addEventListener('click', closeMenu);
-  menuOverlay.addEventListener('touchstart', closeMenu, { passive: false });
-  
-  // LINKS: fechar ao navegar
-  sidebar.querySelectorAll('nav a').forEach(link => {
-    link.addEventListener('click', closeMenu);
+      body.classList.toggle('menu-open');
+    };
+    
+    // Fechar ao clicar no overlay
+    overlay.onclick = function() {
+      body.classList.remove('menu-open');
+    };
+    
+    // Fechar ao clicar em links
+    var links = document.querySelectorAll('.sidebar nav a');
+    links.forEach(function(link) {
+      link.onclick = function() {
+        body.classList.remove('menu-open');
+      };
+    });
+    
+    // Fechar com ESC
+    document.onkeydown = function(e) {
+      if (e.key === 'Escape') {
+        body.classList.remove('menu-open');
+      }
+    };
   });
-  
-  // TECLADO: ESC fecha
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && body.classList.contains('menu-open')) {
-      closeMenu();
-    }
-  });
-  
-  console.log('✓ Menu mobile inicializado');
-});
+  </script>
 
-</script>
 </body>
 </html>
